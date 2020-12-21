@@ -3,67 +3,66 @@ package com.semiproj.comments.model;
 import java.sql.Timestamp;
 
 public class CommentsVO {
-	private int no;	//댓글번호
-	private int bookNo; //책번호
-	private String userid; //아이디
-	private String content;	//내용
-	private Timestamp regdate;	//등록시간
+	private int no;
+	private String nickname; 
+	private String pwd;
+	Timestamp regdate;
+	private String content;
+	private int bookNo ;
 	
 	public CommentsVO() {
 		super();
 	}
-	public CommentsVO(int no, int bookNo, String userid, String content, Timestamp regdate) {
+	public CommentsVO(int no, String nickname, String pwd, Timestamp regdate, String content, int bookNo) {
 		super();
 		this.no = no;
-		this.bookNo = bookNo;
-		this.userid = userid;
-		this.content = content;
+		this.nickname = nickname;
+		this.pwd = pwd;
 		this.regdate = regdate;
+		this.content = content;
+		this.bookNo = bookNo;
 	}
-
+	
 	public int getNo() {
 		return no;
 	}
-
 	public void setNo(int no) {
 		this.no = no;
 	}
-
-	public int getBookNo() {
-		return bookNo;
+	public String getNickname() {
+		return nickname;
 	}
-
-	public void setBookNo(int bookNo) {
-		this.bookNo = bookNo;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
-
-	public String getUserid() {
-		return userid;
+	public String getPwd() {
+		return pwd;
 	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
 	public Timestamp getRegdate() {
 		return regdate;
 	}
-
 	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
 	}
-
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public int getBookNo() {
+		return bookNo;
+	}
+	public void setBookNo(int bookNo) {
+		this.bookNo = bookNo;
+	}
+	
 	@Override
 	public String toString() {
-		return "CommentsVO [no=" + no + ", bookNo=" + bookNo + ", userid=" + userid + ", content=" + content
-				+ ", regdate=" + regdate + "]";
+		return "CommentsVO [no=" + no + ", nickname=" + nickname + ", pwd=" + pwd + ", regdate=" + regdate
+				+ ", content=" + content + ", bookNo=" + bookNo + "]";
 	}
 }

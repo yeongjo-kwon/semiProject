@@ -71,6 +71,91 @@ input, select, textarea {
 	-ms-appearance: none;
 	appearance: none;
 }
+	.divSearch, .divPage{
+		text-align: center;
+		height: 50px;
+	}
+	
+	.divSearch select{
+		width: 15%;
+		height: 35px;
+		max-width: 80px;
+		padding-left: 10px;
+	}
+	.divSearch input[name="srchKeyword"]{
+		width: 50%;
+		display: inline;
+	}
+	.divSearch input[type="submit"]{
+		min-width: 80px;
+		max-width: 80px;
+		height: 45px;
+		font-weight: 500;
+	}
+	
+	.divList td{
+		vertical-align: middle;
+	}
+	.divList a{
+		color: inherit;
+	}
+	
+	fieldset .center{
+		text-align: center;
+	}
+	.center input{
+		margin: 20px;
+	}
+	
+	.registForm{
+		margin-left: 40px;
+	}
+	
+	.registForm div{
+		display: inline;
+	}
+	.registForm label{
+		display: block;
+	}
+	
+	.registForm input[type="text"],
+	.registForm input[type="Password"]{
+		width: 30%;
+		display: inline;
+	}
+	.registForm input[type="button"]{
+		display: inline-block;
+		width: 80px;
+		height: 47px;
+		margin: 10px;
+	}
+	.registForm select{
+		width: 30%;
+		height: 45px;
+		display: inline;
+		padding-left: 8px;
+	}
+	
+	.registForm input[name="address"],
+	.registForm input[name="addressDetail"]{
+		width: 70%;
+		margin-top: 10px;
+	}
+	
+	.hpDiv select[name="hp1"],
+	.hpDiv input[name="hp2"],
+	.hpDiv input[name="hp3"]{
+		width: 20%;
+	}
+	
+	
+	.registForm .center #wr_submit{
+		background: rgb(179, 66, 28);
+		color: white;
+		font-size: 1.2em;
+		text-align: center;
+	}
+
 
 /* Basic */
 
@@ -113,7 +198,6 @@ input, select, textarea {
 		transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 		color: #3fb1a3;
 		text-decoration: none;
-		border-bottom: dotted 1px;
 	}
 
 		a:hover {
@@ -1884,6 +1968,7 @@ input, select, textarea {
 	 	text-align: center;
 	 	display: inline-block;
 	 }
+	 
 /* Icon */
 
 	.icon {
@@ -2113,17 +2198,23 @@ input, select, textarea {
 
 			table.default td {
 				padding: 0.5em 1em 0.5em 1em;
+				text-align: center;
 			}
 
 			table.default th {
 				font-weight: 400;
 				padding: 0.5em 1em 0.5em 1em;
-				text-align: left;
+				text-align: center;
+				vertical-align: middle
 			}
 
 			table.default thead {
-				background: #7c8081;
+				background: #bf2009;
 				color: #fff;
+			}
+			
+			table.default a{
+				text-decoration: none;
 			}
 
 /* Button */

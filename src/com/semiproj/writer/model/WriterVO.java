@@ -7,6 +7,7 @@ public class WriterVO {
 	private String photoFileName;
 	private String photoOriginFileName;
 	
+	
 	public WriterVO() {
 		super();
 	}
