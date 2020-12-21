@@ -1,4 +1,4 @@
-package com.semiproj.semiboard.model;
+package com.semiproj.eventboard.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,14 +11,14 @@ import java.util.List;
 import com.semiproj.db.ConnectionPoolMgr;
 
 
-public class semiBoardDAO {
+public class eventBoardDAO {
 	private ConnectionPoolMgr pool;
 
-	public semiBoardDAO() {
+	public eventBoardDAO() {
 		pool=new ConnectionPoolMgr();
 	}
 
-	public int insertBoard(semiBoardVO vo) throws SQLException {
+	public int insertBoard(eventBoardVO vo) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
 
@@ -27,8 +27,8 @@ public class semiBoardDAO {
 			con=pool.getConnection();
 
 			//3. ps
-			String sql="insert into board(no, title, content)" + 
-					" values(board_seq.nextval,?,?)";
+			String sql="insert into eventboard(no, title, content)" + 
+					" values(eventboard_seq.nextval,?,?)";
 			ps=con.prepareStatement(sql);
 
 			ps.setString(1, vo.getTitle());
@@ -44,36 +44,44 @@ public class semiBoardDAO {
 		}
 	}
 
-	public List<semiBoardVO> selectAll() throws SQLException{
+	public List<eventBoardVO> selectAll(String condition, String keyword) throws SQLException{
 
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 
-		List<semiBoardVO> list=new ArrayList<semiBoardVO>();
+		List<eventBoardVO> list=new ArrayList<eventBoardVO>();
 		try {
 			//1,2 con
 			con=pool.getConnection();
 
 			//3. ps
-			String sql="select * from board order by no desc";
+			String sql="select * from eventboard ";
+			if(keyword!=null && !keyword.isEmpty()) { //검색
+				sql += " where "+ condition +" like '%' || ? || '%'";
+			}
+			sql += " order by no desc";
 			ps=con.prepareStatement(sql);
+			
+			if(keyword!=null && !keyword.isEmpty()) { //검색
+				ps.setString(1, keyword);
+			}
 
 			//4. exec
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				int no=rs.getInt("no");
 				String title=rs.getString("title");
-				int readcount=rs.getInt("readcount");
 				Timestamp regdate=rs.getTimestamp("regdate");
 				String content=rs.getString("content");
 				String imgFileName=rs.getString("imgFileName");
 				String imgOriginFileName=rs.getString("imgOriginFileName");
 
-				semiBoardVO vo = new semiBoardVO(no, title, regdate, content, imgFileName, imgOriginFileName);
+				eventBoardVO vo = new eventBoardVO(no, title, regdate, content, imgFileName, imgOriginFileName);
 				list.add(vo);
 			}
-			System.out.println("글목록 결과 list.size="+list.size());
+			System.out.println("글목록 결과 list.size="+list.size()
+				+", 매개변수 condition="+condition+", keyword="+keyword);
 		
 			return list;
 		}finally {
@@ -81,18 +89,18 @@ public class semiBoardDAO {
 		}
 	}
 
-	public semiBoardVO selectByNo(int no) throws SQLException {
+	public eventBoardVO selectByNo(int no) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 
-		semiBoardVO vo = new semiBoardVO();
+		eventBoardVO vo = new eventBoardVO();
 		try {
 			//1,2
 			con=pool.getConnection();
 
 			//3
-			String sql="select * from semiboard where no=?";
+			String sql="select * from eventboard where no=?";
 			ps=con.prepareStatement(sql);
 			ps.setInt(1, no);
 
@@ -112,7 +120,7 @@ public class semiBoardDAO {
 		}
 	}
 
-	public int updateBoard(semiBoardVO vo) throws SQLException {
+	public int updateBoard(eventBoardVO vo) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
 
@@ -121,7 +129,7 @@ public class semiBoardDAO {
 			con=pool.getConnection();
 
 			//3
-			String sql="update semiboard" + 
+			String sql="update eventboard" + 
 					" set title=?,content=?" + 
 					" where no=?";
 			ps=con.prepareStatement(sql);
@@ -149,7 +157,7 @@ public class semiBoardDAO {
 			con=pool.getConnection();
 
 			//3
-			String sql="delete from semiboard where no=? ";
+			String sql="delete from eventboard where no=? ";
 			ps=con.prepareStatement(sql);
 			ps.setInt(1, no);
 			// pwd있어야하지 않나?
@@ -173,7 +181,7 @@ public class semiBoardDAO {
 			con=pool.getConnection();
 
 			//3
-			String sql="update semiboard" + 
+			String sql="update eventboard" + 
 					" set readcount=readcount+1" + 
 					" where no=?";
 			ps=con.prepareStatement(sql);

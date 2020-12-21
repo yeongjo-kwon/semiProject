@@ -39,6 +39,13 @@
 			noOpenerFade: true,
 			expandMode: (browser.mobile ? 'click' : 'hover')
 		});
+		
+	//custom
+		$('.divList tr').hover(function(){
+			$(this).find($('td')).css('background', '#ffffee');
+		},function(){
+			$(this).find($('td')).css('background', '');
+		});
 
 	// Nav Panel.
 

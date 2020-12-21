@@ -1,8 +1,8 @@
-package com.semiproj.semiboard.model;
+package com.semiproj.eventboard.model;
 
 import java.sql.Timestamp;
 
-public class semiBoardVO {
+public class eventBoardVO {
 	private int no;
 	private String title;
 	private Timestamp regdate;
@@ -10,11 +10,11 @@ public class semiBoardVO {
 	private String imgFileName;
 	private String imgOriginFileName;
 	
-	public semiBoardVO() {
+	public eventBoardVO() {
 		super();
 	}
 
-	public semiBoardVO(int no, String title, Timestamp regdate, String content, String imgFileName,
+	public eventBoardVO(int no, String title, Timestamp regdate, String content, String imgFileName,
 			String imgOriginFileName) {
 		super();
 		this.no = no;

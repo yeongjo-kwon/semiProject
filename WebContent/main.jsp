@@ -2,30 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ include file="inc/top.jsp" %>
 			<!-- Banner -->
-				<section id="banner">
-
-					<!--
-						".inner" is set up as an inline-block so it automatically expands
-						in both directions to fit whatever's inside it. This means it won't
-						automatically wrap lines, so be sure to use line breaks where
-						appropriate (<br />).
-					-->
-					<div class="inner">
-
-						<header>
-							<h2>책킷아웃</h2>
-						</header>
-						<p>책킷아웃에서 <b>새로운 이야기</b>가<br />
-						 당신을 기다립니다.</p>
-						<footer>
+			<section id="banner">
+				<div class="inner">
+					<header>
+						<h2>책킷아웃</h2>
+					</header>
+					<p>책킷아웃에서 <b>새로운 이야기</b>가<br />
+					 당신을 기다립니다.</p>
+					<footer>
 							<ul class="buttons stacked">
 								<li><a href="#main" class="button fit scrolly">Tell Me More</a></li>
 							</ul>
 						</footer>
-
-					</div>
-
-				</section>
+				</div>
+			</section>
 
 			<!-- Main -->
 			<article id="main">
@@ -69,7 +59,7 @@
 			<!-- 베스트 셀러 -->
 				<section class="wrapper style3 container special">
 					<header class="major">
-						<h2>이 달의<strong>베스트셀러</strong> top10</h2>
+						<h2><strong>베스트셀러</strong> Top3</h2>
 					</header>
 					<div class="row">
 						<div class="col-12 col-12-narrower">
@@ -86,7 +76,7 @@
 					</div>
 					<footer class="major">
 						<ul class="buttons">
-							<li><a href="#" class="button">See More</a></li>
+							<li><a href="<c:url value='/book/bookList.do'/>" class="button">See More</a></li>
 						</ul>
 					</footer>
 				</section>
@@ -94,13 +84,13 @@
 			<!-- CTA -->
 				<section id="cta">
 					<header>
-						<h2>abcd</h2>
-						<p>efgh</p>
+						<h2>AA</h2>
+						<p>bb</p>
 					</header>
 					<footer>
 						<ul class="buttons">
-							<li><a href="#" class="button primary">i</a></li>
-							<li><a href="#" class="button">j</a></li>
+							<li><a href="#" class="button primary">ok</a></li>
+							<li><a href="#" class="button">cancel</a></li>
 						</ul>
 					</footer>
 				</section>
