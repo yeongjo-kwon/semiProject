@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 public class CommentsVO {
 	private int no;
 	private String nickname; 
-	private String pwd;
 	Timestamp regdate;
 	private String content;
 	private int bookNo ;
@@ -13,11 +12,10 @@ public class CommentsVO {
 	public CommentsVO() {
 		super();
 	}
-	public CommentsVO(int no, String nickname, String pwd, Timestamp regdate, String content, int bookNo) {
+	public CommentsVO(int no, String nickname,Timestamp regdate, String content, int bookNo) {
 		super();
 		this.no = no;
 		this.nickname = nickname;
-		this.pwd = pwd;
 		this.regdate = regdate;
 		this.content = content;
 		this.bookNo = bookNo;
@@ -34,12 +32,6 @@ public class CommentsVO {
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
-	}
-	public String getPwd() {
-		return pwd;
-	}
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
 	}
 	public Timestamp getRegdate() {
 		return regdate;
@@ -62,7 +54,7 @@ public class CommentsVO {
 	
 	@Override
 	public String toString() {
-		return "CommentsVO [no=" + no + ", nickname=" + nickname + ", pwd=" + pwd + ", regdate=" + regdate
+		return "CommentsVO [no=" + no + ", nickname=" + nickname + " regdate=" + regdate
 				+ ", content=" + content + ", bookNo=" + bookNo + "]";
 	}
 }
