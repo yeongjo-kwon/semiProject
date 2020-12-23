@@ -23,4 +23,9 @@
 	<servlet-name>dispatcherServlet</servlet-name>
 	<url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  
+  <session-config>
+  	<session-timeout>600</session-timeout>
+  	<tracking-mode>COOKIE</tracking-mode>
+  </session-config>
 </web-app>

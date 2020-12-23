@@ -1,6 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
+<style>
+	caption{
+		visibility: hidden;
+	}
+</style>
+<script type="text/javascript">
+function pageFunc(curPage){
+	$('input[name=currentPage]').val(curPage);
+	$('form[name=frmPage]').submit();
+}
+</script>
+<form name="frmPage" action="<c:url value='/eventBoard/eventList.do'/>" 
+	method="post">
+	<input type="hidden" name="currentPage">
+	<input type="hidden" name="searchKeyword" value="${param.keyword }">
+	<input type="hidden" name="searchCondition" value="${param.condition }">
+</form>
 <article id="banner"></article>
 <!-- Main -->
 <article id="main">
@@ -8,6 +25,10 @@
 	<section class="wrapper style4 container">
 		<div class="row gtr-150">
 			<div class="col-10 col-12-narrower">
+			<c:if test="${!empty param.searchKeyword}">
+				<p>검색어 : ${param.searchKeyword }, ${pageVo.totalRecord }
+					건 검색되었습니다.</p>
+			</c:if>
 				<!-- Content -->
 				<div class="content">
 					<section>
@@ -47,6 +68,10 @@
 									<tr>
 										<td>${vo.no }</td>		
 										<td><a href="eventDetail.do?no=${vo.no }"> 
+											<!-- 파일이 업로드된 경우 파일 이미지 보여주기 -->
+											<c:if test="${!empty vo.imgFileName }">
+												<img src="<c:url value='/images/file.gif'/>" alt='파일 이미지'>
+											</c:if>
 											<!-- 제목이 30자 이상인 경우, 15자리만 보여주고 나머지 생략하기 -->
 											${vo.title }</a>
 										</td>
@@ -64,8 +89,7 @@
 							<!-- 페이지 번호 추가 -->		
 							<!-- 이전 블럭으로 이동 -->
 							<c:if test="${pageVo.firstPage>1 }">
-								<a href="<c:url value='/eventBoard/eventList.do?currentPage=${pageVo.firstPage-1 }
-								&searchCondition=${param.condition }&searchKeyword=${param.keyword }' />">
+								<a href="#" onclick="pageFunc(${pageVo.firstPage-1})">
 									<img src="<c:url value='/images/first.JPG'/>" alt="이전블럭으로 이동">
 								</a>
 							</c:if>
@@ -76,29 +100,26 @@
 										<span style="color:orange;font-weight: bold">${i }</span>
 									</c:if>
 									<c:if test="${i!=pageVo.currentPage }">
-										<a href="<c:url value='/eventBoard/eventList.do?currentPage=${i}
-								&searchCondition=${param.condition }&searchKeyword=${param.keyword }' />">
-									[${i }]</a>
+										<a href="#" onclick="pageFunc(${i})">[${i }]</a>
 									</c:if>
 								</c:if>
 							</c:forEach>
 							<!-- 다음 블럭으로 이동 -->
 							<c:if test="${pageVo.lastPage < pageVo.totalPage }">
-								<a href="<c:url value='/eventBoard/eventList.do?currentPage=${pageVo.lastPage+1 }
-								&searchCondition=${param.condition }&searchKeyword=${param.keyword }'/>">
+								<a href="#" onclick="pageFunc(${pageVo.lastPage+1})">
 									<img src="<c:url value='/images/last.JPG'/>">
 								</a>
 							</c:if>
 							<!--  페이지 번호 끝 -->
 						</div>
 						<div class="divSearch">
-							<form class="frmSearch" method="post" action="eventList.do">
+							<form class="frmSearch" method="post" action="<c:url value='/eventBoard/eventList.do'/>">
 								<select name="searchCondition">
-									<option value="title" <c:if test="${title eq param.condition }"/>
+									<option value="title" <c:if test="${title eq param.searchCondition }"/>
 									selected="selected">제목</option>
 								</select>
 								<input type="text" name="searchKeyword" title="검색어 입력"
-						        	value="">   
+						        	value="${param.searchKeyword }">   
 								<input type="submit" value="검색">
 							</form>
 						</div>

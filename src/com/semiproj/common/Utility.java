@@ -4,8 +4,10 @@ import java.util.Date;
 
 
 public class Utility {
-	public static final String TEST_DIR="C:\\lecture\\workspace_list\\jsp_ws\\mystudy\\WebContent\\pds_upload";
-	public static final String UPLOAD_DIR="pds_upload";
+	//public static final String TEST_DIR="C:\\lecture\\workspace_list\\jsp_ws\\mystudy\\WebContent\\pds_upload";
+	public static final String TEST_DIR="C:\\Users\\khee8\\git\\semiProject\\WebContent\\eventUpload";
+	//public static final String UPLOAD_DIR="pds_upload";
+	public static final String UPLOAD_DIR="eventUpload";
 	public static String displayRe(int step) {
 		//답변글인 경우 단계별로 이미지 보여주기
 		String str="";
@@ -44,22 +46,20 @@ public class Utility {
 		return result;
 	}
 	
-	public static String displayFile(String fileName) {
+	/*public static String displayFile(String fileName) {
 		String result="";
 		if(fileName!=null && !fileName.isEmpty()) {
 			result="<img src='../images/file.gif' alt='파일 이미지'>";
 		}
 		return result;
-	}
+	}*/
 	
-	public static String getFileInfo(String originName, long fileSize) {
+	public static String getFileInfo(String originName) {
 		String result="";
-		float fSize=fileSize/1024f;
-		fSize=Math.round(fSize*10)/10f;
 		
 		if(originName!=null && !originName.isEmpty()) {
 			result="<img src='../images/file.gif' alt='파일 이미지'>";
-			result+=" "+originName+" ("+fSize+"KB)";
+			result+=" "+originName;
 		}
 		return result;
 	}

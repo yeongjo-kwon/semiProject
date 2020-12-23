@@ -27,12 +27,14 @@ public class eventBoardDAO {
 			con=pool.getConnection();
 
 			//3. ps
-			String sql="insert into eventboard(no, title, content)" + 
-					" values(eventboard_seq.nextval,?,?)";
+			String sql="insert into eventboard(no,title,content,imgfilename,imgoriginfilename)" + 
+					" values(eventboard_seq.nextval,?,?,?,?)";
 			ps=con.prepareStatement(sql);
 
 			ps.setString(1, vo.getTitle());
 			ps.setString(2, vo.getContent());
+			ps.setString(3, vo.getImgFileName());
+			ps.setString(4, vo.getImgOriginFileName());
 
 			//4. exec
 			int cnt=ps.executeUpdate();
@@ -110,7 +112,9 @@ public class eventBoardDAO {
 				vo.setNo(no);
 				vo.setTitle(rs.getString("title"));
 				vo.setRegdate(rs.getTimestamp("regdate"));
-				vo.setContent("content");
+				vo.setContent(rs.getString("content"));
+				vo.setImgFileName(rs.getString("imgFileName"));
+				vo.setImgOriginFileName(rs.getString("imgOriginFileName"));
 			}
 			System.out.println("글 상세보기 결과 vo="+vo+", 매개변수 no="+no);
 
@@ -195,6 +199,20 @@ public class eventBoardDAO {
 			return cnt;
 		}finally {
 			pool.dbClose(ps, con);
+		}
+	}
+	
+	public int updateDownCount(int no) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		
+		try {
+			con=pool.getConnection();
+			
+			String sql="";
+			ps=con.prepareStatement(sql);
+		}finally {
+			
 		}
 	}
 }

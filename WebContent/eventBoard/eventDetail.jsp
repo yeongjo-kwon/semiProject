@@ -1,113 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
-<article id="banner"></article>
-<!-- Main -->
-<article id="main">
-	<header class="special container">
-	</header>
 
-	<!-- One -->
-	<section class="wrapper style4 container">
-		<div class="row gtr-150">
-			<div class="col-10 col-12-narrower">
-				<!-- Content -->
-				<div class="content">
-				<div class="divForm">
-					<div class="firstDiv">
-						<span class="sp1">제목</span> <span>${eventVo.title }</span>
-					</div>
-					<div>
-						<span class="sp1">등록일</span> 
-						<span>
-							<fmt:formatDate value="${eventVo.regdate }" pattern="yyyy-MM-dd"/>
-						</span>
-					</div>
-					<div class="lastDiv">			
-						<p class="content">${eventVo.content}</p>
-					</div>
-					<div class="center">
-						<a href=''>수정</a> |
-				       	<a href=''>삭제</a> |
-				       	<a href="<c:url value='/eventBoard/eventList.do'/>">목록</a>			
-					</div>
-				</div>
-				</div>
-			</div>
-			<div class="col-2 col-12-narrower">
-				<!-- Sidebar -->
-				<div class="sidebar">
-					<section>
-						<header>
-							<h3>Magna Feugiat</h3>
-						</header>
-						<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit..</p>
-						<footer>
-							<ul class="buttons">
-								<li><a href="#" class="button small">Learn More</a></li>
-							</ul>
-						</footer>
-					</section>
-					<section>
-						<a href="#" class="image featured"><!-- img --></a>
-						<header>
-							<h3>Amet Lorem Tempus</h3>
-						</header>
-						<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper sed blandit lorem ipsum dolore.</p>
-						<footer>
-							<ul class="buttons">
-								<li><a href="#" class="button small">Learn More</a></li>
-							</ul>
-						</footer>
-					</section>
-				</div>
-			</div>
+<script type="text/javascript">
+	$(function(){
+		$('#btEdit').click(function(){
+			location.href="<c:url value='/eventBoard/eventEdit.do?no=${param.no}'/>";
+		});
+		$('#btDel').click(function(){
+			if(confirm('삭제하시겠습니까?')){
+				location.href="<c:url value='/eventBoard/eventDelete_ok.do?no=${param.no}'/>";
+			}else{
+				event.preventDefault();
+			}
+		});
+		$('#btList').click(function(){
+			location.href="<c:url value='/eventBoard/eventList.do'/>";
+		});
+	});
+</script>
+<title>책킷아웃 - 상세보기</title>
+</head>
+<body>
+<h2>이벤트 글 상세보기</h2>
+<div class="divForm">
+		<div class="firstDiv">
+			<span class="sp1">제목</span> <span>${eventVo.title }</span>
 		</div>
-	</section>
+		<div>
+			<span class="sp1">등록일</span> 
+			<span>
+				<fmt:formatDate value="${eventVo.regdate }" pattern="yyyy-MM-dd"/>
+			</span>
+		</div>
+		<div>
+			<span class="sp1">첨부파일</span>
+			<c:if test="${!empty eventVo.imgFileName }">
+				<img src='<c:url value="/images/file.gif"/>' alt='파일 이미지'>
+			</c:if>
+			<span>${fileInfo }</span>
+		</div>
+		<%
+			pageContext.setAttribute("newLine","\r\n");
+		%>
+		<c:set var="content" 
+			value="${fn:replace(eventVo.content,newLine,'<br>') }"/>
+			
+		<div class="lastDiv">		
+			<p class="content">${content }</p>
+		</div>
+		<div class="center">
+			<form>
+				<input type="button" id="btEdit" value="수정">
+				<input type="button" id="btDel" value="삭제">
+				<input type="button" id="btList" value="목록">
+			</form>		
+		</div>
+	</div>
 
-	<!-- Two -->
-	<section class="wrapper style1 container special">
-		<div class="row">
-			<div class="col-4 col-12-narrower">
-				<section>
-					<header>
-						<h3>This is Something</h3>
-					</header>
-					<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit, et sagittis turpis. Integer ut fermentum.</p>
-					<footer>
-						<ul class="buttons">
-							<li><a href="#" class="button small">Learn More</a></li>
-						</ul>
-					</footer>
-				</section>
-			</div>
-			<div class="col-4 col-12-narrower">
-				<section>
-					<header>
-						<h3>Also Something</h3>
-					</header>
-					<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit, et sagittis turpis. Integer ut fermentum.</p>
-					<footer>
-						<ul class="buttons">
-							<li><a href="#" class="button small">Learn More</a></li>
-						</ul>
-					</footer>
-				</section>
-			</div>
-			<div class="col-4 col-12-narrower">
-				<section>
-					<header>
-						<h3>Probably Something</h3>
-					</header>
-					<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit, et sagittis turpis. Integer ut fermentum.</p>
-					<footer>
-						<ul class="buttons">
-							<li><a href="#" class="button small">Learn More</a></li>
-						</ul>
-					</footer>
-				</section>
-			</div>
-		</div>
-	</section>
-</article>
 <%@ include file="../inc/bottom.jsp" %>
