@@ -23,6 +23,13 @@ public class EventDetailController implements Controller{
 		//=> http://localhost:9090/semiproj/eventBoard/eventDetail.do?no=6
 		String no=request.getParameter("no");
 		
+		if(no==null || no.isEmpty()) {
+			request.setAttribute("msg", "잘못된 url입니다.");
+			request.setAttribute("url", "/eventBoard/eventList.do");
+			
+			return "/common/message.jsp";
+		}
+		
 		//2. 비즈니스 로직 처리 - 모델에 의뢰, db작업
 		eventBoardService eventService=new eventBoardService();
 		eventBoardVO eventVo=null;
