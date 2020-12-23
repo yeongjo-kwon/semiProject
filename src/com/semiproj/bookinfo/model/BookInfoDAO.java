@@ -62,4 +62,72 @@ public class BookInfoDAO {
 			pool.dbClose(rs, ps, con);
 		}
 	}
+	
+	public BookInfoVO selectByNo(int no) throws SQLException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		BookInfoVO vo=null;
+		try {
+			con=pool.getConnection();
+			
+			String sql="select * from bookinfo" + 
+					" where no=?";
+			ps=con.prepareStatement(sql);
+			
+			ps.setInt(1, no);
+			
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				String title=rs.getString("title");
+				int price=rs.getInt("price");
+				Timestamp regdate=rs.getTimestamp("regdate");
+				String publisher=rs.getString("publisher");
+				int wrNo=rs.getInt("wrNo");
+				String content=rs.getString("content");
+				String txtFileName=rs.getString("txtFileName");
+				String coverFileName=rs.getString("coverFileName");
+				String txtOriginFileName=rs.getString("txtOriginFileName");
+				String coverOriginFileName=rs.getString("coverOriginFileName");
+				
+				vo=new BookInfoVO(no, title, price, regdate, publisher, wrNo, content, txtFileName, coverFileName, txtOriginFileName, coverOriginFileName);
+			}
+			System.out.println("번호로 조회 결과 vo="+vo+", 매개변수 no="+no);
+			
+			return vo;
+		}finally {
+			pool.dbClose(rs, ps, con);
+		}
+	}
+	
+	public int insertBook(BookInfoVO vo) throws SQLException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		
+		try{
+			con=pool.getConnection();
+			
+			String sql="insert into bookinfo(no, title, price, publisher, wrno, content, txtfilename, coverfilename, txtoriginfilename, coveroriginfilename)" + 
+					" values(bookinfo_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			ps=con.prepareStatement(sql);
+			
+			ps.setString(1, vo.getTitle());
+			ps.setInt(2, vo.getPrice());
+			ps.setString(3, vo.getPublisher());
+			ps.setInt(4, vo.getWrNo());
+			ps.setString(5, vo.getContent());
+			ps.setString(6, vo.getTxtFileName());
+			ps.setString(7, vo.getCoverFileName());
+			ps.setString(8, vo.getTxtOriginFileName());
+			ps.setString(9, vo.getCoverOriginFileName());
+			
+			int cnt=ps.executeUpdate();
+			System.out.println("책 등록 결과 cnt="+cnt+", 매개변수 vo="+vo);
+			
+			return cnt;
+		}finally {
+			pool.dbClose(ps, con);
+		}
+	}
 }

@@ -53,7 +53,7 @@
 												<tr>
 													<td>
 														<img alt="표지 이미지"
-															src="<c:url value='/images/cover_upload/${bookVo.coverFileName}'/>"
+															src="<c:url value='/file_upload/cover/${bookVo.coverFileName}'/>"
 																width="100px">
 													</td>
 													<td><a href="<c:url value='/book/bookDetail.do?no=${bookVo.no}'/>">
@@ -117,14 +117,15 @@
 							</form>
 						
 						</div>
-							<hr>
+						<hr>
+						<div class="adminButton">
 							<a class="button small" style="float: right"
 								<c:set var="nickname" value="세션닉네임"/>
 								<%--<c:if test="${nickname!='admin'}">
 									hidden="hidden"
 								</c:if>--%>
 								href="<c:url value='/book/bookeWrite.do'/>">책 등록</a>
-											
+						</div>				
 					</section>
 				</div>
 			</div>

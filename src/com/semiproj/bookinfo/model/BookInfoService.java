@@ -13,4 +13,12 @@ public class BookInfoService {
 	public List<BookInfoVO> selectAll(String condition, String keyword) throws SQLException{
 		return bookinfoDao.selectAll(condition, keyword);
 	}
+	
+	public BookInfoVO selectByNo(int no) throws SQLException{
+		return bookinfoDao.selectByNo(no);
+	}
+	
+	public int insertBook(BookInfoVO vo) throws SQLException{
+		return bookinfoDao.insertBook(vo);
+	}
 }
