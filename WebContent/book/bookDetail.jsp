@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
+<script type="text/javascript">
+	$(function(){
+		$('#cfDel').click(function(){
+			if(confirm("삭제하시겠습니까?")){
+				location.href="<c:url value='/book/bookDel.do?no=${param.no}'/>";
+			}
+		});			
+	});
+</script>
 <article id="banner"></article>
 <!-- Main -->
 <article id="main">
@@ -11,7 +20,44 @@
 				<!-- Content -->
 				<div class="content">
 					<section>
-						<jsp:include page="../comments/comments_detail.do?bookNo=${param.bookNo}"></jsp:include>			
+						<h1>책 상세정보</h1>
+						<div>
+							<img alt="책 표지 이미지" width="250px"
+								src="<c:url value='/file_upload/cover/${bookVo.coverFileName}'/>">
+						</div><br><br>
+						<p><b>책 제목</b> : ${bookVo.title}</p>
+						<p><b>작가</b> :
+							<a href="<c:url value='/writerPage.do?no=${bookVo.wrNo}'/>">
+								${writerVo.name}</a>
+						<p><b>가격</b> : <fmt:formatNumber value="${bookVo.price}"
+									pattern="#,###"/>원</p>
+						<p><b>출판사</b> : ${bookVo.publisher}</p>
+						<p><b>등록일</b> : <fmt:formatDate value="${bookVo.regdate}"
+									pattern="yyyy-MM-dd"/></p>
+						<br><br>
+						
+						<b>책 소개</b><br>
+						<p class="bookContent">${bookVo.content}</p>
+									
+									
+						<a class="button small"
+							 href="<c:url value='/book/bookList.do'/>">책 목록</a>
+						<div class="adminButton">
+							<a class="button small"
+								<c:set var="nickname" value="세션닉네임"/>
+								<%--<c:if test="${nickname!='admin'}">
+									hidden="hidden"
+								</c:if>--%>
+								href="<c:url value='/book/bookEdit.do?no=${param.no}'/>">정보 수정</a>
+							<a class="button small"
+								<c:set var="nickname" value="세션닉네임"/>
+								<%--<c:if test="${nickname!='admin'}">
+									hidden="hidden"
+								</c:if>--%>
+								href="#" id="cfDel">삭제</a>
+						</div><br><br>
+						<jsp:include page="../comments/comments_write.jsp"></jsp:include>			
+						<jsp:include page="../comments/comments_List.jsp"></jsp:include>			
 					</section>
 				</div>
 			</div>
