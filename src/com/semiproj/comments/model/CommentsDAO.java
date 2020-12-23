@@ -38,12 +38,10 @@ public class CommentsDAO {
 			while(rs.next()) {
 				int no=rs.getInt("no");
 				String nickname=rs.getString("nickname");
-				String pwd=rs.getString("pwd");
 				Timestamp regdate=rs.getTimestamp("regdate");
 				String content=rs.getString("content");
-				//int bookNo=rs.getInt("bookno");
 				
-				CommentsVO vo = new CommentsVO(no, nickname, pwd, regdate, content, bookNo);
+				CommentsVO vo = new CommentsVO(no, nickname,regdate, content, bookNo);
 				
 				list.add(vo);
 			}
@@ -61,15 +59,14 @@ public class CommentsDAO {
 		try {
 			con=pool.getConnection();
 			
-			String sql="insert into comments(no,nickname,pwd,content,bookno)" + 
-					" values(comments_seq.nextval,?,?,?,?)";
+			String sql="insert into comments(no,nickname,content,bookno)" + 
+					" values(comments_seq.nextval,?,?,?)";
 			
 			ps=con.prepareStatement(sql);
 			
 			ps.setString(1, vo.getNickname());
-			ps.setString(2, vo.getPwd());
-			ps.setString(3, vo.getContent());
-			ps.setInt(4, vo.getBookNo());
+			ps.setString(2, vo.getContent());
+			ps.setInt(3, vo.getBookNo());
 			
 			cnt=ps.executeUpdate();
 			System.out.println("댓글 작성 결과 : cnt="+cnt+" , 매개변수 vo="+vo);
