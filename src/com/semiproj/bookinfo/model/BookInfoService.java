@@ -21,4 +21,9 @@ public class BookInfoService {
 	public int insertBook(BookInfoVO vo) throws SQLException{
 		return bookinfoDao.insertBook(vo);
 	}
+	
+	//작가번호로 책조회
+	public List<BookInfoVO> selectByWrno(int wrno) throws SQLException {
+		return bookinfoDao.selectByWrno(wrno);
+	}
 }
