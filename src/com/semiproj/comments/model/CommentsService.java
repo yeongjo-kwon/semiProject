@@ -26,4 +26,8 @@ public class CommentsService {
 	public int selectCommentsCnt(int bookNo) throws SQLException {
 		return cDao.selectCommentsCnt(bookNo);
 	}
+	
+	public int deleteCmt(int no) throws SQLException {
+		return cDao.deleteCmt(no);
+	}
 }

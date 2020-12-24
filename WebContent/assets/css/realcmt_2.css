@@ -6,6 +6,13 @@ body {
   font-size: 14px;
   color: #242424;
 }
+/*등록 버튼*/
+
+input#button {
+    border-radius: 5px;
+    border: 1px solid #dfdfdf;
+    color: #585656;
+}
 
 /*댓글 수*/
 .book-info-title .number {
