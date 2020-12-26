@@ -33,21 +33,27 @@
 </head>
 <body>
 	<%
+	//테스트 세션
 		session.setAttribute("no", "1");
 		session.setAttribute("bookno", "1");
 		session.setAttribute("nickname", "세미");
-		String no = request.getParameter("no");
+		session.setAttribute("img", "AvataImg");
+		
+		//String no = request.getParameter("no");
 		String no_co = (String) session.getAttribute("no");
-		//int no=Integer.parseInt(no_co);
+		//세션이랑 일치시킴 - 테스트용
+		int no=Integer.parseInt(no_co);
+		String nickname_c = (String) session.getAttribute("nickname");//삭제
+
 		String bookno = (String) session.getAttribute("bookno");
 		String nickname = (String) session.getAttribute("nickname");
-		//String nickname_co=(String)request.getAttribute("nickname");
-		//String nickname_co=(String) session.getAttribute("nickname");
-		String nickname_co = "세미";
+		//String nickname_c=(String)request.getAttribute("nickname");
+		String img_c = (String) session.getAttribute("img");
+		
 		CommentsService cmtservice = new CommentsService();
 		CommentsVO cmtvo = new CommentsVO();
 
-		System.out.println("nickname=" + nickname + "nickname_co=" + nickname_co);
+		System.out.println("nickname=" + nickname + "nickname_c=" + nickname_c);
 		List<CommentsVO> commList = cmtservice.selectAllCmt(Integer.parseInt(bookno));
 		System.out.println(commList);
 		SimpleDateFormat commSdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -74,19 +80,27 @@
 											<%=nickname%>
 											님<br /> 한 줄 리뷰를 작성해보세요
 										</p>
+										<form method="post" name="cmtFrm"
+									action="<c:url value='/comments/comments_write_ok.do'/>">
+											<!-- hidden으로 변경하기 -->
+									<input type="text" name="bookno" id="bookno" value="<%=bookno%>">
+									<input type="text" name="nickname" id="nickname"
+										value="<%=nickname_c%>" /> <input type="text" name="img_c"
+										id="img_c" value="<%=img_c%>" />
+			
 										<div class="image" style="background-image: url('');"></div>
 									</div>
 									<div class="register">
 										<textarea placeholder="한 줄 리뷰를 남겨주세요" maxlength="50"
-											class="textarea"></textarea>
+											class="textarea"  id="content" name="content"></textarea>
 										<p class="text-number">
 											<span>0</span><em>/</em>50
 										</p>
 										<input type="submit" class="gtm-review-register disabled"
 										 value="리뷰 등록하기" name="button" id="button">
-											</button>
 									</div>
 								</div>
+								</form>
 								<div class="sub-inner p0 review-detail">
 									<p class="review-count">
 										총
@@ -96,7 +110,7 @@
 									<%-- <c:if test="${empty commList}">
 				<p>등록된 리뷰가 없습니다.</p>
 			</c:if> --%>
-									<c:if test="${!empty commList}">
+									<c:if test="${empty commList}">
 										<%
 											for (int i = 0; i < commList.size(); i++) {
 										%>
@@ -110,15 +124,10 @@
 												<div class="info">
 													<p class="nickname">
 														<a href="#" class="gtm-review-lib"><%=commList.get(i).getNickname()%></a>
-
 														<!--1등이면-->
-														<%
-															if (i == 0) {
-														%>
+														<%	if (i == 0) {	%>
 														<strong class="best">Best</strong> <strong class="rank">1등</strong>
-														<%
-															}
-														%>
+														<%	}	%>
 													</p>
 													<span class="date"><%=commSdf.format(commList.get(i).getRegdate())%></span>
 													<pre class="cont"><%=commList.get(i).getContent()%></pre>
@@ -131,19 +140,15 @@
 													<!---->
 													<!--  닉네임 일치시 삭제  -->
 													<%
-														if (nickname_co.equals(nickname)) {
+														if (nickname_c.equals(nickname)) {
 													%>
 													<div class="more-area">
-														<!-- <button type="button" class="gtm-review-delect" id="delete" name="delete"
-									onclick="">삭제하기</button> -->
-														<form
-															action="<c:url value='/comments/comments_delete.do?no=${param.no}'/>"
-															method="post" name="delete" id="delete">
+												<%-- 		<form action="<c:url value='/comments/comments_delete.do?no=${param.no}'/>" 
+															method="post" name="delete" id="delete">--%>
 															<input type="text" value="<%=commList.get(i).getNo()%>"
-																name="no" id="no"> <input type="button"
-																name="button" id="delete" value="삭제하기"
-																onclick="button_event();">
-														</form>
+																name="no" id="no">
+																 <input type="button"	name="button" id="delete" value="삭제하기" onclick="button_event();">
+												<!-- 		</form> -->
 													</div>
 													<%
 														}
