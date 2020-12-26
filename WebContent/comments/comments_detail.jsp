@@ -36,7 +36,7 @@
 	//테스트 세션
 		session.setAttribute("no", "1");
 		session.setAttribute("bookno", "1");
-		session.setAttribute("nickname", "세미");
+		session.setAttribute("nickname", "이세미");
 		session.setAttribute("img", "AvataImg");
 		
 		//String no = request.getParameter("no");
@@ -49,7 +49,6 @@
 		String nickname = (String) session.getAttribute("nickname");
 		//String nickname_c=(String)request.getAttribute("nickname");
 		String img_c = (String) session.getAttribute("img");
-		
 		CommentsService cmtservice = new CommentsService();
 		CommentsVO cmtvo = new CommentsVO();
 
@@ -58,6 +57,8 @@
 		System.out.println(commList);
 		SimpleDateFormat commSdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		System.out.println("detail => no=" + no + " , nickname=" + nickname);
+	
+		 session.invalidate();
 	%>
 	<article id="banner"></article>
 	<!-- Main -->
@@ -143,8 +144,6 @@
 														if (nickname_c.equals(nickname)) {
 													%>
 													<div class="more-area">
-												<%-- 		<form action="<c:url value='/comments/comments_delete.do?no=${param.no}'/>" 
-															method="post" name="delete" id="delete">--%>
 															<input type="text" value="<%=commList.get(i).getNo()%>"
 																name="no" id="no">
 																 <input type="button"	name="button" id="delete" value="삭제하기" onclick="button_event();">
