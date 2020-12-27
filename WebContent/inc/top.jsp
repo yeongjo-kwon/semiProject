@@ -29,7 +29,7 @@
 						<li class="submenu">
 							<a href="#">Menu</a>
 							<ul>
-								<li><a href="left-sidebar.html">Left Sidebar</a></li>
+								<li><a href="left-sidebar.html">책 </a></li>
 								<li><a href="right-sidebar.html">Right Sidebar</a></li>
 								<li><a href="no-sidebar.jsp">No Sidebar</a></li>
 								<li><a href="contact.html">Contact</a></li>
