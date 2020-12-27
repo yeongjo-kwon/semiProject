@@ -1,21 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Document</title>
+	<%@ include file="../inc/top.jsp"%>
+
 <link rel="stylesheet" href="<c:url value='/css/Map.css'/>" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=LIBRARY"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
-</head>
-<body>
-<jsp:include page="../inc/top.jsp"/>
+
 <article id="banner"></article>
 	<!-- Main -->
 	<article id="main">
@@ -26,48 +18,49 @@
 					<!-- Content -->
 					<div class="content">
 								<section>
+								<h2>ì°¾ì•„ì˜¤ì‹œëŠ” ê¸¸</h2>
 		<div id="map" style="width: 100%; height: 350px">
 			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b9d71171c0f73b7fc048f620acf5c061"></script>
 		<script type="text/javascript">
-          var mapContainer = document.getElementById('map'), // Áöµµ¸¦ Ç¥½ÃÇÒ div
+          var mapContainer = document.getElementById('map'), // ì§€ë„ë¥¼ í‘œì‹œí•  div
             mapOption = {
               center: new kakao.maps.LatLng(
                 37.498911100975185,
                 127.03195344212064
-              ), // ÁöµµÀÇ Áß½ÉÁÂÇ¥
-              level: 3, // ÁöµµÀÇ È®´ë ·¹º§
+              ), // ì§€ë„ì˜ ì¤‘ì‹¬ì¢Œí‘œ
+              level: 3, // ì§€ë„ì˜ í™•ëŒ€ ë ˆë²¨
             };
 
           var map = new kakao.maps.Map(mapContainer, mapOption);
 
-          // ¸¶Ä¿°¡ Ç¥½ÃµÉ À§Ä¡ÀÔ´Ï´Ù
+          // ë§ˆì»¤ê°€ í‘œì‹œë  ìœ„ì¹˜ìž…ë‹ˆë‹¤
           var markerPosition = new kakao.maps.LatLng(
             37.498911100975185,
             127.03195344212064
           );
 
-          // ¸¶Ä¿¸¦ »ý¼ºÇÕ´Ï´Ù
+          // ë§ˆì»¤ë¥¼ ìƒì„±í•©ë‹ˆë‹¤
           var marker = new kakao.maps.Marker({
             position: markerPosition,
           });
 
-          // ¸¶Ä¿°¡ Áöµµ À§¿¡ Ç¥½ÃµÇµµ·Ï ¼³Á¤ÇÕ´Ï´Ù
+          // ë§ˆì»¤ê°€ ì§€ë„ ìœ„ì— í‘œì‹œë˜ë„ë¡ ì„¤ì •í•©ë‹ˆë‹¤
           marker.setMap(map);
 
           var iwContent =
-              '<div style="padding:5px;">Ã½Å¶¾Æ¿ô<br><a href="#" style="color:blue" target="_blank" class="">Å«Áöµµº¸±â</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">±æÃ£±â</a></div>', // ÀÎÆ÷À©µµ¿ì¿¡ Ç¥ÃâµÉ ³»¿ëÀ¸·Î HTML ¹®ÀÚ¿­ÀÌ³ª document element°¡ °¡´ÉÇÕ´Ï´Ù
+              '<div style="padding:5px;">ì²µí‚·ì•„ì›ƒ<br><a href="#" style="color:blue" target="_blank" class="">í°ì§€ë„ë³´ê¸°</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">ê¸¸ì°¾ê¸°</a></div>', // ì¸í¬ìœˆë„ìš°ì— í‘œì¶œë  ë‚´ìš©ìœ¼ë¡œ HTML ë¬¸ìžì—´ì´ë‚˜ document elementê°€ ê°€ëŠ¥í•©ë‹ˆë‹¤
             iwPosition = new kakao.maps.LatLng(
               37.498911100975185,
               127.03195344212064
-            ); //ÀÎÆ÷À©µµ¿ì Ç¥½Ã À§Ä¡ÀÔ´Ï´Ù
+            ); //ì¸í¬ìœˆë„ìš° í‘œì‹œ ìœ„ì¹˜ìž…ë‹ˆë‹¤
 
-          // ÀÎÆ÷À©µµ¿ì¸¦ »ý¼ºÇÕ´Ï´Ù
+          // ì¸í¬ìœˆë„ìš°ë¥¼ ìƒì„±í•©ë‹ˆë‹¤
           var infowindow = new kakao.maps.InfoWindow({
             position: iwPosition,
             content: iwContent,
           });
 
-          // ¸¶Ä¿ À§¿¡ ÀÎÆ÷À©µµ¿ì¸¦ Ç¥½ÃÇÕ´Ï´Ù. µÎ¹øÂ° ÆÄ¶ó¹ÌÅÍÀÎ marker¸¦ ³Ö¾îÁÖÁö ¾ÊÀ¸¸é Áöµµ À§¿¡ Ç¥½ÃµË´Ï´Ù
+          // ë§ˆì»¤ ìœ„ì— ì¸í¬ìœˆë„ìš°ë¥¼ í‘œì‹œí•©ë‹ˆë‹¤. ë‘ë²ˆì§¸ íŒŒë¼ë¯¸í„°ì¸ markerë¥¼ ë„£ì–´ì£¼ì§€ ì•Šìœ¼ë©´ ì§€ë„ ìœ„ì— í‘œì‹œë©ë‹ˆë‹¤
           infowindow.open(map, marker);
         </script>
 		</div>
@@ -75,32 +68,32 @@
 		<div class="customerDiv">
 			<div class="white_box"
 				style="margin-top: 20px; border-top: 1px solid #ddd">
-				<h3>±× ¿Ü¿¡ ±Ã±ÝÇÏ½Å Á¡Àº ¾Æ·¡·Î ¹®ÀÇÇØ ÁÖ¼¼¿ä</h3>
+				<h3>ê·¸ ì™¸ì— ê¶ê¸ˆí•˜ì‹  ì ì€ ì•„ëž˜ë¡œ ë¬¸ì˜í•´ ì£¼ì„¸ìš”</h3>
 				<div class="flex-area">
-					<a href="./qna_entry.html" class="btn_btype">1:1 ¹®ÀÇÇÏ±â</a> <a
+					<a href="./qna_entry.html" class="btn_btype">1:1 ë¬¸ì˜í•˜ê¸°</a> <a
 						href="mailto:business@millie.town" target="_blank"
-						class="btn_btype">¸¶ÄÉÆÃ/Á¦ÈÞ ¹®ÀÇ</a>
+						class="btn_btype">ë§ˆì¼€íŒ…/ì œíœ´ ë¬¸ì˜</a>
 				</div>
 				<div class="flex-area">
 					<a href="mailto:beiron@millie.town" target="_blank"
-						class="btn_btype">ÄÜÅÙÃ÷ °ø±Þ ¹®ÀÇ</a> <a
+						class="btn_btype">ì½˜í…ì¸  ê³µê¸‰ ë¬¸ì˜</a> <a
 						href="/customer/qna_write.html?common_code_seq=903"
-						class="btn_btype">B2B °ü·Ã ¹®ÀÇ</a>
+						class="btn_btype">B2B ê´€ë ¨ ë¬¸ì˜</a>
 				</div>
 			</div>
 
 			<div>
 				<a class="white_box openBrowser" href="tel:070-7510-5415">
-					<h3 class="font-weight-bold">°í°´¼¾ÅÍ 070-7510-5415</h3>
+					<h3 class="font-weight-bold">ê³ ê°ì„¼í„° 070-7510-5415</h3>
 					<p>
-						ÆòÀÏ 10:00 ~ 18:00 (Á¡½É½Ã°£ 13:00 ~ 14:00)<br /> Åä/ÀÏ/°øÈÞÀÏ Day off
+						í‰ì¼ 10:00 ~ 18:00 (ì ì‹¬ì‹œê°„ 13:00 ~ 14:00)<br /> í† /ì¼/ê³µíœ´ì¼ Day off
 					</p>
 				</a>
 			</div>
 			<div class="white_box" style="padding: 0 0 20px">
 				<p>
-					¡ØÄÚ·Î³ª19·Î ÀÎÇØ °í°´¼¾ÅÍ ¿î¿µÀ» ÃÖ¼ÒÈ­ ÇÏ°í ÀÖ½À´Ï´Ù.<br /> ÅëÈ­ ¿¬°áÀÌ ¾î·Á¿ì´Ï <b>1:1 ¹®ÀÇÇÏ±â</b>¸¦
-					ÀÌ¿ëÇØÁÖ¼¼¿ä.
+					â€»ì½”ë¡œë‚˜19ë¡œ ì¸í•´ ê³ ê°ì„¼í„° ìš´ì˜ì„ ìµœì†Œí™” í•˜ê³  ìžˆìŠµë‹ˆë‹¤.<br /> í†µí™” ì—°ê²°ì´ ì–´ë ¤ìš°ë‹ˆ <b>1:1 ë¬¸ì˜í•˜ê¸°</b>ë¥¼
+					ì´ìš©í•´ì£¼ì„¸ìš”.
 				</p>
 			</div>
 </div>
@@ -198,6 +191,4 @@
 			</div>
 		</section>
 </article>
-	<jsp:include page="../inc/bottom.jsp" />
-</body>
-</html>
+<%@ include file="../inc/bottom.jsp"%>

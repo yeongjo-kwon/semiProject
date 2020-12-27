@@ -27,7 +27,6 @@
 <!-- 댓글 수 증가하면 카운트하는거 추가할거면 js넣기 -->
 </head>
 <body>
-
 	<%
 	// 데이터 나중에 삭제 - 테스트용
 		session.setAttribute("no", "1");
@@ -38,11 +37,9 @@
 		CommentsService cmtservice = new CommentsService();
 		String bookno = (String) session.getAttribute("no");
 		String img_e = (String) request.getAttribute("img");
-		String email_e = (String) request.getAttribute("email_c");
-	// 세션에서 읽어오기
-		String email_c = (String) session.getAttribute("email");
-		String nickname_c = (String) session.getAttribute("nickname");
 		String img_c = (String) session.getAttribute("img");
+	// 세션에서 읽어오기 - 이건 삭제 x
+		String nickname = (String) session.getAttribute("nickname");
 	%>
 	<div id="anchorReview" class="review-container thin-line">
 		<form method="post" name="cmtFrm"
@@ -50,8 +47,7 @@
 			<!-- hidden으로 변경하기 -->
 			<input type="text" name="bookno" id="bookno" value="<%=bookno%>">
 			<input type="text" name="nickname" id="nickname"
-				value="<%=nickname_c%>" /> <input type="text" name="img_c"
-				id="img_c" value="<%=img_c%>" />
+				value="<%=nickname%>" />
 
 			<!-- 댓글 입력 시작 -->
 			<div class="review-register">

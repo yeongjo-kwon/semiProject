@@ -3,6 +3,7 @@ package com.semiproj.comments.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,22 +20,30 @@ public class CmtDetailController implements Controller{
 		 	 => /comments/comments_detail.jsp포워딩
 		 */
 		String no=request.getParameter("no");
+		System.out.println("no="+no);
 		if(no==null || no.isEmpty()) {
 			request.setAttribute("msg", "잘못된 url입니다.");
-			//request.setAttribute("url", "/book/bookDetail.do?no="+no);
+			
 			request.setAttribute("url","/book/bookDetail.jsp");
 			return "/common/message.jsp";
 		}
-		
+		CommentsVO commVo=new CommentsVO();
 		CommentsService cmtservice=new CommentsService();
 		List<CommentsVO> list=null;
+		int totalcmt=0;
 		try {
 			list=cmtservice.selectAllCmt(Integer.parseInt(no));
+			totalcmt=cmtservice.selectCommentsCnt(Integer.parseInt(no));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+		int commListSize=list.size();
 		
+		request.setAttribute("totalcmt", totalcmt);
+		request.setAttribute("commListSize", commListSize);
 		request.setAttribute("commList", list);
+		System.out.println("totalcmt="+totalcmt+" , commListSize="+commListSize);
+		
 		return "/comments/comments_detail.jsp";
 	}
 

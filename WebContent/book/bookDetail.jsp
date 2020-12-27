@@ -56,10 +56,10 @@
 								</c:if>--%>
 								href="#" id="cfDel">삭제</a>
 						</div><br><br>
-						<%-- 
+						
 						<jsp:include page="../comments/comments_write.jsp"></jsp:include>			
 						<jsp:include page="../comments/comments_List.jsp"></jsp:include>			
-						 --%>
+			
 					</section>
 				</div>
 			</div>
