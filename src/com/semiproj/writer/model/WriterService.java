@@ -17,7 +17,11 @@ public class WriterService {
 	public WriterVO selectByName(String name) throws SQLException {
 		return writerDao.selectByName(name);
 	}
-	
+
+	public List<WriterVO> selectByName(String name) throws SQLException {
+		return writerDao.selectByName(name);
+	}
+
 	public WriterVO selectByWrno(int no) throws SQLException {
 		return writerDao.selectByWrno(no);
 	}
@@ -25,5 +29,5 @@ public class WriterService {
 	public List<WriterVO> selectAll() throws SQLException{
 		return writerDao.selectAll();
 	}
-	
+
 }

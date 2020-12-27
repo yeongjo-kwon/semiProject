@@ -20,9 +20,8 @@
 						<div class="divList">
 							<table class="default" border="1">
 								<colgroup>
-									<col style="width:15;" />
-									<col style="width:25%;" />
-									<col style="width:30%;" />
+									<col style="width:5%;" />
+									<col style="width:40%;" />
 									<col style="width:20%;" />
 									<col style="width:10%;" />		
 								</colgroup>
@@ -30,7 +29,6 @@
 									<tr>
 										<th>표지 이미지</th>
 										<th>책 제목</th>
-										<th>소개</th>
 										<th>출판사</th>
 										<th>등록일</th>
 									</tr>
@@ -53,12 +51,11 @@
 												<tr>
 													<td>
 														<img alt="표지 이미지"
-															src="<c:url value='/file_upload/cover/${bookVo.coverFileName}'/>"
+															src="<c:url value='/file_upload/${bookVo.coverFileName}'/>"
 																width="100px">
 													</td>
 													<td><a href="<c:url value='/book/bookDetail.do?no=${bookVo.no}'/>">
 														${bookVo.title}</a></td>
-													<td>${bookVo.content}</td>
 													<td>${bookVo.publisher}</td>
 													<td><fmt:formatDate value="${bookVo.regdate}"
 														pattern="yyyy-MM-dd"/></td>
@@ -124,7 +121,7 @@
 								<%--<c:if test="${nickname!='admin'}">
 									hidden="hidden"
 								</c:if>--%>
-								href="<c:url value='/book/bookeWrite.do'/>">책 등록</a>
+								href="<c:url value='/book/bookWrite.do'/>">책 등록</a>
 						</div>				
 					</section>
 				</div>

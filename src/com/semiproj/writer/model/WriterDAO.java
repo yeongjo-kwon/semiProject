@@ -98,7 +98,41 @@ public class WriterDAO {
 			pool.dbClose(rs, ps, con);
 		}
 	}
-	
+
+	public List<WriterVO> selectByName(String name) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<WriterVO> list=new ArrayList<WriterVO>();
+		try {
+			con=pool.getConnection();
+			
+			String sql="select * from writer"
+					+ " where name like '%'||?||'%'";
+			ps=con.prepareStatement(sql);
+			ps.setString(1, name);
+			
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				int no=rs.getInt("no");
+				String dbName=rs.getString("name");
+				String intro=rs.getString("intro");
+				String photoFileName=rs.getString("photofilename");
+				String photoOriginFileName=rs.getString("photooriginfilename");
+				
+				WriterVO vo=new WriterVO(no, dbName, intro, photoFileName, photoOriginFileName);
+				list.add(vo);
+			}
+			
+			System.out.println("작가 이름 조회 결과 list.size()="+list.size()+", 매개변수 name="+name);
+			
+			return list;
+		}finally {
+			pool.dbClose(rs, ps, con);
+		}
+	}
+
 	public List<WriterVO> selectAll() throws SQLException{
 		Connection con=null;
 		PreparedStatement ps=null;
@@ -131,11 +165,7 @@ public class WriterDAO {
 			pool.dbClose(rs, ps, con);
 			
 		}
-		
-		
 	}
-	
-	
 }//class
 
 
