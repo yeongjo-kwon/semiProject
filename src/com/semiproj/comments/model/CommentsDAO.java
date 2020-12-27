@@ -29,7 +29,7 @@ public class CommentsDAO {
 			
 			//3. ps
 			String sql="select * from comments" + 
-					" where bookno=? order by no desc";
+					" where bookno=? order by no asc";
 			ps=con.prepareStatement(sql);
 			ps.setInt(1, bookNo);
 			
@@ -101,5 +101,26 @@ public class CommentsDAO {
 		}finally {
 			pool.dbClose(rs, ps, con);
 		}
+	}
+	
+	public int deleteCmt(int no) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		
+		try {
+			con=pool.getConnection();
+			
+			String sql="delete from comments where no=?";
+			ps=con.prepareStatement(sql);
+			ps.setInt(1, no);
+			
+			int cnt=ps.executeUpdate();
+			System.out.println("댓글 삭제 결과 cnt="+cnt+", 매개변수 no="+no);
+			
+			return cnt;
+		}finally {
+			pool.dbClose(ps, con);
+		}
+		
 	}
 }

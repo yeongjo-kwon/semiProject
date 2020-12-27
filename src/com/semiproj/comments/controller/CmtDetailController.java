@@ -21,8 +21,8 @@ public class CmtDetailController implements Controller{
 		String no=request.getParameter("no");
 		if(no==null || no.isEmpty()) {
 			request.setAttribute("msg", "잘못된 url입니다.");
-			request.setAttribute("url", "/book/bookDetail.do?no="+no);
-			
+			//request.setAttribute("url", "/book/bookDetail.do?no="+no);
+			request.setAttribute("url","/book/bookDetail.jsp");
 			return "/common/message.jsp";
 		}
 		

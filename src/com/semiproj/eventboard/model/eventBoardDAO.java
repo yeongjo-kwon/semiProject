@@ -78,8 +78,9 @@ public class eventBoardDAO {
 				String content=rs.getString("content");
 				String imgFileName=rs.getString("imgFileName");
 				String imgOriginFileName=rs.getString("imgOriginFileName");
+				int downCount=rs.getInt("downCount");
 
-				eventBoardVO vo = new eventBoardVO(no, title, regdate, content, imgFileName, imgOriginFileName);
+				eventBoardVO vo = new eventBoardVO(no, title, regdate, content, imgFileName, imgOriginFileName, downCount);
 				list.add(vo);
 			}
 			System.out.println("글목록 결과 list.size="+list.size()
@@ -115,6 +116,7 @@ public class eventBoardDAO {
 				vo.setContent(rs.getString("content"));
 				vo.setImgFileName(rs.getString("imgFileName"));
 				vo.setImgOriginFileName(rs.getString("imgOriginFileName"));
+				vo.setdownCount(rs.getInt("downCount"));
 			}
 			System.out.println("글 상세보기 결과 vo="+vo+", 매개변수 no="+no);
 
@@ -134,13 +136,27 @@ public class eventBoardDAO {
 
 			//3
 			String sql="update eventboard" + 
-					" set title=?,content=?" + 
-					" where no=?";
+					" set title=?,content=? ";
+			//새로 파일 첨부한 경우만 파일정보 update
+			if(vo.getImgFileName()!=null && !vo.getImgFileName().isEmpty()) {
+				sql+=", imgfilename=?, imgoriginfilename=? ";
+			}
+					
+			sql+=" where no=?";
+			
 			ps=con.prepareStatement(sql);
 
 			ps.setString(1, vo.getTitle());
 			ps.setString(2, vo.getContent());
-			ps.setInt(3, vo.getNo());
+			
+			if(vo.getImgFileName()!=null && !vo.getImgFileName().isEmpty()) {
+				ps.setString(3, vo.getImgFileName());
+				ps.setString(4, vo.getImgOriginFileName());
+				ps.setInt(5, vo.getNo());
+			}else {
+				//첨부파일이 없으면 빠지기
+				ps.setInt(3, vo.getNo());
+			}
 
 			//4
 			int cnt=ps.executeUpdate();
@@ -164,7 +180,6 @@ public class eventBoardDAO {
 			String sql="delete from eventboard where no=? ";
 			ps=con.prepareStatement(sql);
 			ps.setInt(1, no);
-			// pwd있어야하지 않나?
 
 			//4
 			int cnt=ps.executeUpdate();
@@ -202,17 +217,27 @@ public class eventBoardDAO {
 		}
 	}
 	
-	public int updateDownCount(int no) throws SQLException {
+	public int updatedownCount(int no) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
 		
 		try {
 			con=pool.getConnection();
 			
-			String sql="";
+			String sql="update eventboard" + 
+					" set downCount=downCount+1" + 
+					 " where no=?";
 			ps=con.prepareStatement(sql);
-		}finally {
 			
+			ps.setInt(1, no);
+			
+			int cnt=ps.executeUpdate();
+			System.out.println("다운로드수 증가 결과, cnt="+ cnt+
+					", 매개변수 no="+no);
+			
+			return cnt;
+		}finally {
+			pool.dbClose(ps, con);
 		}
 	}
 }

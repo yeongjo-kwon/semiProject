@@ -21,6 +21,9 @@
 <noscript>
 	<link rel="stylesheet" href="../assets/css/noscript.css" />
 </noscript>
+<article id="banner"></article>
+<!-- Main -->
+<article id="main">
 
 <%
 	//view 페이지
@@ -33,7 +36,6 @@
 	<div id="page-wrapper">
 
 		<!-- One -->
-		<br><br><br><br><br>
 		<section class="wrapper style4 container">
 
 			<div class="row gtr-150">
@@ -62,7 +64,8 @@
 							</c:if>
 							<%for(int i=0; i<list.size(); i++){
 									BookInfoVO bvo=list.get(i);%>
-							<img src="../images/<%=bvo.getTxtFileName()%>"><br> <span><%=bvo.getTitle() %></span><br>
+							<img src="../images/<%=bvo.getTxtFileName()%>" width="100" height="200"><br> 
+							<span><%=bvo.getTitle() %></span><br>
 							<span><%=bvo.getPrice() %></span><br>
 							<%} %>
 						</section>

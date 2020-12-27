@@ -1,6 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="inc/top.jsp" %>
+<style type="text/css">
+.wrapper style1 container special .carousel slide .carousel-inner {
+	width: 70%;
+	height: 200px;
+	overflow: hidden;
+}
+
+.carousel-inner div img{
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+</style>
 			<!-- Banner -->
 			<section id="banner">
 				<div class="inner">
@@ -37,13 +50,15 @@
 						</ol>
 						<div class="carousel-inner">
 							<div class="carousel-item active">
-								<img src="images/pic02.jpg" class="d-block w-100" alt="...">
+								<img src="<c:url value='/images/bookstore_size50.jpg'/>" class="d-block w-100" alt="...">
 							</div>
 							<div class="carousel-item">
-								<img src="images/pic02.jpg" class="d-block w-100" alt="...">
+								<a href="<c:url value='/eventBoard/eventDetail.do?no=1'/>">
+									<img src="<c:url value='/images/merry_christmas.jpg'/>" class="d-block w-100" 
+								alt="..."></a>
 							</div>
 							<div class="carousel-item">
-								<img src="images/pic02.jpg" class="d-block w-100" alt="...">
+								<img src="<c:url value='/images/woman_reading.jpg'/>" class="d-block w-100" alt="...">
 							</div>
 						</div>
 						<a class="carousel-control-prev" href="#carouselExampleIndicators"
