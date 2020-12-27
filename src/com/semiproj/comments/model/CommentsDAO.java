@@ -29,7 +29,7 @@ public class CommentsDAO {
 			
 			//3. ps
 			String sql="select * from comments" + 
-					" where bookno=? order by no desc";
+					" where bookno=? order by no asc";
 			ps=con.prepareStatement(sql);
 			ps.setInt(1, bookNo);
 			
