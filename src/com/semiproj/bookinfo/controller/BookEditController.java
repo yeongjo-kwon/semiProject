@@ -11,11 +11,10 @@ import com.semiproj.bookinfo.model.BookInfoVO;
 import com.semiproj.writer.model.WriterService;
 import com.semiproj.writer.model.WriterVO;
 
-public class BookDetailController implements Controller{
+public class BookEditController implements Controller{
 	@Override
 	public String requestProcess(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		//1.
-		//=> http://localhost:9090/semiproj/book/bookDetail.do?no=9999
 		String no=request.getParameter("no");
 		if(no==null || no.isEmpty()) {
 			request.setAttribute("msg", "잘못된 url");
@@ -24,6 +23,7 @@ public class BookDetailController implements Controller{
 			//4.
 			return "/common/message.jsp";
 		}
+		
 		//2.
 		//책 정보
 		BookInfoService service=new BookInfoService();
@@ -48,7 +48,7 @@ public class BookDetailController implements Controller{
 		request.setAttribute("writerVo", wVo);
 		
 		//4.
-		return "/book/bookDetail.jsp";
+		return "/book/bookEdit.jsp";
 	}
 
 	@Override

@@ -44,32 +44,55 @@
 				<div class="content">
 					<section>
 						<div class="divbookWrite">
-						<h2>책 등록</h2><br><br><br>
-							<form name="frmWrite" action="<c:url value='/book/bookWrite_ok.do'/>"
+						<h2>책 정보 수정</h2><br><br><br>
+							<form name="frmEdit" action="<c:url value='/book/bookEdit_ok.do'/>"
 									method="post" enctype="multipart/form-data">
+								<!-- 수정시 필요한 no -->
+    							<input type="hidden" name="no" value="${param.no}"/>
+								
 								<label for="title">책 제목</label>
-								<input type="text" name="title" id="title"><br>
+								<input type="text" name="title" id="title"
+										value="${bookVo.title}"><br>
 								<label for="price">가격</label>
-								<input type="text" name="price" id="price"><br>
+								<input type="text" name="price" id="price"
+										value="${bookVo.price}"><br>
 								<label for="publisher">출판사</label>
-								<input type="text" name="publisher" id="publisher"><br><br>
+								<input type="text" name="publisher" id="publisher"
+										value="${bookVo.publisher}"><br><br>
 								
 								<label for="wrNo">작가명</label>
-								<input type="hidden" name="wrNo" id="wrNo"><br>
-								<input type="text" name="writer" id="writer"><br>
+								<input type="hidden" name="wrNo" id="wrNo"
+										value="${writerVo.no}"><br>
+								<input type="text" name="writer" id="writer"
+										value="${writerVo.name}"><br>
 								<input type="Button" value="작가 번호 확인" id="btnWriter" title="새창열림"><br>
 								<br><br>
 								<label for="content">책 소개</label>
-								<textarea rows="5" name="content"></textarea>
+								<textarea rows="5" name="content">${bookVo.content}</textarea>
 								<br><br>
 								
+								<!-- 기존 텍스트 첨부파일명 -->
+								<input type="hidden" name="oldTxtFileName" value="${bookVo.txtFileName}"/><br>
            						<label for="txtUpload">텍스트 첨부파일 : </label>
-           						<input type="file" id="txtUpload" name="txtUpload" /><br>
-								<label for="coverUpload">책표지 첨부파일 : </label>
-           						<input type="file" id="coverUpload" name="coverUpload" /><br>
+           						<input type="file" id="txtUpload" name="txtUpload"/><br>
+									<c:if test="${!empty bookVo.txtFileName}">
+										<span> - 기존 텍스트 첨부파일 : </span>
+							            <span><img src='<c:url value="/assets/css/images/file.gif"/>'> ${bookVo.txtOriginFileName}</span>
+						            </c:if><br><br>
+						        
+								<!-- 기존 책표지 첨부파일명 -->
+								<input type="hidden" name="oldCoverFileName" value="${bookVo.coverFileName}"/><br>
+           						<label for="coverUpload">책표지 첨부파일 : </label>
+           						<input type="file" id="coverUpload" name="coverUpload"/><br>
+									<c:if test="${!empty bookVo.coverFileName}">
+										<span> - 기존 책표지 첨부파일 : </span>
+							            <span><img src='<c:url value="/assets/css/images/file.gif"/>'> ${bookVo.coverOriginFileName}</span>
+						            </c:if><br><br>		
+								<span style="color: red">※ 기존파일이 첨부된 채로
+							            	첨부파일을 새로 업로드 할 시엔, 기존 파일이 삭제됩니다.</span>
            						<br><br><br>
            						
-								<input type="submit" id="bookWr_submit" value="책 등록">
+								<input type="submit" id="bookWr_submit" value="수정">
 								<input type ="hidden" name="chkWrNo" id="chkWrNo">
 							</form>
 						

@@ -21,4 +21,12 @@ public class BookInfoService {
 	public int insertBook(BookInfoVO vo) throws SQLException{
 		return bookinfoDao.insertBook(vo);
 	}
+	
+	public int updateBook(BookInfoVO vo) throws SQLException{
+		return bookinfoDao.updateBook(vo);
+	}
+	
+	public int deleteBook(int no) throws SQLException {
+		return bookinfoDao.deleteBook(no);
+	}
 }
