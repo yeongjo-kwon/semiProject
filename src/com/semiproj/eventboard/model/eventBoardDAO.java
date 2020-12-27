@@ -240,4 +240,34 @@ public class eventBoardDAO {
 			pool.dbClose(ps, con);
 		}
 	}
+	
+	public List<eventBoardVO> listSideMenu() throws SQLException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<eventBoardVO> list=new ArrayList<eventBoardVO>();
+		try {
+			con=pool.getConnection();
+			
+			String sql="select no, title" + 
+					" from (select no, title from eventboard" + 
+					" order by no desc)" + 
+					" where rownum<=3";
+			ps=con.prepareStatement(sql);
+			
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				eventBoardVO vo=new eventBoardVO();
+				vo.setNo(rs.getInt("no"));
+				vo.setTitle(rs.getString("title"));
+				
+				list.add(vo);
+			}
+		}finally {
+			pool.dbClose(rs, ps, con);
+		}
+		
+		return list;
+	}
 }

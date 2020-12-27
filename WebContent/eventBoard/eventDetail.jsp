@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/assets/css/eventAll.css'/>" />
 
 <script type="text/javascript">
 	$(function() {
@@ -26,12 +28,17 @@
 <article id="banner"></article>
 <!-- Main -->
 <article id="main">
+	<header class="special container">
+		<span class="icon solid"></span>
+		<h2>
+			<strong>ALL ABOUT EVENT</strong>
+		</h2>
+	</header>
 	<!-- One -->
 	<section class="wrapper style4 container">
 		<div class="row gtr-150">
 			<div class="col-10 col-12-narrower">
-				<h2>ALL ABOUT EVENT</h2>
-				<div class="divForm">
+				<div class="eventAllDiv">
 					<div class="eventDiv">
 						<span class="sp1">제목</span> <span>${eventVo.title }</span>
 					</div>
@@ -65,6 +72,42 @@
 								type="button" id="btList" value="목록">
 						</form>
 					</div>
+				</div>
+			</div>
+			<div class="col-2 col-12-narrower">
+				<!-- Sidebar -->
+				<div class="sidebar">
+					<section>
+						<header>
+							<h5><img src="<c:url value='/images/pd_190.png'/>"/> EVENT</h5>
+						</header>
+						<div>
+							<!-- 이벤트 -->
+							<table summary="최근 이벤트 3건을 보여주는 표입니다.">
+								<caption>공지사항</caption>
+								<tbody>
+									<!-- 반복시작 -->
+									<c:forEach var="eVo" items="${eList}">
+									<tr>
+										<td><img
+											src="<c:url value='/images/dot.JPG'/>"/> 
+											<a href
+											="<c:url value='/eventBoard/eventDetail.do?no=${eVo.no}'/>">
+												${eVo.title }
+										</a></td>
+										<td></td>
+									</tr>
+									</c:forEach>
+									<!-- 반복 끝 -->
+								</tbody>
+							</table>
+						</div>
+						<footer>
+							<ul class="buttons">
+								<li><a href="<c:url value='/eventBoard/eventList.do'/>" class="button small">More</a></li>
+							</ul>
+						</footer>
+					</section>
 				</div>
 			</div>
 		</div>

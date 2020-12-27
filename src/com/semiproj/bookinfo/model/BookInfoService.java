@@ -28,7 +28,8 @@ public class BookInfoService {
 	
 	public int deleteBook(int no) throws SQLException {
 		return bookinfoDao.deleteBook(no);
-
+	}
+	
 	//작가번호로 책조회
 	public List<BookInfoVO> selectByWrno(int wrno) throws SQLException {
 		return bookinfoDao.selectByWrno(wrno);

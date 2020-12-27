@@ -27,7 +27,7 @@ public class WriterPageController implements Controller {
 		WriterVO vo=null;
 		
 		try {
-			vo=service.selectByWrno(Integer.parseInt(no));
+			vo=service.selectByNo(Integer.parseInt(no));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}

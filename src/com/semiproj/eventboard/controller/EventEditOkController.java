@@ -27,6 +27,7 @@ public class EventEditOkController implements Controller{
 		*/
 
 		//파일 업로드 처리
+		String no=null;
 		try {
 			ServletContext context=request.getSession().getServletContext();
 			String saveDir=context.getRealPath(Utility.UPLOAD_DIR);
@@ -49,7 +50,7 @@ public class EventEditOkController implements Controller{
 			
 			//1
 			//param으로 받아온 no
-			String no=mr.getParameter("no");
+			no=mr.getParameter("no");
 			System.out.println("no="+no);
 			String title=mr.getParameter("title");
 			System.out.println("title="+title);
@@ -92,7 +93,7 @@ public class EventEditOkController implements Controller{
 		
 		//3
 		//4
-		return "/eventBoard/eventList.do";
+		return "/eventBoard/eventDetail.do?no="+no;
 	}
 
 	@Override

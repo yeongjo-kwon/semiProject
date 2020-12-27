@@ -17,7 +17,7 @@ tbody tr td {
 
 select[name=searchCondition] {
     float: left;
-    margin-left: 130px;
+    margin-left: 180px;
 }
 
 input[name=searchKeyword] {
@@ -33,4 +33,5 @@ input[type="submit"] {
 
 .divBtn {
     float: right;
+    margin: 40px 0;
 }
