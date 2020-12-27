@@ -22,6 +22,7 @@ public class EventDetailController implements Controller{
 		//1. 요청 파라미터 읽어오기
 		//=> http://localhost:9090/semiproj/eventBoard/eventDetail.do?no=6
 		String no=request.getParameter("no");
+		System.out.println("no="+no);
 		
 		if(no==null || no.isEmpty()) {
 			request.setAttribute("msg", "잘못된 url입니다.");

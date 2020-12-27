@@ -29,24 +29,21 @@
 <body>
 
 	<%
+	// 데이터 나중에 삭제 - 테스트용
 		session.setAttribute("no", "1");
 		session.setAttribute("bookno", "2");
 		session.setAttribute("nickname", "세미");
 		session.setAttribute("img", "AvataImg");
-		session.setAttribute("regdate", "2020-12-22");
-		session.setAttribute("content", "가슴이 따뜻해지는 책입니다!");
-
+	// 사용자 정보 읽어오기
 		CommentsService cmtservice = new CommentsService();
 		String bookno = (String) session.getAttribute("no");
 		String img_e = (String) request.getAttribute("img");
 		String email_e = (String) request.getAttribute("email_c");
-
+	// 세션에서 읽어오기
 		String email_c = (String) session.getAttribute("email");
 		String nickname_c = (String) session.getAttribute("nickname");
 		String img_c = (String) session.getAttribute("img");
-		//LoginVO userDetail_co = (LoginVO)session.getAttribute("userDetail");
 	%>
-	<!-- 유효성 검사-닉네임 추가하기 -->
 	<div id="anchorReview" class="review-container thin-line">
 		<form method="post" name="cmtFrm"
 			action="<c:url value='/comments/comments_write_ok.do'/>">

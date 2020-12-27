@@ -5,7 +5,7 @@
 	$(function(){
 		$('#cfDel').click(function(){
 			if(confirm("삭제하시겠습니까?")){
-				location.href="<c:url value='/book/bookDel.do?no=${param.no}'/>";
+				location.href="<c:url value='/book/bookDel.do?no=${param.no}&txtFileName=${bookVo.txtFileName}&coverFileName=${bookVo.coverFileName}'/>";
 			}
 		});			
 	});
@@ -23,7 +23,7 @@
 						<h1>책 상세정보</h1>
 						<div>
 							<img alt="책 표지 이미지" width="250px"
-								src="<c:url value='/file_upload/cover/${bookVo.coverFileName}'/>">
+								src="<c:url value='/file_upload/${bookVo.coverFileName}'/>">
 						</div><br><br>
 						<p><b>책 제목</b> : ${bookVo.title}</p>
 						<p><b>작가</b> :
@@ -56,8 +56,10 @@
 								</c:if>--%>
 								href="#" id="cfDel">삭제</a>
 						</div><br><br>
+						<%-- 
 						<jsp:include page="../comments/comments_write.jsp"></jsp:include>			
 						<jsp:include page="../comments/comments_List.jsp"></jsp:include>			
+						 --%>
 					</section>
 				</div>
 			</div>

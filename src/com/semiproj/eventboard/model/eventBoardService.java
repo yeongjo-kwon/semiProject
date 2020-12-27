@@ -34,4 +34,8 @@ public class eventBoardService {
 		return dao.updateReadCount(no);
 	}
 	
+	public int updateDownCount(int no) throws SQLException {
+		return dao.updatedownCount(no);
+	}
+	
 }
