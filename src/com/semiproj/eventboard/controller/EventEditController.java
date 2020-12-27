@@ -22,6 +22,7 @@ public class EventEditController implements Controller{
 		//1
 		//=> http://localhost:9090/semiproj/eventBoard/eventEdit.do?no=9
 		String no=request.getParameter("no");
+		System.out.println();
 		
 		if(no==null || no.isEmpty()) {
 			request.setAttribute("msg", "잘못된 url입니다.");
