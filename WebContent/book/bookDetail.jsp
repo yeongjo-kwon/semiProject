@@ -27,7 +27,7 @@
 						</div><br><br>
 						<p><b>책 제목</b> : ${bookVo.title}</p>
 						<p><b>작가</b> :
-							<a href="<c:url value='/writerPage.do?no=${bookVo.wrNo}'/>">
+							<a href="<c:url value='/writer/writerPage.do?no=${bookVo.wrNo}'/>">
 								${writerVo.name}</a>
 						<p><b>가격</b> : <fmt:formatNumber value="${bookVo.price}"
 									pattern="#,###"/>원</p>
