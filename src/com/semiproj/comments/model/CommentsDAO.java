@@ -29,7 +29,7 @@ public class CommentsDAO {
 			
 			//3. ps
 			String sql="select * from comments" + 
-					" where bookno=? order by no desc";
+					" where bookno=? order by no asc";
 			ps=con.prepareStatement(sql);
 			ps.setInt(1, bookNo);
 			
@@ -38,12 +38,10 @@ public class CommentsDAO {
 			while(rs.next()) {
 				int no=rs.getInt("no");
 				String nickname=rs.getString("nickname");
-				String pwd=rs.getString("pwd");
 				Timestamp regdate=rs.getTimestamp("regdate");
 				String content=rs.getString("content");
-				//int bookNo=rs.getInt("bookno");
 				
-				CommentsVO vo = new CommentsVO(no, nickname, pwd, regdate, content, bookNo);
+				CommentsVO vo = new CommentsVO(no, nickname,regdate, content, bookNo);
 				
 				list.add(vo);
 			}
@@ -61,15 +59,14 @@ public class CommentsDAO {
 		try {
 			con=pool.getConnection();
 			
-			String sql="insert into comments(no,nickname,pwd,content,bookno)" + 
-					" values(comments_seq.nextval,?,?,?,?)";
+			String sql="insert into comments(no,nickname,content,bookno)" + 
+					" values(comments_seq.nextval,?,?,?)";
 			
 			ps=con.prepareStatement(sql);
 			
 			ps.setString(1, vo.getNickname());
-			ps.setString(2, vo.getPwd());
-			ps.setString(3, vo.getContent());
-			ps.setInt(4, vo.getBookNo());
+			ps.setString(2, vo.getContent());
+			ps.setInt(3, vo.getBookNo());
 			
 			cnt=ps.executeUpdate();
 			System.out.println("댓글 작성 결과 : cnt="+cnt+" , 매개변수 vo="+vo);
@@ -104,5 +101,26 @@ public class CommentsDAO {
 		}finally {
 			pool.dbClose(rs, ps, con);
 		}
+	}
+	
+	public int deleteCmt(int no) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		
+		try {
+			con=pool.getConnection();
+			
+			String sql="delete from comments where no=?";
+			ps=con.prepareStatement(sql);
+			ps.setInt(1, no);
+			
+			int cnt=ps.executeUpdate();
+			System.out.println("댓글 삭제 결과 cnt="+cnt+", 매개변수 no="+no);
+			
+			return cnt;
+		}finally {
+			pool.dbClose(ps, con);
+		}
+		
 	}
 }

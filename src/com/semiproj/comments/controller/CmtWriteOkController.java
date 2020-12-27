@@ -16,37 +16,32 @@ public class CmtWriteOkController implements Controller{
 	/*
 	 	/comments/comments_write_ok.do⇒ CmtWriteOkController
 	 	   ⇒ //book/bookDetail.do로 리다이렉트
-	 	  
 	 */
 		// 조건
-		//1
 		//1.
-		String bookNo=request.getParameter("bookNo2");
+		String bookNo=request.getParameter("bookno");
 		String nickname=request.getParameter("nickname");
-		String pwd=request.getParameter("pwd");
 		String content=request.getParameter("content");
 		
 		//2.
 		CommentsService service=new CommentsService();
-		String msg="등록에 실패했습니다.", url="/book/bookDetail.do?no="+bookNo;
+		String msg="등록에 실패했습니다.", url="/comments/comments_write.do?no="+bookNo;
 		try {
 			CommentsVO vo=new CommentsVO();
 			vo.setBookNo(Integer.parseInt(bookNo));
 			vo.setNickname(nickname);
-			vo.setPwd(pwd);
 			vo.setContent(content);
 			
 			int cnt=service.insertCmt(vo);
 			if(cnt>0) {
 				msg="댓글 등록 성공";
+				// 나중에 
 				url="/book/bookDetail.do?no="+bookNo;
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
 		//3.
-
 		request.setAttribute("msg", msg);
 		request.setAttribute("url", url);
 		

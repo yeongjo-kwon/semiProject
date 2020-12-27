@@ -1,7 +1,7 @@
 package com.semiproj.writer.model;
 
 public class WriterVO {
-	private int no;
+	private int wrno;
 	private String name;
 	private String intro;
 	private String photoFileName;
@@ -11,19 +11,19 @@ public class WriterVO {
 	public WriterVO() {
 		super();
 	}
-	public WriterVO(int no, String name, String intro, String photoFileName, String photoOriginFileName) {
+	public WriterVO(int wrno, String name, String intro, String photoFileName, String photoOriginFileName) {
 		super();
-		this.no = no;
+		this.wrno = wrno;
 		this.name = name;
 		this.intro = intro;
 		this.photoFileName = photoFileName;
 		this.photoOriginFileName = photoOriginFileName;
 	}
-	public int getNo() {
-		return no;
+	public int getWrno() {
+		return wrno;
 	}
-	public void setNo(int no) {
-		this.no = no;
+	public void setWrno(int wrno) {
+		this.wrno = wrno;
 	}
 	public String getName() {
 		return name;
@@ -49,10 +49,11 @@ public class WriterVO {
 	public void setPhotoOriginFileName(String photoOriginFileName) {
 		this.photoOriginFileName = photoOriginFileName;
 	}
-	
 	@Override
 	public String toString() {
-		return "WriterVO [no=" + no + ", name=" + name + ", intro=" + intro + ", photoFileName=" + photoFileName
+		return "WriterVO [wrno=" + wrno + ", name=" + name + ", intro=" + intro + ", photoFileName=" + photoFileName
 				+ ", photoOriginFileName=" + photoOriginFileName + "]";
 	}
+	
+	
 }

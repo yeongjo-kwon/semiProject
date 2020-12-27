@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
-<style>
-	caption{
-		visibility: hidden;
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="<c:url value='/assets/css/eventList.css'/>">
+
 <script type="text/javascript">
 function pageFunc(curPage){
 	$('input[name=currentPage]').val(curPage);
@@ -23,6 +20,7 @@ function pageFunc(curPage){
 <article id="main">
 	<!-- One -->
 	<section class="wrapper style4 container">
+		<h2>EVENT</h2>
 		<div class="row gtr-150">
 			<div class="col-10 col-12-narrower">
 			<c:if test="${!empty param.searchKeyword}">
@@ -134,7 +132,7 @@ function pageFunc(curPage){
 				<div class="sidebar">
 					<section>
 						<header>
-							<h3>Magna Feugiat</h3>
+							<h5>메인으로 돌아가기</h5>
 						</header>
 						<p>aaa</p>
 						<footer>

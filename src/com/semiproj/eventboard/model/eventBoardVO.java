@@ -9,14 +9,14 @@ public class eventBoardVO {
 	private String content;
 	private String imgFileName;
 	private String imgOriginFileName;
-	private int downcount;
+	private int downCount;
 	
 	public eventBoardVO() {
 		super();
 	}
 
 	public eventBoardVO(int no, String title, Timestamp regdate, String content, String imgFileName,
-			String imgOriginFileName, int downcount) {
+			String imgOriginFileName, int downCount) {
 		super();
 		this.no = no;
 		this.title = title;
@@ -24,7 +24,7 @@ public class eventBoardVO {
 		this.content = content;
 		this.imgFileName = imgFileName;
 		this.imgOriginFileName = imgOriginFileName;
-		this.downcount = downcount;
+		this.downCount = downCount;
 	}
 
 	public int getNo() {
@@ -75,19 +75,19 @@ public class eventBoardVO {
 		this.imgOriginFileName = imgOriginFileName;
 	}
 	
-	public int getDowncount() {
-		return downcount;
+	public int getdownCount() {
+		return downCount;
 	}
 
-	public void setDowncount(int downcount) {
-		this.downcount = downcount;
+	public void setdownCount(int downCount) {
+		this.downCount = downCount;
 	}
 
 	@Override
 	public String toString() {
 		return "eventBoardVO [no=" + no + ", title=" + title + ", regdate=" + regdate + ", content=" + content
-				+ ", imgFileName=" + imgFileName + ", imgOriginFileName=" + imgOriginFileName + ", downcount="
-				+ downcount + "]";
+				+ ", imgFileName=" + imgFileName + ", imgOriginFileName=" + imgOriginFileName + ", downCount="
+				+ downCount + "]";
 	}
 
 	
