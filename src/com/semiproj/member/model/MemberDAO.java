@@ -59,7 +59,7 @@ public class MemberDAO {
 			//1,2
 			con=pool.getConnection();
 			//3
-			String sql="select count(*) from member where email=?";
+			String sql="select count(email) from member where email=?";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, email);
 			
@@ -68,13 +68,13 @@ public class MemberDAO {
 			if(rs.next()){
 				int count=rs.getInt(1);
 				if(count>0){	//이미 존재=>사용불가
-					result=MemberService.EXIST_ID;
+					result=MemberService.EXIST_EMAIL;
 				}else{	//사용가능
-					result=MemberService.NON_EXIST_ID;
+					result=MemberService.NON_EXIST_EMAIL;
 				}
 			}//if
 			
-			System.out.println("아이디 중복 확인 결과 , result="+result+", 매개변수 email="+email);
+			System.out.println("이메일 중복 확인 결과 , result="+result+", 매개변수 email="+email);
 			
 			return result;
 		} finally {
@@ -105,7 +105,7 @@ public class MemberDAO {
 					result=MemberService.PWD_DISAGREE;
 				}
 			}else {
-				result=MemberService.ID_NONE;
+				result=MemberService.EMAIL_NONE;
 			}
 			
 			System.out.println("로그인 처리 결과, result="+result
@@ -116,7 +116,7 @@ public class MemberDAO {
 		}
 	}
 	
-	public MemberVO seletMember(String email) throws SQLException {
+	public MemberVO selectMember(String email) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -173,7 +173,7 @@ public class MemberDAO {
 			
 			String sql="update member" +
 					" set pwd=?, nickname=?, hp=?, zipcode=?, address=?, addressdetail=?" +
-					" where email=?";
+					" where nickname=?";
 			ps=con.prepareStatement(sql);
 			
 			ps.setString(1, vo.getPwd());
@@ -182,6 +182,7 @@ public class MemberDAO {
 			ps.setString(4, vo.getZipcode());
 			ps.setString(5, vo.getAddress());
 			ps.setString(6, vo.getAddressDetail());
+			ps.setString(7, vo.getNickname());
 			
 			int cnt=ps.executeUpdate();
 			System.out.println("회원수정 결과 cnt="+cnt+", 매개변수 vo="+vo);
