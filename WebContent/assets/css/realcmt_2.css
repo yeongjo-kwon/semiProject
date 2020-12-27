@@ -16,7 +16,7 @@ input#button {
 
 /*댓글 수*/
 .book-info-title .number {
-  color: #ffb904;
+  color: rgb(179, 66, 28);
   font-weight: 700;
   margin-left: 4px;
 }
