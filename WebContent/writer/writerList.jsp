@@ -35,7 +35,7 @@
 				<div class="row gtr-150">
 					<div class="col-8 col-12-narrower">
 
-						<h1>상품목록</h1>
+						<h1>작가목록</h1>
 						<table border="1" style="width: 500px">
 							<tr>
 								<th>번호</th>
