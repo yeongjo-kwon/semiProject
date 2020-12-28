@@ -29,27 +29,22 @@
 	<%
 	// 데이터 나중에 삭제 - 테스트용
 		session.setAttribute("no", "1");
-		session.setAttribute("bookno", "2");
+		session.setAttribute("bookno", "1");
 		session.setAttribute("nickname", "세미");
 		session.setAttribute("img", "AvataImg");
-	// 사용자 정보 읽어오기
-		String img_e = (String) request.getAttribute("img");
-		String img_c = (String) session.getAttribute("img");
-	// 세션에서 읽어오기 - 이건 삭제 x
-		String bookno = (String) session.getAttribute("no");
-		String nickname = (String) session.getAttribute("nickname");
 	%>
 	<div id="anchorReview" class="review-container thin-line">
 		<form method="post" name="cmtFrm"
 			action="<c:url value='/comments/comments_write_ok.do'/>">
 			<!-- hidden으로 변경하기 -->
-			<input type="text" name="bookno" id="bookno" value="<%=bookno%>">
+			<input type="text" name="bookno" id="bookno" value="${bookno}">
 			<input type="text" name="nickname" id="nickname"
-				value="<%=nickname%>" />
+				value="${nickname}" />
 
 			<!-- 댓글 입력 시작 -->
 			<div class="review-register">
-				<div class="image" style="background-image: url('');"></div>
+				<div class="image" style="background-image: url('');">
+				<i class="fas fa-user-circle fa-2x solid lightgray" style="color: #757575"></i></div>
 				<div class="register">
 					<textarea placeholder="한 줄 리뷰를 남겨주세요" maxlength="50"
 						class="textarea" style="height: 22px" id="content" name="content"></textarea>

@@ -64,7 +64,7 @@ input#button {
   background-position: 50% 50%;
 }
 /*댓글 입력폼*/
-.sub-inner.review-profile .register .textarea {
+.sub-inner.review-profile .register .cmtFrm .textarea {
   margin-top: 24px;
   display: block;
   width: 100%;
