@@ -22,7 +22,7 @@ public class WriterVO {
 	public int getNo() {
 		return no;
 	}
-	public void setNo(int wrno) {
+	public void setNo(int no) {
 		this.no = no;
 	}
 	public String getName() {

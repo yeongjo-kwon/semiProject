@@ -50,11 +50,11 @@ public class WriterEditOkController implements Controller {
 
 
 		WriterVO vo=new WriterVO();
-		vo.setIntro(intro);
+		vo.setNo(Integer.parseInt(no));
 		vo.setName(name);
+		vo.setIntro(intro);
 		vo.setPhotoFileName(photoFileName);
 		vo.setPhotoOriginFileName(photoOriginFileName);
-		vo.setNo(Integer.parseInt(no));
 
 		try {
 			int cnt=service.updateWriter(vo);
@@ -70,6 +70,7 @@ public class WriterEditOkController implements Controller {
 				msg="수정 성공";
 				url="/writer/writerPage.do?no="+no;
 			}
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}

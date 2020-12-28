@@ -44,19 +44,19 @@ public class WriterPageController implements Controller {
 		}
 		
 		//페이징처리
-				int currentPage=1;
-				if(request.getParameter("curPage")!=null
-						&& !request.getParameter("curPage").isEmpty()) {
-					currentPage
-						=Integer.parseInt(request.getParameter("curPage"));
-				}
+		int currentPage=1;
+		if(request.getParameter("curPage")!=null
+				&& !request.getParameter("curPage").isEmpty()) {
+			currentPage
+				=Integer.parseInt(request.getParameter("curPage"));
+		}
+		
+		int totalRecord=0;
+		if(list!=null) totalRecord=list.size();
 				
-				int totalRecord=0;
-				if(list!=null) totalRecord=list.size();
-						
-				int pageSize=5, blockSize=10;
-			
-				PagingVO pageVo=new PagingVO(currentPage, totalRecord, pageSize, blockSize);
+		int pageSize=5, blockSize=10;
+	
+		PagingVO pageVo=new PagingVO(currentPage, totalRecord, pageSize, blockSize);
 				
 		
 		request.setAttribute("vo", vo);

@@ -14,6 +14,16 @@
 
 <html>
 <head>
+<script type="text/javascript">
+	$(function(){
+		$('#del').click(function(){
+			if(confirm("삭제하시겠습니까?")){
+				location.href="<c:url value='/writer/writerDel.do?no=${param.no }&photoFileName=${vo.photoFileName }' />";
+			}
+		});
+	});
+
+</script>
 <title>작가 소개</title>
 <meta charset="utf-8" />
 <meta name="viewport"
@@ -49,7 +59,8 @@
 								<section>
 									<a href="#" class="image featured"> <img
 										src="images/pic03.jpg" alt="" /></a> 
-									<img src="<c:url value='/file_upload/writer/${vo.photoOriginFileName}' /> "  width="400" height="400"><br>
+										
+									<img src="<c:url value='/file_upload/writer/${vo.photoFileName}' /> "  width="400" height="400"><br>
 									<span>${vo.name}</span><br> <span>${vo.intro}</span><br>
 									<br> 
 									<a href="<c:url value='/writer/writerInsert.do' /> ">
@@ -58,7 +69,7 @@
 										작가	수정</a><br> 
 									<a href="<c:url value='/writer/writerList.do' /> ">
 										작가	목록</a><br>
-									<a href="<c:url value='/writer/writerDel.do?no=${param.no }&photoFileName=${vo.photoFileName }' /> ">
+									<a href="#" id="del">
 										작가	삭제</a><br>
 								</section>
 							</div>
@@ -72,14 +83,14 @@
 												<div class="divList">
 													<table class="default" border="1">
 														<colgroup>
-															<col style="width: 5%;" />
-															<col style="width: 40%;" />
 															<col style="width: 20%;" />
-															<col style="width: 10%;" />
+															<col style="width: 50%;" />
+															<col style="width: 30%;" />
+															<col style="width: 40%;" />
 														</colgroup>
 														<thead>
 															<tr>
-																<th>표지 이미지</th>
+																<th>이미지</th>
 																<th>책 제목</th>
 																<th>출판사</th>
 																<th>등록일</th>

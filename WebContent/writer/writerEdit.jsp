@@ -33,7 +33,7 @@
 						enctype="multipart/form-data">
 						<h3>작가 수정</h3>
 						</header>
-						<input type="hidden" name="no" value="${param.no}"/>
+						<input type="hidden" name="no" id="no" value="${param.no}"/>
 						<img
 							src="<c:url value='/file_upload/writer/${vo.photoFileName}' />"
 							width="400" height="400"><br> 
