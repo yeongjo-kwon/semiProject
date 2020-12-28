@@ -25,5 +25,13 @@ public class WriterService {
 	public List<WriterVO> selectAll() throws SQLException{
 		return writerDao.selectAll();
 	}
+	
+	public int updateWriter(WriterVO vo) throws SQLException{
+		return writerDao.updateWriter(vo);
+	}
+	
+	public int deleteWr(int no) throws SQLException {
+		return writerDao.deleteWr(no); 
+	}
 
 }

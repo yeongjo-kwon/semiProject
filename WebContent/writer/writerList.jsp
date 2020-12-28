@@ -1,98 +1,202 @@
-<%@page import="com.semiproj.writer.model.WriterVO"%>
-<%@page import="com.semiproj.bookinfo.model.BookInfoVO"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file="../inc/top.jsp"%>
+    pageEncoding="UTF-8"%>
+<%@ include file="../inc/top.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html>
-<head>
-<title>작가 대표작품</title>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
-<link rel="stylesheet" href="../assets/css/main.css" />
-<noscript>
-	<link rel="stylesheet" href="../assets/css/noscript.css" />
-</noscript>
 <article id="banner"></article>
 <!-- Main -->
 <article id="main">
-<%
-	//view 페이지
-	List<WriterVO> list=(List<WriterVO>)request.getAttribute("list");
-	
-	//3
-%>
+	<header class="special container">
+		<span class="icon solid"></span>
+		<h2><strong>작가</strong> 차트</h2>
+	</header>
 
-	<body class="right-sidebar is-preload">
-		<div id="page-wrapper">
-
-			<!-- One -->
-			<section class="wrapper style4 container">
-				<div class="row gtr-150">
-					<div class="col-8 col-12-narrower">
-
-						<h1>작가목록</h1>
-						<table border="1" style="width: 500px">
-							<tr>
-								<th>번호</th>
-								<th>작가이름</th>
-								<th>소개글</th>
-								<th>작가사진이름</th>
-								<th>작가사진원본이름</th>
-							</tr>
-						<%-- 	
-							<%for(int i=0; i<list.size(); i++){
-								
-								WriterVO vo=list.get(i); %>
-							<tr>
-							<td><%=vo.getWrno() %></td>
-							<td><%=vo.getName() %></td>
-							<td><%=vo.getIntro() %></td>
-							<td><%=vo.getPhotoFileName() %></td>
-							<td><%=vo.getPhotoOriginFileName() %></td>
-							<%} %> --%>
+	<!-- One -->
+	<section class="wrapper style4 container">
+		<div class="row gtr-150">
+			<div class="col-10 col-12-narrower">
+				<!-- Content -->
+				<div class="content">
+					<section>
+						<div class="divList">
+							<table class="default" border="1">
+								<colgroup>
+									<col style="width:5%;" />
+									<col style="width:10%;" />
+									<col style="width:30%;" />
+									<col style="width:10%;" />		
+								</colgroup>
+								<thead>
+									<tr>
+										<th>작가 이미지</th>
+										<th>이름</th>
+										<th>소개글</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:if test="${empty writerList}">
+										<tr>
+											<td colspan="5">데이터가 존재하지 않습니다.</td>
+										</tr>
+									</c:if>
+									<c:if test="${!empty writerList}">
+										<c:set var="num" value="${pageVo.num}"/>
+										<c:set var="curPos" value="${pageVo.curPos}"/>
+										<c:forEach var="i" begin="1" end="${pageVo.pageSize}">
+											<c:if test="${num>=1}">
+												<c:set var="wrVo" value="${writerList[curPos]}"/>
+										  		<c:set var="curPos" value="${curPos+1}"/>
+										 		<c:set var="num" value="${num-1}"/>
+												
+												<tr>
+													<td>
+														<img alt="작가 이미지"
+															src="<c:url value='/file_upload/writer/${wrVo.photoFileName}'/>"
+																width="100px" height="100px">
+													</td>
+													<td><a href="<c:url value='/writer/writerPage.do?no=${wrVo.no}'/>">
+														${wrVo.name}</a></td>
+													<td>${wrVo.intro}</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</c:if>
+								</tbody>
+							</table>
+						</div>
+						<div class="divPage">
+							<!-- 이전 블럭 -->
+							<c:if test="${pageVo.firstPage>1}">
+								<a href="<c:url value='/writer/writerList.do?curPage=${pageVo.firstPage-1}&srchCondition=${param.srchCondition}&srchKeyword=${param.srchKeyword}'/>">
+									<img alt="이전 블럭으로" src="../images/first.JPG"></a>
+							</c:if>
 							
-							 <c:forEach var="dto" items="${list}">
-								<tr>
-									<td>${dto.wrno}</td>
-									<td><a
-										href="<c:url value='/writer/writerPage.do?no=${dto.wrno}'/>">
-											${dto.name}</a></td>
-									<td>${dto.intro}</td>
-									<td>${dto.photoFileName}</td>
-									<td>${dto.photoOriginFileName}</td>
-								</tr>
+							<!-- 페이지 목록 -->
+							<c:forEach var="i" begin="${pageVo.firstPage}"
+										end="${pageVo.lastPage}">
+								<c:if test="${i<=pageVo.totalPage}">
+									<c:if test="${param.curPage==i}">
+										<span style="color: #d1230a; font-weight: bold">${i}</span>
+									</c:if>
+									<c:if test="${param.curPage!=i}">
+										<a href="<c:url value='/writer/writerList.do?curPage=${i}&srchCondition=${param.srchCondition}&srchKeyword=${param.srchKeyword}'/>">
+											[${i}]</a>
+									</c:if>
+								</c:if>
 							</c:forEach>
-						</table>
+							
+							<!-- 다음 블럭 -->
+							<c:if test="${pageVo.lastPage<pageVo.totalPage}">
+								<a href="<c:url value='/writer/writerList.do?curPage=${pageVo.lastPage+1}&srchCondition=${param.srchCondition}&srchKeyword=${param.srchKeyword}'/>">
+									<img alt="이전 블럭으로" src="../images/first.JPG"></a>
+							</c:if>
+						</div>
+						<div class="divSearch">
+							<form name="frmSearch" action="<c:url value='/book/bookList.do'/>" method="post">
+								<select name="srchCondition">
+									<option value="title" 
+										<c:if test="${'title'==param.srchCondition}">
+								            selected="selected"
+								        </c:if>> 제목</option>
+								    <option value="writer"
+										<c:if test="${'writer'==param.srchCondition}">
+								            selected="selected"
+								        </c:if>> 작가명</option>
+								    <option value="publisher"
+										<c:if test="${'publisher'==param.srchCondition}">
+								            selected="selected"
+								        </c:if>> 출판사</option>
+								</select>
+								<input type="text" name="srchKeyword" value="${param.srchKeyword}">
+								<input type="submit" value="검색">
+							</form>
+						
+						</div>
 						<hr>
-						<a href="<c:url value='/writer/writerInsert.do' /> ">작가 등록</a>
-
-						</form>
-					</div>
+						<div class="adminButton">
+							<a class="button small" style="float: right"
+								<c:set var="nickname" value="세션닉네임"/>
+								<%--<c:if test="${nickname!='admin'}">
+									hidden="hidden"
+								</c:if>--%>
+								href="<c:url value='/writer/writerInsert.do'/>">작가 등록</a>
+						</div>				
+					</section>
 				</div>
-			</section>
+			</div>
+			<div class="col-2 col-12-narrower">
+				<!-- Sidebar -->
+				<div class="sidebar">
+					<section>
+						<header>
+							<h3>Magna Feugiat</h3>
+						</header>
+						<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit..</p>
+						<footer>
+							<ul class="buttons">
+								<li><a href="#" class="button small">Learn More</a></li>
+							</ul>
+						</footer>
+					</section>
+					<section>
+						<a href="#" class="image featured"><!-- img --></a>
+						<header>
+							<h3>Amet Lorem Tempus</h3>
+						</header>
+						<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper sed blandit lorem ipsum dolore.</p>
+						<footer>
+							<ul class="buttons">
+								<li><a href="#" class="button small">Learn More</a></li>
+							</ul>
+						</footer>
+					</section>
+				</div>
+			</div>
 		</div>
+	</section>
 
-
-
-
-
-		<!-- Scripts -->
-		<script src="../assets/js/jquery.min.js"></script>
-		<script src="../assets/js/jquery.dropotron.min.js"></script>
-		<script src="../assets/js/jquery.scrolly.min.js"></script>
-		<script src="../assets/js/jquery.scrollgress.min.js"></script>
-		<script src="../assets/js/jquery.scrollex.min.js"></script>
-		<script src="../assets/js/browser.min.js"></script>
-		<script src="../assets/js/breakpoints.min.js"></script>
-		<script src="../assets/js/util.js"></script>
-		<script src="../assets/js/main.js"></script>
-	</body>
-</html>
-<%@ include file="../inc/bottom.jsp"%>
-
-
+	<!-- Two -->
+	<section class="wrapper style1 container special">
+		<div class="row">
+			<div class="col-4 col-12-narrower">
+				<section>
+					<header>
+						<h3>This is Something</h3>
+					</header>
+					<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit, et sagittis turpis. Integer ut fermentum.</p>
+					<footer>
+						<ul class="buttons">
+							<li><a href="#" class="button small">Learn More</a></li>
+						</ul>
+					</footer>
+				</section>
+			</div>
+			<div class="col-4 col-12-narrower">
+				<section>
+					<header>
+						<h3>Also Something</h3>
+					</header>
+					<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit, et sagittis turpis. Integer ut fermentum.</p>
+					<footer>
+						<ul class="buttons">
+							<li><a href="#" class="button small">Learn More</a></li>
+						</ul>
+					</footer>
+				</section>
+			</div>
+			<div class="col-4 col-12-narrower">
+				<section>
+					<header>
+						<h3>Probably Something</h3>
+					</header>
+					<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit, et sagittis turpis. Integer ut fermentum.</p>
+					<footer>
+						<ul class="buttons">
+							<li><a href="#" class="button small">Learn More</a></li>
+						</ul>
+					</footer>
+				</section>
+			</div>
+		</div>
+	</section>
+</article>
+<%@ include file="../inc/bottom.jsp" %>

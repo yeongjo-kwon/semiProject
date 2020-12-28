@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
@@ -27,7 +28,7 @@
 						</div><br><br>
 						<p><b>책 제목</b> : ${bookVo.title}</p>
 						<p><b>작가</b> :
-							<a href="<c:url value='/writerPage.do?no=${bookVo.wrNo}'/>">
+							<a href="<c:url value='/writer/writerPage.do?no=${bookVo.wrNo}'/>">
 								${writerVo.name}</a>
 						<p><b>가격</b> : <fmt:formatNumber value="${bookVo.price}"
 									pattern="#,###"/>원</p>
@@ -56,10 +57,10 @@
 								</c:if>--%>
 								href="#" id="cfDel">삭제</a>
 						</div><br><br>
-						
+						<%-- 
 						<jsp:include page="../comments/comments_write.jsp"></jsp:include>			
 						<jsp:include page="../comments/comments_List.jsp"></jsp:include>			
-			
+						 --%>
 					</section>
 				</div>
 			</div>
@@ -139,4 +140,5 @@
 		</div>
 	</section>
 </article>
+
 <%@ include file="../inc/bottom.jsp" %>

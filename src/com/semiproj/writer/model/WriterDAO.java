@@ -58,7 +58,7 @@ public class WriterDAO {
 			
 			rs=ps.executeQuery();
 			if(rs.next()) {
-				vo.setWrno(no);
+				vo.setNo(no);
 				vo.setName(rs.getString("name"));
 				vo.setIntro(rs.getString("intro"));
 				vo.setPhotoFileName(rs.getString("photofilename"));
@@ -139,6 +139,67 @@ public class WriterDAO {
 			
 		}
 	}
+	
+	public int updateWriter(WriterVO vo) throws SQLException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		try {
+			//con
+			con=pool.getConnection();
+			
+			//ps
+			String sql="update writer" + 
+					" set name=?, intro=?";
+			
+				//작가이미지 파일 첨부한 경우
+				if(vo.getPhotoFileName()!=null && !vo.getPhotoFileName().isEmpty()) {
+					sql+=", photoFileName=?, photoOriginFileName=?";
+				}
+				
+				sql+=" where no=?";
+			ps=con.prepareStatement(sql);
+			
+			ps.setString(1, vo.getName());
+			ps.setString(2, vo.getIntro());
+			
+			//이미지파일 첨부 됐을 때
+			if(vo.getPhotoFileName()!=null && !vo.getPhotoFileName().isEmpty()) {
+				ps.setString(3, vo.getPhotoFileName());
+				ps.setString(4, vo.getPhotoOriginFileName());
+				ps.setInt(5, vo.getNo());
+			}else {
+				ps.setInt(3, vo.getNo());
+			}
+			//
+			int cnt=ps.executeUpdate();
+			System.out.println("작가 정보 수정 결과 cnt="+cnt+", 매개변수 vo="+vo);
+			
+			return cnt;
+		}finally {
+			pool.dbClose(ps, con);
+		}
+	}
+	
+	public int deleteWr(int no) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		try {
+			con=pool.getConnection();
+			
+			String sql="delete writer where no=?";
+			ps=con.prepareStatement(sql);
+			
+			ps.setInt(1, no);
+			
+			int cnt=ps.executeUpdate();
+			System.out.println("책 정보 삭제 결과 cnt="+cnt+", 매개변수 no="+no);
+			
+			return cnt;
+		}finally {
+			pool.dbClose(ps, con);
+		}
+	}
+	
 }//class
 
 
