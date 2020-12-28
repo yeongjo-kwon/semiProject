@@ -123,4 +123,26 @@ public class CommentsDAO {
 		}
 		
 	}
+	public int updateCmt(CommentsVO vo) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		int cnt=0;
+		try {
+			con=pool.getConnection();
+			
+			String sql="update comments" + 
+					" set content=? where no=?";
+			
+			ps=con.prepareStatement(sql);
+			
+			ps.setString(1, vo.getContent());
+			ps.setInt(2, vo.getNo());
+			
+			cnt=ps.executeUpdate();
+			System.out.println("댓글 수정 결과 : cnt="+cnt+" , 매개변수 vo="+vo);
+			return cnt;
+		}finally {
+			pool.dbClose(ps, con);
+		}
+	}
 }

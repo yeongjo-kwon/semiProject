@@ -6,6 +6,7 @@
 	pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -22,13 +23,14 @@
 <script type="text/javascript"
 	src="<c:url value='/js/jquery-3.5.1.min.js'/>"></script>
 <script type="text/javascript">
-	function button_event(cmt_no) {
+	function button_delete(cmt_no) {
 		if (confirm("한 줄 평을 삭제하시겠습니까?") == true) { //확인
 			location.href = "<c:url value='/comments/comments_delete.do?no='/>"+cmt_no;
 		} else { //취소
 			return;
 		}
 	}
+	
 </script>
 </head>
 <body>
@@ -36,7 +38,7 @@
 		//테스트 세션 - 삭제
 		//session.setAttribute("no", "1");
 		session.setAttribute("bookno", "1");
-		session.setAttribute("nickname", "이세미");
+		session.setAttribute("nickname", "세미");
 		session.setAttribute("img", "AvataImg");
 		String no_co = request.getParameter("no");
 		//세션이랑 일치시킴 - 테스트용
@@ -84,12 +86,14 @@
 										<form method="post" name="cmtFrm"
 									action="<c:url value='/comments/comments_write_ok.do'/>">
 											<!-- hidden으로 변경하기 -->
-									<input type="text" name="bookno" id="bookno" value="<%=bookno%>">
-									<input type="text" name="nickname" id="nickname"
+									<input type="hidden" name="bookno" id="bookno" value="<%=bookno%>">
+									<input type="hidden" name="nickname" id="nickname"
 										value="<%=nickname%>" /> <input type="text" name="img_c"
 										id="img_c" value="<%=img_c%>" />
 			
-										<div class="image" style="background-image: url('');"></div>
+										
+										<i class="fas fa-user-circle fa-4x solid lightgray"
+														style="color: #757575"></i></div>
 									</div>
 									<div class="register">
 										<textarea placeholder="한 줄 리뷰를 남겨주세요" maxlength="50"
@@ -117,7 +121,7 @@
 										%>
 										<ul class="review-list">
 											<li>
-												<div class="image" style="background-image: url('');">
+												<div class="image" >
 													<i class="fas fa-user-circle fa-2x solid lightgray"
 														style="color: #757575"></i> <a href="#"
 														class="gtm-review-lib"></a>
@@ -126,8 +130,11 @@
 													<p class="nickname">
 														<a href="#" class="gtm-review-lib"><%=commList.get(i).getNickname()%></a>
 														<!--1등이면-->
-														<%	if (i == 0) {	%>
-														<strong class="best">Best</strong> <strong class="rank">1등</strong>
+														<% if(i==0){ %>
+														 	<strong class="rank">1등</strong>
+														<%	}	%>
+														<%	if (i < 2) {	%>
+															<strong class="best">Best</strong>
 														<%	}	%>
 													</p>
 													<span class="date"><%=commSdf.format(commList.get(i).getRegdate())%></span>
@@ -143,12 +150,13 @@
 														String nickname_co=commList.get(i).getNickname();
 															if(nickname.equals(nickname_co)){
 													%>
+													<c:if test="${commVo.nickname=='nickname' }"/>
 													<div class="more-area">
 													<!-- hidden으로 변경 -->
 															<input type="text" value="<%=commList.get(i).getNo()%>"
 																name="no" id="no">
 																 <input type="button"	name="button" id="delete" value="삭제하기" 
-																 onclick="button_event('<%=commList.get(i).getNo()%>');">
+																 onclick="button_delete('<%=commList.get(i).getNo()%>');">
 													</div>
 													<%	}	%>
 												</div>
@@ -160,7 +168,7 @@
 							</div>
 						</section>
 					</div>
-				</div>
+					</div>
 				<div class="col-2 col-12-narrower">
 					<!-- Sidebar -->
 					<div class="sidebar">

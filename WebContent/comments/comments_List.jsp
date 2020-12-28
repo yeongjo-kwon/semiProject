@@ -15,13 +15,16 @@
 <script src="https://kit.fontawesome.com/2d323a629b.js"
 	crossorigin="anonymous"></script>
 <meta charset="utf-8">
-<script type="text/javascript">
-	
-</script>
+<script type="text/javascript"></script>
 </head>
 <body>
 	<%
-	
+	//테스트 세션 - 삭제
+	session.setAttribute("no", "1");
+	session.setAttribute("bookno", "1");
+	session.setAttribute("nickname", "이세미");
+	session.setAttribute("img", "AvataImg");
+	String no_co = request.getParameter("no");
 	// bookno, nickname 필요
 	String bookno=(String)session.getAttribute("no");
 	System.out.println("List  bookno=>"+bookno);

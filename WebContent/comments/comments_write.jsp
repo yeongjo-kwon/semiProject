@@ -24,7 +24,6 @@
 		$('#content').keyup();
 	});
 </script>
-<!-- 댓글 수 증가하면 카운트하는거 추가할거면 js넣기 -->
 </head>
 <body>
 	<%
@@ -34,11 +33,10 @@
 		session.setAttribute("nickname", "세미");
 		session.setAttribute("img", "AvataImg");
 	// 사용자 정보 읽어오기
-		CommentsService cmtservice = new CommentsService();
-		String bookno = (String) session.getAttribute("no");
 		String img_e = (String) request.getAttribute("img");
 		String img_c = (String) session.getAttribute("img");
 	// 세션에서 읽어오기 - 이건 삭제 x
+		String bookno = (String) session.getAttribute("no");
 		String nickname = (String) session.getAttribute("nickname");
 	%>
 	<div id="anchorReview" class="review-container thin-line">
