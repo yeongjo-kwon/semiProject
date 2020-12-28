@@ -1,25 +1,21 @@
-package com.semiproj.controller;
+package com.semiproj.login.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.controller.Controller;
-import com.semiproj.member.model.MemberVO;
 
-public class MainController implements Controller{
+public class LoginController implements Controller{
+
 	@Override
 	public String requestProcess(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		
-		HttpSession session = request.getSession();
-		MemberVO vo =(MemberVO) session.getAttribute("memVo");
-		
-		System.out.println(vo);
-		return "/main.jsp";
+		return "login.jsp";
 	}
 
 	@Override
 	public boolean isRedirect() {
+		
 		return false;
 	}
 

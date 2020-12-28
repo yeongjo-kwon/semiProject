@@ -1,40 +1,10 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="com.semiproj.member.model.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
-<script type="text/javascript">
-	$(function() {
-		$('#wr_submit').click(function() {
-			if ($('#email1').val().length < 1) {
-				alert('이메일을 입력하세요');
-				$('#email1').focus();
-				event.preventDefault();
-			} else if (!validate_email($('#email1').val())) {
-				alert('이메일는 영문,숫자,_만 가능합니다.');
-				$('#email1').focus();
-				event.preventDefault();
-			} else if ($('#pwd').val().length < 1) {
-				alert('비밀번호를 입력하세요');
-				$('#pwd').focus();
-				event.preventDefault();
-			} else if ($('#pwd').val() != $('#pwd2').val()) {
-				alert('비밀번호가 일치하지 않습니다.');
-				$('#pwd2').focus();
-				event.preventDefault();
-			} else if (!validate_phone($('#hp2').val())
-					|| !validate_phone($('#hp3').val())) {
-				alert('전화번호는 숫자만 가능합니다.');
-				$('#hp2').focus();
-				event.preventDefault();
-			}/* else if ($('#chkEmail').val() !="Y") {
-				alert('이메일 중복확인 하세요');
-				$('#btnChkEmail').focus();
-				event.preventDefault();
-			} */
-		});
-	});
-	
-	
-</script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <article id="banner"></article>
 <!-- Main -->
 <article id="main">
@@ -48,9 +18,83 @@
 				<!-- Content -->
 				<div class="content">
 <div class="registForm">
-<form name="frm1" method="post" action="register_ok.do">
+
+<script type="text/javascript" src="../assets/js/member.js"></script>
+<jsp:useBean id="memService" class="com.semiproj.member.model.MemberService" scope="session"></jsp:useBean>
+<%
+	String userid = (String) session.getAttribute("userid");
+
+	MemberVO vo = null;
+		try {
+			vo = memService.selectMember(userid);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
+	String zipcode = vo.getZipcode();
+	String address = vo.getAddress();
+	String addressDetail = vo.getAddressDetail();
+	if (zipcode == null)
+		zipcode = "";
+	if (address == null)
+		address = "";
+	if (addressDetail == null)
+		addressDetail = "";
+	
+	String hp = vo.getHp();
+	String email = vo.getEmail();
+	String hp1 = "", hp2 = "", hp3 = "";
+	String email1 = "", email2 = "", email3 = "";
+	if (hp != null && !hp.isEmpty()) { //010-100-2000
+		String[] hpArr = hp.split("-");
+		hp1 = hpArr[0]; //010
+		hp2 = hpArr[1]; //100
+		hp3 = hpArr[2]; //2000
+	}
+
+	String[] emailList = { "naver.com", "hanmail.net", "nate.com", "gmail.com" };
+	
+	int count = 0;
+	boolean isEtc = false; //직접입력이 아닌 경우 false
+	if (email != null && !email.isEmpty()) { //h@nate.com(콤보 안), k@herb.com(직접입력)
+		String[] emailArr = email.split("@");
+		email1 = emailArr[0]; //h, k
+		email2 = emailArr[1]; //nate.com, herb.com
+	
+		//for문 돌려서 일치하는게 있다면 count++
+		for (int i = 0; i < emailList.length; i++) {
+			if (email2.equals(emailList[i])) {
+		count++;
+		break;
+			}
+		} //for
+	
+		//count값에 따라서 직접입력이다 / 아니다 구분
+		if (count == 0) {
+			isEtc = true; //직접입력
+		}
+	}
+%>
+
+<script language="Javascript">
+	String email="";
+	if(email1!=null && !email1.isEmpty()){
+		if(email2.equals("etc")){
+			if(email3!=null && !email3.isEmpty()){
+				email=email1+"@"+email3;
+			}
+		}else{
+			email=email1+"@"+email2;
+		}
+	}
+</script>
+
+<form name="frm1" method="post" action="<c:url value='/member/memberEdit_ok.do'/>">
 	<fieldset>
-		<legend>회원 가입</legend>
+		<legend>회원 수정</legend>
+			<input type="hidden" name="chkEmail" id="chkEmail">
+			<input type="hidden" name="chkNick" id="chkNick">
+			<input type="text" name="email" id="email" value="${param.email}" }>
 		<br><br><br>
 		<div>
 			<label for="email1">이메일 주소</label> 
@@ -67,12 +111,11 @@
 		</div><br><br>
 		<div>
 			<label for="name">성명</label> 
-			<input type="text" name="name" id="name" style="ime-mode: active">
+			<span><%=vo.getName() %></span>
 		</div><br><br>
 		<div>
 			<label for="nickname">닉네임</label> 
-			<input type="text" name="nickname"
-				id="nickname" style="ime-mode: inactive">&nbsp; 
+			<span><%=userid %></span>&nbsp; 
 			<input type="button" value="중복확인" id="btnChknick" title="새창열림">
 		</div><br><br>
 		
@@ -113,21 +156,8 @@
 			<input type="submit" id="wr_submit" value="회원가입">
 		</div>
 	</fieldset>
-<script language="Javascript">
-	String email="";
-	if(email1!=null && !email1.isEmpty()){
-		if(email2.equals("etc")){
-			if(email3!=null && !email3.isEmpty()){
-				email=email1+"@"+email3;
-			}
-		}else{
-			email=email1+"@"+email2;
-		}
-	}
-</script>
-	<input type="hidden" name="chkEmail" id="chkEmail">
-	<input type="hidden" name="chkNick" id="chkNick">
-	<input type="text" name="email" id="email">
+
+	
 </form>
 	
 </div>
@@ -208,5 +238,8 @@
 			</div>
 		</div>
 	</section>
-</article>
+
+
+
+
 <%@ include file="../inc/bottom.jsp" %>
