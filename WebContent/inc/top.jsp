@@ -45,7 +45,7 @@
 								</li>
 							</ul>
 						</li>
-						<li><a href="#" class="button primary">Log-in</a></li>
+						<li><a href="<c:url value='/login/login.do'/>" class="button primary">Log-in</a></li>
 					</ul>
 				</nav>
 			</header>
