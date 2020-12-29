@@ -19,7 +19,7 @@ public class MainController implements Controller{
 		HttpSession session = request.getSession();
 		MemberVO vo =(MemberVO) session.getAttribute("memVo");
 		
-		System.out.println(vo);
+		System.out.println("디버깅용 회원 정보 vo="+vo);
 		
 		//베스트셀러
 		BookInfoService bookService=new BookInfoService();
@@ -30,6 +30,7 @@ public class MainController implements Controller{
 			e.printStackTrace();
 		}
 		request.setAttribute("bookList", bookList);
+		
 		
 		return "/main.jsp";
 	}

@@ -8,24 +8,19 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:useBean id="memService" class="com.semiproj.member.model.MemberService" scope="session"></jsp:useBean>
 
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="../js/jquery-3.5.1.min.js"></script>
-<script type="text/javascript">
-   
-</script>
 </head>
 <body>
-	<h2>이메일 중복 검사</h2>
+<h2>별명 중복 검사</h2>
 	<br>
-	<form name="frmId" method="post" action="checkEmail_ok.do">
-		<label for="email">email : </label> <input type="text" name="email"
-			id="email" value="${email}" title="email 입력"> <input
-			type="submit" id="submit" value="이메일 확인">
+	<form name="frmId" method="post" action="checkNickname_ok.do">
+		<label for="email">별명 : </label> <input type="text" name="nickname"
+			id="nickname" value="${nickname}" title="nickname 입력"> <input
+			type="submit" id="submit" value="별명 확인">
 	</form>
 </body>
 </html>
