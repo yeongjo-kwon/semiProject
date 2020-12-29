@@ -2,8 +2,9 @@ html {
   width: 50%;
 }
 
-h3 {
+.white_box h3 {
     margin-top: 30px;
+     font-size: 26px;
 }
 .content body {
   display: block;
@@ -84,7 +85,7 @@ a:hover {
   font-size: 1.2rem;
   text-align: center;
   white-space: nowrap;
-  color: #ad6603 !important;
+  color: #ad6603;
   border: 1px solid #ad6603;
   background: #fff;
 }

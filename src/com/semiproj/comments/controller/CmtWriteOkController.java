@@ -19,7 +19,7 @@ public class CmtWriteOkController implements Controller{
 	 */
 		// 조건
 		//1.
-		String bookNo=request.getParameter("bookno");
+		String bookNo=request.getParameter("bookNo");
 		String nickname=request.getParameter("nickname");
 		String content=request.getParameter("content");
 		

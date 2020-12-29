@@ -7,8 +7,13 @@
 			if(confirm("삭제하시겠습니까?")){
 				location.href="<c:url value='/book/bookDel.do?no=${param.no}&txtFileName=${bookVo.txtFileName}&coverFileName=${bookVo.coverFileName}'/>";
 			}
-		});			
+		});
 	});
+	
+	function getText() {
+		open("<c:url value='/book/readBook.do?no=${param.no}'/>", "readBook",
+		"width=810, height=520, top=120, left=400, location=no, resizable=no");
+	}
 </script>
 <article id="banner"></article>
 <!-- Main -->
@@ -55,6 +60,9 @@
 									hidden="hidden"
 								</c:if>--%>
 								href="#" id="cfDel">삭제</a>
+							<a class="button small" href="#" id="viewTxt"
+								onclick="getText()">읽기</a>
+							<div id="txtContent"></div>
 						</div><br><br>
 						<%-- 
 						<jsp:include page="../comments/comments_write.jsp"></jsp:include>			

@@ -60,7 +60,7 @@ public class BookDetailController implements Controller{
 		request.setAttribute("bookVo", vo);
 		request.setAttribute("writerVo", wVo);
 		request.setAttribute("commList", list);
-    
+		
 		//4.
 		return "/book/bookDetail.jsp";
 	}

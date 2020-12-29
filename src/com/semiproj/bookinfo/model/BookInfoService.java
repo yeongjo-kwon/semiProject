@@ -34,4 +34,12 @@ public class BookInfoService {
 	public List<BookInfoVO> selectByWrno(int wrno) throws SQLException {
 		return bookinfoDao.selectByWrno(wrno);
 	}
+	
+	public int updateReadCount(int no) throws SQLException{
+		return bookinfoDao.updateReadCount(no);
+	}
+	
+	public List<BookInfoVO> selectTop3() throws SQLException{
+		return bookinfoDao.selectTop3();
+	}
 }

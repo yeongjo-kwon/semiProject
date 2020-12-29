@@ -21,10 +21,11 @@
 						<div class="divList">
 							<table class="default" border="1">
 								<colgroup>
-									<col style="width: 5%;" />
-									<col style="width: 40%;" />
-									<col style="width: 20%;" />
-									<col style="width: 10%;" />
+									<col style="width:5%;" />
+									<col style="width:40%;" />
+									<col style="width:20%;" />
+									<col style="width:10%;" />
+									<col style="width:5%;" />
 								</colgroup>
 								<thead>
 									<tr>
@@ -32,6 +33,8 @@
 										<th>책 제목</th>
 										<th>출판사</th>
 										<th>등록일</th>
+										<th>조회</th>
+										
 									</tr>
 								</thead>
 								<tbody>
@@ -50,15 +53,17 @@
 												<c:set var="num" value="${num-1}" />
 
 												<tr>
-													<td><img alt="표지 이미지"
-														src="<c:url value='/file_upload/${bookVo.coverFileName}'/>"
-														width="100px"></td>
-													<td><a
-														href="<c:url value='/book/bookDetail.do?no=${bookVo.no}'/>">
-															${bookVo.title}</a></td>
+													<td>
+														<img alt="표지 이미지"
+															src="<c:url value='/file_upload/${bookVo.coverFileName}'/>"
+																width="100px">
+													</td>
+													<td><a href="<c:url value='/book/readCount.do?no=${bookVo.no}'/>">
+														${bookVo.title}</a></td>
 													<td>${bookVo.publisher}</td>
 													<td><fmt:formatDate value="${bookVo.regdate}"
-															pattern="yyyy-MM-dd" /></td>
+														pattern="yyyy-MM-dd"/></td>
+													<td>${bookVo.readCount}</td>
 												</tr>
 											</c:if>
 										</c:forEach>

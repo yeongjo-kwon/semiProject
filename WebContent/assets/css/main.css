@@ -184,8 +184,11 @@ input, select, textarea {
 		border: 1px solid black;
 	}
 	
-	input[type="text"]{
+	section.bestSeller p.bsContent{
+		font-size: 0.9em;
+		border-top: 2px solid #c18282;
 	}
+	
 	
 /* Basic */
 

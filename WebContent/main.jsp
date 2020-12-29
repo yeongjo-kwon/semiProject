@@ -30,7 +30,6 @@
 		</footer>
 	</div>
 </section>
-
 <!-- Main -->
 <article id="main">
 	<header class="special container">
@@ -92,6 +91,15 @@
 					<div class="imgBlock">
 						<a href="#" class="image featured"><img src="images/pic01.jpg"
 							alt="" /></a>
+								</div>
+								<header>
+									<h3>${bookVo.title}</h3>
+								</header>
+								<p class="bsContent">${bookVo.content}</p>
+								<br><br>
+							</c:forEach>
+							</section>
+						</div>
 					</div>
 					<header>
 						<h3>책 제목</h3>
