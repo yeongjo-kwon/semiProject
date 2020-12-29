@@ -60,7 +60,7 @@ public class WriterPageController implements Controller {
 				
 		
 		request.setAttribute("vo", vo);
-		request.setAttribute("writerList", list);
+		request.setAttribute("bookList", list);
 		request.setAttribute("pageVo", pageVo);
 		
 		return "/writer/writerPage.jsp";

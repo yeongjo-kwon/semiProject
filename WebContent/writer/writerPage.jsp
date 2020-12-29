@@ -112,7 +112,7 @@
 																		<c:set var="num" value="${num-1}" />
 
 																		<tr>
-																			<td><img alt="작가이미지"
+																			<td><img alt="책이미지"
 																				src="<c:url value='/file_upload/${bookVo.coverFileName}'/>"
 																				width="100px"></td>
 																			<td><a
