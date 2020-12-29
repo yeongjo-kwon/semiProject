@@ -13,6 +13,24 @@ body {
   font-size: 14px;
   color: #242424;
 }
+/*삭제 a태그*/
+a .btDel {
+	 background: none;
+    border: solid 1px;
+    border-radius: 0;
+    color: inherit;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.8em;
+    font-weight: 900;
+    letter-spacing: 2px;
+    min-width: 15em;
+    padding: 0 0.75em;
+    line-height: 3.75em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
 /*입력버튼*/
 input#button {
     background: #dfdfdf;
@@ -300,7 +318,7 @@ textarea {
 }
 
 /*닉네임 일치시 삭제버튼 */
-button.gtm-review-delect {
+button.gtm-review-delect, a .btDel {
    border: 1px solid #dfdfdf; 
     border-radius: 24px;
     height: 24px;

@@ -17,8 +17,8 @@ public class CmtDeleteController implements Controller{
 		  	  =>/comments/comments_detail.do로 리다이렉트
 		 */
 		String no=request.getParameter("no");
-		String bookno=request.getParameter("bookno");
-		System.out.println("deleteconteriller : no="+no+" , bookno="+bookno);
+		String bookNo=request.getParameter("bookNo");
+		System.out.println("deleteConteriller : no="+no+" , bookNo="+bookNo);
 		CommentsService cmtservice=new CommentsService();
 		try {
 			int cnt=cmtservice.deleteCmt(Integer.parseInt(no));
@@ -31,7 +31,7 @@ public class CmtDeleteController implements Controller{
 			e.printStackTrace();
 		}
 		
-		return "/comments/comments_detail.do?no="+bookno;
+		return "/comments/comments_detail.do?no="+bookNo;
 	}
 
 	@Override

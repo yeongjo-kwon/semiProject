@@ -29,7 +29,7 @@ public class CommentsDAO {
 			
 			//3. ps
 			String sql="select * from comments" + 
-					" where bookno=? order by no asc";
+					" where bookNo=? order by no asc";
 			ps=con.prepareStatement(sql);
 			ps.setInt(1, bookNo);
 			
@@ -63,7 +63,7 @@ public class CommentsDAO {
 			
 			//3. ps
 			String sql="select * from comments" + 
-					" where bookno=? order by no asc";
+					" where bookNo=? order by no asc";
 			ps=con.prepareStatement(sql);
 			ps.setInt(1, bookNo);
 			
@@ -93,7 +93,7 @@ public class CommentsDAO {
 		try {
 			con=pool.getConnection();
 			
-			String sql="insert into comments(no,nickname,content,bookno)" + 
+			String sql="insert into comments(no,nickname,content,bookNo)" + 
 					" values(comments_seq.nextval,?,?,?)";
 			
 			ps=con.prepareStatement(sql);
@@ -120,7 +120,7 @@ public class CommentsDAO {
 			con=pool.getConnection();
 			
 			String sql="select count(*) from comments"
-					+ " where bookno=?";
+					+ " where bookNo=?";
 			ps=con.prepareStatement(sql);
 			
 			ps.setInt(1, bookNo);

@@ -18,17 +18,14 @@ $(function() {
 					function() {
 						location.href = "<c:url value='/comments/comments_edit.do?no=${param.no}'/>";
 					});
-
-	$('#btDel')
-	.click(
-			function  ()  {
-				if (confirm('삭제하시겠습니까?')) {
-					location.href = "<c:url value='/comments/comments_delete.do?no=${commVo.no}'/>";
+			});
+			function  del_cmt(num)  {
+				if (confirm('작성하신 한 줄 리뷰를 삭제하시겠습니까?')) {
+					location.href = "<c:url value='/comments/comments_delete.do?no='/>"+num+"&bookNo="+${param.no};
 				} else {
 					event.preventDefault();
 				}
-			});
-});
+			}
 </script>
 	<article id="banner"></article>
 	<!-- Main -->
@@ -53,10 +50,11 @@ $(function() {
 									<div class="register">
 									<form method="post" name="cmtFrm"
 										action="<c:url value='/comments/comments_write_ok.do'/>">
+											<!-- post로 전송할 것들 -->
 											<!-- hidden으로 변경하기 -->
-											<input type="text" name="bookno" id="bookno"
-												value="${bookno}"> 
-												<input type="text"	name="nickname" id="nickname" value="${nickname}" /> 
+											<input type="hidden" name="bookNo" id="bookNo"
+												value="${bookNo}"> 
+												<input type="hidden"	name="nickname" id="nickname" value="${nickname}" /> 
 										<textarea placeholder="한 줄 리뷰를 남겨주세요" maxlength="50"
 											class="textarea" id="content" name="content"></textarea>
 										<p class="text-number">
@@ -108,18 +106,17 @@ $(function() {
 													</button>
 												</div>
 												<!--  닉네임 일치시 삭제 버튼  -->
-												<c:if test="${session.nickname eq commVo.nickname}" />
+												<c:if test="${nickname eq commVo.nickname}" >
 												<div class="more-area">
 													<!-- hidden으로 변경 -->
 													<c:set var="num" value="${commVo.no}"/>
-													<form>
-													<input type="text" value="${commVo.no}"
+													<!-- 댓글 번호 확인용 -->
+													<input type="hidden" value="${commVo.no}"
 														name="no" id="no"> 
-														<input
-															type="button" id="btDel" value="삭제하기"  >
+															<a href="#" class="btDel" onclick="del_cmt(${commVo.no})" >삭제하기</a>
 														<input type="button" id="btEdit" value="수정하기">
-												</form>
 												</div> 
+												</c:if>
 											</div>
 										</li>
 									</ul>
@@ -128,7 +125,7 @@ $(function() {
 						</section>
 						</div>
 					</div>
-		
+			<jsp:include page="../comments/comments_List.jsp"></jsp:include>	
 				<div class="col-2 col-12-narrower">
 					<!-- Sidebar -->
 					<div class="sidebar">

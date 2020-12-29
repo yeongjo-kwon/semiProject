@@ -18,15 +18,15 @@
 	<%
 	//테스트 세션 - 삭제
 	session.setAttribute("no", "1");
-	session.setAttribute("bookno", "1");
+	session.setAttribute("bookNo", "1");
 	session.setAttribute("nickname", "세미");
 	session.setAttribute("img", "AvataImg");
-	// bookno, nickname 필요
+	// bookNo, nickname 필요
 	%>
 	<form method="post" name="cmtFrm"
-		action="<c:url value='/comments/comments_detail.do?no=${bookno}'/>">
+		action="<c:url value='/comments/comments_detail.do?no=${bookNo}'/>">
 		<div id="anchorReview" class="review-container thin-line">
-			<input type="text" name="bookno" id="bookno" value="${bookno}">
+			<input type="text" name="bookNo" id="bookNo" value="${bookNo}">
 			<input type="text"	name="nickname" id="nickname" value="${nickname}" /> 
 			<h3 class="book-info-title link">
 				<button type="submit" class="gtm-review-2depth" >
@@ -53,7 +53,7 @@
 							<span class="date"><fmt:formatDate value="${commVo.regdate}" 
 													pattern="yyyy-MM-dd hh:mm:ss "/></span>
 							<a
-								href="<c:url value='/comments/comments_detail.do?no=${session.bookno}'/>"
+								href="<c:url value='/comments/comments_detail.do?no=${session.bookNo}'/>"
 								class="gtm-review-textclick" id="textclick"> 
 								<pre	class="cont">${commVo.content }</pre>
 							</a> 
