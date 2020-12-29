@@ -34,7 +34,7 @@
 									<div class="sub-inner review-profile line">
 										<div class="profile">
 											<p class="nickname">
-												${session.nickname}
+												${nickname}
 												님<br /> 한 줄 리뷰를 작성해보세요
 											</p>
 												 <i class="fas fa-user-circle fa-4x solid lightgray" style="color: #757575"></i>
@@ -46,7 +46,7 @@
 											<!-- hidden으로 변경하기 -->
 											<input type="text" name="bookno" id="bookno"
 												value="${bookno}"> 
-												<input type="text"	name="nickname" id="nickname" value="${session.nickname}" /> 
+												<input type="text"	name="nickname" id="nickname" value="${nickname}" /> 
 										<textarea placeholder="한 줄 리뷰를 남겨주세요" maxlength="50"
 											class="textarea" id="content" name="content"></textarea>
 										<p class="text-number">
@@ -69,8 +69,8 @@
 									<p>등록된 리뷰가 없습니다.</p>
 								</c:if>
 								<c:if test="${!empty commList}">
-										<c:forEach var="commVo" items="${commList}" >
 										<c:forEach var="i" begin="1" end="${fn:length(commList)}">
+										<c:set var="commVo" value="${commList[i] }" />
 									<ul class="review-list">
 										<li>
 											<div class="image">
@@ -109,7 +109,6 @@
 											</div>
 										</li>
 									</ul>
-									</c:forEach>
 									</c:forEach>
 								</c:if>
 						</section>

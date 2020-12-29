@@ -40,7 +40,6 @@
 			<input type="text" name="bookno" id="bookno" value="${bookno}">
 			<input type="text" name="nickname" id="nickname"
 				value="${nickname}" />
-
 			<!-- 댓글 입력 시작 -->
 			<div class="review-register">
 				<div class="image" style="background-image: url('');">
@@ -51,7 +50,8 @@
 					<input type="submit" class="button" id="button" value="등록" />
 				</div>
 			</div>
-		</form>
+			</form>
+		
 		<!-- 글자수 체크 할건지? -->
 		<div class="text-number">
 			<p>

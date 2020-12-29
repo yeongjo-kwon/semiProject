@@ -20,7 +20,8 @@ public class CmtDetailController implements Controller{
 		 	 => /comments/comments_detail.jsp포워딩
 		 */
 		String no=request.getParameter("no");
-		System.out.println("no="+no);
+		String nickname=request.getParameter("nickname");
+		System.out.println("no="+no+" , nickname="+nickname);
 		if(no==null || no.isEmpty()) {
 			request.setAttribute("msg", "잘못된 url입니다.");
 			
@@ -39,10 +40,8 @@ public class CmtDetailController implements Controller{
 		}
 		int commListSize=list.size();
 		
-		request.setAttribute("totalcmt", totalcmt);
-		request.setAttribute("commListSize", commListSize);
 		request.setAttribute("commList", list);
-		System.out.println("totalcmt="+totalcmt+" , commListSize="+commListSize);
+		System.out.println("comController list.size="+list.size());
 		
 		return "/comments/comments_detail.jsp";
 	}

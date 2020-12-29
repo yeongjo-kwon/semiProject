@@ -27,9 +27,11 @@
 		action="<c:url value='/comments/comments_detail.do?no=${bookno}'/>">
 		<div id="anchorReview" class="review-container thin-line">
 			<input type="text" name="bookno" id="bookno" value="${bookno}">
+			<input type="text"	name="nickname" id="nickname" value="${nickname}" /> 
 			<h3 class="book-info-title link">
-				<button type="submit" class="gtm-review-2depth" ></button>
+				<button type="submit" class="gtm-review-2depth" >
 					한 줄 리뷰 <span class="number">${fn:length(commList)}</span><i class="fas fa-chevron-right"></i>
+			</button>
 			</h3>
 			<c:if test="${empty commList}">
 				<p>등록된 리뷰가 없습니다.</p>
@@ -42,7 +44,8 @@
 							<i class="fas fa-user-circle fa-2x" style="color: #757575"></i> <a
 								href="#" class="gtm-review-lib"></a>
 						</div>
-						<c:forEach var="commVo"  items="${commList }" begin="1" end="3">
+							<c:forEach var="i" begin="1" end="3">
+										<c:set var="commVo" value="${commList[i] }" />
 						<div class="info">
 							<p class="nickname">
 								<a href="#" class="gtm-review-lib">${commVo.nickname}</a>
