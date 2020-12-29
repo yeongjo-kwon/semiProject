@@ -10,7 +10,7 @@ input[id*="answer"]+label {
 	border-bottom: 0;
 	color: white;
 	font-weight: 900;
-	background: rgb(224, 194, 194);
+	background-color: rgb(179, 66, 28);
 	cursor: pointer;
 	position: relative;
 }

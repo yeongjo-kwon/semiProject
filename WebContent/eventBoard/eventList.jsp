@@ -1,9 +1,10 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<title>이벤트 - 책킷아웃</title>
 <%@ include file="../inc/top.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/assets/css/eventList.css'/>">
-
 <script type="text/javascript">
 $(function(){
 	$('#btWrite').click(function(){
@@ -77,22 +78,17 @@ function pageFunc(curPage){
 												<c:set var="curPos" value="${curPos+1}" />
 												<tr>
 													<td>${vo.no }</td>
-													<td>
-													<a href="eventDetail.do?no=${vo.no }"> 
-													<!-- 파일이 업로드된 경우 파일 이미지 보여주기 -->
+													<td><a href="eventDetail.do?no=${vo.no }"> <!-- 파일이 업로드된 경우 파일 이미지 보여주기 -->
 															<c:if test="${!empty vo.imgFileName }">
 																<img src="<c:url value='/images/file.gif'/>"
 																	alt='파일 이미지'>
-															</c:if> 
-															<!-- 제목이 30자 이상인 경우, 15자리만 보여주고 나머지 생략하기 --> 
-															<c:if test="${fn:length(vo.title)>=30}">
-																${fn:substring(vo.title,0,30) }...
-															</c:if> 
-															<c:if test="${fn:length(vo.title)<30}">
+															</c:if> <!-- 제목이 30자 이상인 경우, 30자리만 보여주고 나머지 생략하기 --> <c:if
+																test="${fn:length(vo.title)>=30}">
+																${fn:substring(vo.title,0,30) }....
+															</c:if> <c:if test="${fn:length(vo.title)<30}">
 																${vo.title }
 															</c:if>
-													</a>
-													</td>
+													</a></td>
 													<td><fmt:formatDate value="${vo.regdate }"
 															pattern="yyyy-MM-dd" /></td>
 												</tr>

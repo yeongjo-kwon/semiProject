@@ -1,6 +1,7 @@
 package com.semiproj.eventboard.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,15 +35,18 @@ public class EventDetailController implements Controller{
 		//2. 비즈니스 로직 처리 - 모델에 의뢰, db작업
 		eventBoardService eventService=new eventBoardService();
 		eventBoardVO eventVo=null;
+		List<eventBoardVO> eList=null;
 		
 		try {
 			eventVo=eventService.selectByNo(Integer.parseInt(no));
+			eList=eventService.listSideMenu();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		
 		//3. request에 결과 저장
 		request.setAttribute("eventVo", eventVo);
+		request.setAttribute("eList", eList);
 		
 		//4. 뷰페이지 리턴
 		return "/eventBoard/eventDetail.jsp";
