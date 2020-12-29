@@ -1,20 +1,10 @@
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.List"%>
-<%@page import="com.semiproj.comments.model.CommentsVO"%>
-<%@page import="com.semiproj.comments.model.CommentsService"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<jsp:include page="../inc/top.jsp" />
-<meta charset="UTF-8" />
-<meta name="viewport"
-	content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover" />
-<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>한 줄 평 전체 보기</title>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ include file="../inc/top.jsp" %>
+
 <link rel="stylesheet"
 	href="<c:url value='/assets/css/realcmt_detail.css'/>" />
 <script src="https://kit.fontawesome.com/2d323a629b.js"
@@ -22,37 +12,21 @@
 <script type="text/javascript"
 	src="<c:url value='/js/jquery-3.5.1.min.js'/>"></script>
 <script type="text/javascript">
-	function button_event() {
-		if (confirm("한 줄 평을 삭제하시겠습니까?") == true) { //확인
-			location.href = "<c:url value='/comments/comments_delete.do?no=${param.no}'/>";
-		} else { //취소
-			return;
-		}
-	}
+$(function() {
+	$('#btEdit')
+			.click(
+					function() {
+						location.href = "<c:url value='/comments/comments_edit.do?no=${param.no}'/>";
+					});
+			});
+			function  del_cmt(num)  {
+				if (confirm('작성하신 한 줄 리뷰를 삭제하시겠습니까?')) {
+					location.href = "<c:url value='/comments/comments_delete.do?no='/>"+num+"&bookNo="+${param.no};
+				} else {
+					event.preventDefault();
+				}
+			}
 </script>
-</head>
-<body>
-	<%
-			//테스트 세션
-			String no = request.getParameter("no");
-			String no_co = (String) session.getAttribute("no");
-			String nickname_c = (String) session.getAttribute("nickname");//삭제
-
-			String bookno = (String) session.getAttribute("bookno");
-			String nickname = (String) session.getAttribute("nickname");
-			//String nickname=(String)request.getAttribute("nickname");
-			String img_c = (String) session.getAttribute("img");
-			CommentsService cmtservice = new CommentsService();
-			CommentsVO cmtvo = new CommentsVO();
-
-			System.out.println("nickname=" + nickname + "nickname_c=" + nickname_c);
-			List<CommentsVO> commList = cmtservice.selectAllCmt(Integer.parseInt(bookno));
-			System.out.println(commList);
-			SimpleDateFormat commSdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-			System.out.println("detail => no=" + no + " , nickname=" + nickname +" , bookno="+bookno);
-		
-			 session.invalidate();
-	%>
 	<article id="banner"></article>
 	<!-- Main -->
 	<article id="main">
@@ -63,229 +37,94 @@
 					<!-- Content -->
 					<div class="content">
 						<section>
-							<form action="post" class="regiter">
-								<input type="text" name="bookno" id="bookno"
-									value="<%=bookno%>" />
-							</form>
-							<div class="sub-content">
-								<div class="sub-inner review-profile line">
-									<div class="profile">
-										<p class="nickname">
-											<%=nickname%>
-											님<br /> 한 줄 리뷰를 작성해보세요
-										</p>
-										<form method="post" name="cmtFrm"
-									action="<c:url value='/comments/comments_write_ok.do'/>">
-											<!-- hidden으로 변경하기 -->
-									<input type="text" name="bookno" id="bookno" value="<%=bookno%>">
-									<input type="text" name="nickname" id="nickname"
-										value="<%=nickname_c%>" /> <input type="text" name="img_c"
-										id="img_c" value="<%=img_c%>" />
-			
-										<div class="image" style="background-image: url('');"></div>
-									</div>
+								<div class="sub-content">
+									<div class="sub-inner review-profile line">
+										<div class="profile">
+											<p class="nickname">
+												${nickname}
+												님<br /> 한 줄 리뷰를 작성해보세요
+											</p>
+												 <i class="fas fa-user-circle fa-4x solid lightgray" style="color: #757575"></i>
+										</div>
+									
 									<div class="register">
+									<form method="post" name="cmtFrm"
+										action="<c:url value='/comments/comments_write_ok.do'/>">
+											<!-- post로 전송할 것들 -->
+											<!-- hidden으로 변경하기 -->
+											<input type="hidden" name="bookNo" id="bookNo"
+												value="${bookNo}"> 
+												<input type="hidden"	name="nickname" id="nickname" value="${nickname}" /> 
 										<textarea placeholder="한 줄 리뷰를 남겨주세요" maxlength="50"
-											class="textarea"  id="content" name="content"></textarea>
+											class="textarea" id="content" name="content"></textarea>
 										<p class="text-number">
 											<span>0</span><em>/</em>50
 										</p>
 										<input type="submit" class="gtm-review-register disabled"
-										 value="리뷰 등록하기" name="button" id="button">
+											value="리뷰 등록하기" name="button" id="button">
+									</form>
 									</div>
 								</div>
-								</form>
-								<div class="sub-inner p0 review-detail">
-									<p class="review-count">
-										총
-										<%=cmtservice.selectCommentsCnt(Integer.parseInt(bookno))%>개
-									</p>
-									<!-- 댓글 반복문시작 -->
-									
-									<%-- <c:if test="${empty commList}">
-									<p>등록된 리뷰가 없습니다.</p>
-								</c:if> --%>
-								
-									<!-- 임시 데이터 -->
-			<ul class="review-list">
-					<li>
-						<div class="image" style="background-image: url('');">
-							<i class="fas fa-user-circle fa-2x" style="color: #757575"></i> <a
-								href="#" class="gtm-review-lib"></a>
-						</div>
-						<div class="info">
-							<p class="nickname">
-								<a href="#" class="gtm-review-lib">권영조</a>
-								<strong class="best">Best</strong> <strong class="rank">1등</strong>
-							</p>
-							<span class="date">2020-12-25 12:25:00</span>
-							<a
-								href="<c:url value='/comments/comments_detail.do?no=${bookno}'/>"
-								class="gtm-review-textclick" id="textclick"> 
-								<pre	class="cont">오랜만에 소설을 읽었고 따뜻했습니다.</pre>
-							</a>
-							<div class="review-setting">
-								<p>이 리뷰가 마음에 드시나요?</p>
-								<button type="submit" class="like-button gtm-review-like">
-									<i class="far fa-heart"></i> <span><%=478%></span>
-								</button>
 							</div>
-						</div>
-					</li>
-					<li>
-						<div class="image" style="background-image: url('');">
-							<i class="fas fa-user-circle fa-2x" style="color: #757575"></i> <a
-								href="#" class="gtm-review-lib"></a>
-						</div>
-						<div class="info">
-							<p class="nickname">
-								<a href="#" class="gtm-review-lib">김한희</a>
-								<strong class="best">Best</strong>
-							</p>
-							<span class="date">2020-12-26 12:26:00</span>
-							<a
-								href="<c:url value='/comments/comments_detail.do?no=${bookno}'/>"
-								class="gtm-review-textclick" id="textclick"> 
-								<pre	class="cont">보면서 계속 디즈니나 픽사 같은 애니메이션으로 제작되는 상상을 하면서 읽었습니다.</pre>
-							</a>
-							<div class="review-setting">
-								<p>이 리뷰가 마음에 드시나요?</p>
-								<button type="submit" class="like-button gtm-review-like">
-									<i class="far fa-heart"></i> <span><%=355%></span>
-								</button>
-							</div>
-						</div>
-					</li>
-					
-					<li>
-						<div class="image" style="background-image: url('');">
-							<i class="fas fa-user-circle fa-2x" style="color: #757575"></i> <a
-								href="#" class="gtm-review-lib"></a>
-						</div>
-						<div class="info">
-							<p class="nickname">
-								<a href="#" class="gtm-review-lib">이소정</a>
-							</p>
-							<span class="date">2020-12-27 12:27:00</span>
-							<a
-								href="<c:url value='/comments/comments_detail.do?no=${bookno}'/>"
-								class="gtm-review-textclick" id="textclick"> 
-								<pre	class="cont">읽으면서 한 편의 만화 영화를 본 듯한 느낌이었어요. 가볍게 기분 전환하기 좋은 책이에요.</pre>
-							</a>
-							<div class="review-setting">
-								<p>이 리뷰가 마음에 드시나요?</p>
-								<button type="submit" class="like-button gtm-review-like">
-									<i class="far fa-heart"></i> <span><%=258%></span>
-								</button>
-							</div>
-						</div>
-					</li>
-					
-						<li>
-						<div class="image" style="background-image: url('');">
-							<i class="fas fa-user-circle fa-2x" style="color: #757575"></i> <a
-								href="#" class="gtm-review-lib"></a>
-						</div>
-						<div class="info">
-							<p class="nickname">
-								<a href="#" class="gtm-review-lib">박경섭</a>
-							</p>
-							<span class="date">2020-12-27 18:28:00</span>
-							<a
-								href="<c:url value='/comments/comments_detail.do?no=${bookno}'/>"
-								class="gtm-review-textclick" id="textclick"> 
-								<pre	class="cont">후루룩읽기좋은책</pre>
-							</a>
-							<div class="review-setting">
-								<p>이 리뷰가 마음에 드시나요?</p>
-								<button type="submit" class="like-button gtm-review-like">
-									<i class="far fa-heart"></i> <span><%=188%></span>
-								</button>
-							</div>
-						</div>
-					</li>
-					
-						<li>
-						<div class="image" style="background-image: url('');">
-							<i class="fas fa-user-circle fa-2x" style="color: #757575"></i> <a
-								href="#" class="gtm-review-lib"></a>
-						</div>
-						<div class="info">
-							<p class="nickname">
-								<a href="#" class="gtm-review-lib">김정만</a>
-							</p>
-							<span class="date">2020-12-28 19:29:00</span>
-							<a
-								href="<c:url value='/comments/comments_detail.do?no=${bookno}'/>"
-								class="gtm-review-textclick" id="textclick"> 
-								<pre	class="cont">편하고 재밌게 쭉 읽을 수 있는 책이고 마지막엔 너무 슬퍼 한동안 울었습니다ㅎㅎ</pre>
-							</a>
-							<div class="review-setting">
-								<p>이 리뷰가 마음에 드시나요?</p>
-								<button type="submit" class="like-button gtm-review-like">
-									<i class="far fa-heart"></i> <span><%=29%></span>
-								</button>
-							</div>
-						</div>
-					</li>
-					
-				</ul>
-			<!-- 임시데이터 끝 -->
-								
-								
-								<c:if test="${empty commList}">
-										<%
-											for (int i = 0; i < commList.size(); i++) {
-										%>
-										<ul class="review-list">
-											<li>
-												<div class="image" style="background-image: url('');">
-													<i class="fas fa-user-circle fa-2x solid lightgray"
-														style="color: #757575"></i> <a href="#"
-														class="gtm-review-lib"></a>
-												</div>
-												<div class="info">
-													<p class="nickname">
-														<a href="#" class="gtm-review-lib"><%=commList.get(i).getNickname()%></a>
-														<!--1등이면-->
-										<%-- 				<%	if (i == 0) {	%>
-														<strong class="best">Best</strong> <strong class="rank">1등</strong>
-														<%	}	%> --%>
-													</p>
-													<span class="date"><%=commSdf.format(commList.get(i).getRegdate())%></span>
-													<pre class="cont"><%=commList.get(i).getContent()%></pre>
-													<div class="review-setting">
-														<p>이 리뷰가 마음에 드시나요?</p>
-														<button type="submit" class="like-button gtm-review-like">
-															<i class="far fa-heart"></i> <span><%=365-i*6%></span>
-														</button>
-													</div>
-													<!---->
-													<!--  닉네임 일치시 삭제  -->
-													<%
-														if (nickname_c.equals(nickname)) {
-													%>
-													<div class="more-area">
-															<input type="text" value="<%=commList.get(i).getNo()%>"
-																name="no" id="no">
-																 <input type="button"	name="button" id="delete" value="삭제하기" onclick="button_event();">
-												<!-- 		</form> -->
-													</div>
-													<%
-														}
-													%>
-												</div>
-											</li>
-										</ul>
-										<%
-											}
-										%>
-									</c:if>
+							<div class="sub-inner p0 review-detail">
+								<p class="review-count">
+									총
+									${fn:length(commList) }개
+								</p>
 								</div>
-							</div>
+								<!-- 댓글 반복문시작 -->
+								<c:if test="${empty commList}">
+									<p>등록된 리뷰가 없습니다.</p>
+								</c:if>
+								<c:if test="${!empty commList}">
+										<c:forEach var="i" begin="1" end="${fn:length(commList)}">
+										<c:set var="commVo" value="${commList[i] }" />
+									<ul class="review-list">
+										<li>
+											<div class="">
+												<i class="fas fa-user-circle fa-2x solid lightgray"
+													style="color: #757575"></i> 
+											</div>
+											<div class="info">
+												<p class="nickname">
+													<a href="#" class="gtm-review-lib">${commVo.nickname}</a>
+													<!--1등이면-->
+													<c:if test="${i==1}">
+													<strong class="rank">1등</strong>
+													</c:if>
+														<c:if test="${i <= 2}">
+													<strong class="best">Best</strong>
+														</c:if>
+												</p>
+												<span class="date"><fmt:formatDate value="${commVo.regdate}" 
+													pattern="yyyy-MM-dd hh:mm:ss "/></span>
+												 <pre class="cont">${commVo.content }</pre>
+												<div class="review-setting">
+													<p>이 리뷰가 마음에 드시나요?</p>
+													<button type="submit" class="like-button gtm-review-like">
+														<i class="far fa-heart"></i> <span>${95-i*7}</span>
+													</button>
+												</div>
+												<!--  닉네임 일치시 삭제 버튼  -->
+												<c:if test="${nickname eq commVo.nickname}" >
+												<div class="more-area">
+													<!-- hidden으로 변경 -->
+													<c:set var="num" value="${commVo.no}"/>
+													<!-- 댓글 번호 확인용 -->
+													<input type="hidden" value="${commVo.no}"
+														name="no" id="no"> 
+															<a href="#" class="btDel" onclick="del_cmt(${commVo.no})" >삭제하기</a>
+														<input type="button" id="btEdit" value="수정하기">
+												</div> 
+												</c:if>
+											</div>
+										</li>
+									</ul>
+									</c:forEach>
+								</c:if>
 						</section>
+						</div>
 					</div>
-				</div>
 				<div class="col-2 col-12-narrower">
 					<!-- Sidebar -->
 					<div class="sidebar">
@@ -324,7 +163,6 @@
 				</div>
 			</div>
 		</section>
-
 		<!-- Two -->
 		<section class="wrapper style1 container special">
 			<div class="row">
@@ -376,6 +214,4 @@
 			</div>
 		</section>
 	</article>
-	<jsp:include page="../inc/bottom.jsp" />
-</body>
-</html>
+<%@ include file="../inc/bottom.jsp" %>

@@ -14,12 +14,13 @@ public class BookInfoVO {
 	private String coverFileName;
 	private String txtOriginFileName;
 	private String coverOriginFileName;
+	private int readCount;
 	
 	public BookInfoVO() {
 		super();
 	}
 	public BookInfoVO(int no, String title, int price, Timestamp regdate, String publisher, int wrNo, String content,
-			String txtFileName, String coverFileName, String txtOriginFileName, String coverOriginFileName) {
+			String txtFileName, String coverFileName, String txtOriginFileName, String coverOriginFileName, int readCount) {
 		super();
 		this.no = no;
 		this.title = title;
@@ -32,6 +33,7 @@ public class BookInfoVO {
 		this.coverFileName = coverFileName;
 		this.txtOriginFileName = txtOriginFileName;
 		this.coverOriginFileName = coverOriginFileName;
+		this.readCount = readCount;
 	}
 
 	public int getNo() {
@@ -100,12 +102,18 @@ public class BookInfoVO {
 	public void setCoverOriginFileName(String coverOriginFileName) {
 		this.coverOriginFileName = coverOriginFileName;
 	}
+	public int getReadCount() {
+		return readCount;
+	}
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
+	}
 	
 	@Override
 	public String toString() {
 		return "BookInfoVO [no=" + no + ", title=" + title + ", price=" + price + ", regdate=" + regdate
 				+ ", publisher=" + publisher + ", wrNo=" + wrNo + ", content=" + content + ", txtFileName="
 				+ txtFileName + ", coverFileName=" + coverFileName + ", txtOriginFileName=" + txtOriginFileName
-				+ ", coverOriginFileName=" + coverOriginFileName + "]";
+				+ ", coverOriginFileName=" + coverOriginFileName + ", readCount=" + readCount + "]";
 	}
 }

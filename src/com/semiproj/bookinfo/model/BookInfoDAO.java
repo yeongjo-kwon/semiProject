@@ -50,8 +50,9 @@ public class BookInfoDAO {
 				String coverFileName=rs.getString("coverFileName");
 				String txtOriginFileName=rs.getString("txtOriginFileName");
 				String coverOriginFileName=rs.getString("coverOriginFileName");
+				int readCount=rs.getInt("readCount");
 
-				BookInfoVO vo=new BookInfoVO(no, title, price, regdate, publisher, wrNo, content, txtFileName, coverFileName, txtOriginFileName, coverOriginFileName);
+				BookInfoVO vo=new BookInfoVO(no, title, price, regdate, publisher, wrNo, content, txtFileName, coverFileName, txtOriginFileName, coverOriginFileName, readCount);
 				list.add(vo);
 			}
 			System.out.println("list.size="+list.size()
@@ -90,8 +91,9 @@ public class BookInfoDAO {
 				String coverFileName=rs.getString("coverFileName");
 				String txtOriginFileName=rs.getString("txtOriginFileName");
 				String coverOriginFileName=rs.getString("coverOriginFileName");
+				int readCount=rs.getInt("readCount");
 
-				vo=new BookInfoVO(no, title, price, regdate, publisher, wrNo, content, txtFileName, coverFileName, txtOriginFileName, coverOriginFileName);
+				vo=new BookInfoVO(no, title, price, regdate, publisher, wrNo, content, txtFileName, coverFileName, txtOriginFileName, coverOriginFileName, readCount);
 			}
 			System.out.println("번호로 조회 결과 vo="+vo+", 매개변수 no="+no);
 
@@ -239,8 +241,9 @@ public class BookInfoDAO {
 				String title=rs.getString("title");
 				String txtFileName=rs.getString("txtFileName");
 				String txtOriginFileName=rs.getString("txtOriginFileName");
-
-				BookInfoVO vo=new BookInfoVO(no, title, price, regdate, publisher, wrno, content, txtFileName, coverFileName, txtOriginFileName, coverOriginFileName);
+				int readCount=rs.getInt("readCount");
+				
+				BookInfoVO vo=new BookInfoVO(no, title, price, regdate, publisher, wrno, content, txtFileName, coverFileName, txtOriginFileName, coverOriginFileName, readCount);
 				list.add(vo);
 
 			}
@@ -250,5 +253,69 @@ public class BookInfoDAO {
 		}finally {
 			pool.dbClose(rs, ps, con);
 		}
+	}
+	
+	public int updateReadCount(int no) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		try {
+			con=pool.getConnection();
+			
+			String sql="update bookinfo"
+					+ " set readcount=readcount+1"
+					+ " where no=?";
+			ps=con.prepareStatement(sql);
+			
+			ps.setInt(1, no);
+			
+			int cnt=ps.executeUpdate();
+			System.out.println("조회수 증가 결과 cnt="+cnt+", 매개변수 no="+no);
+			
+			return cnt;
+		}finally {
+			pool.dbClose(ps, con);
+		}
+	}
+	
+	public List<BookInfoVO> selectTop3() throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<BookInfoVO> list=new ArrayList<BookInfoVO>(); 
+		try {
+			con=pool.getConnection();
+
+			String sql="select A.*" + 
+					" from (select * from bookinfo" + 
+					" order by readcount desc)A" + 
+					" where rownum <=3";
+			ps=con.prepareStatement(sql);
+
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				int no=rs.getInt("no");
+				String content=rs.getString("content");
+				String coverFileName=rs.getString("coverFileName");
+				String coverOriginFileName=rs.getString("coverOriginFileName");
+				int price=rs.getInt("price");
+				String publisher=rs.getString("publisher");
+				int wrNo=rs.getInt("wrno");
+				Timestamp regdate=rs.getTimestamp("regdate");
+				String title=rs.getString("title");
+				String txtFileName=rs.getString("txtFileName");
+				String txtOriginFileName=rs.getString("txtOriginFileName");
+				int readCount=rs.getInt("readCount");
+				
+				BookInfoVO vo=new BookInfoVO(no, title, price, regdate, publisher, wrNo, content, txtFileName, coverFileName, txtOriginFileName, coverOriginFileName, readCount);
+				list.add(vo);
+			}
+			System.out.println("top3 조회 결과 list.size()="+list.size());
+			
+			return list;
+		}finally {
+			pool.dbClose(rs, ps, con);
+		}
+		
 	}
 }

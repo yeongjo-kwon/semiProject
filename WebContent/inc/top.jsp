@@ -31,9 +31,12 @@
 						<li class="submenu">
 							<a href="#">Menu</a>
 							<ul>
-								<li><a href="left-sidebar.html">Left Sidebar</a></li>
-								<li><a href="right-sidebar.html">Right Sidebar</a></li>
-								<li><a href="no-sidebar.jsp">No Sidebar</a></li>
+								<li><a href="left-sidebar.html">Ebook</a></li>
+								<li><a href="right-sidebar.html">Writer</a></li>
+								<li><a href="no-sidebar.jsp">Event</a></li>
+								<li><a href="no-sidebar.jsp">FAQ</a></li>
+								<li><a href="<c:url value='/comments/Map.do'/>">Info</a></li>
+								<li><a href="no-sidebar.jsp">MyPage</a></li>
 								<li><a href="contact.html">Contact</a></li>
 								<li class="submenu">
 									<a href="#">Submenu</a>

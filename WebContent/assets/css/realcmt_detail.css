@@ -13,6 +13,24 @@ body {
   font-size: 14px;
   color: #242424;
 }
+/*삭제 a태그*/
+a .btDel {
+	 background: none;
+    border: solid 1px;
+    border-radius: 0;
+    color: inherit;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.8em;
+    font-weight: 900;
+    letter-spacing: 2px;
+    min-width: 15em;
+    padding: 0 0.75em;
+    line-height: 3.75em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
 /*입력버튼*/
 input#button {
     background: #dfdfdf;
@@ -64,7 +82,7 @@ input#button {
   background-position: 50% 50%;
 }
 /*댓글 입력폼*/
-.sub-inner.review-profile .register .textarea {
+.sub-inner.review-profile .register .cmtFrm .textarea {
   margin-top: 24px;
   display: block;
   width: 100%;
@@ -145,6 +163,7 @@ li {
   flex: 1;
   position: relative;
   line-height: normal;
+      padding-left: 30px;
 }
 .sub-inner.review-detail .review-list li {
   padding: 16px 24px;
@@ -162,10 +181,11 @@ p {
   margin-inline-end: 0px;
 }
 /*리스트 아바타*/
- {
-  background-image: url(https://ofbxchnhqinp910256.cdn.ntruss.com/160/93d6ec2….png?type=w&w=160&quality=100);
+.image_co {
+    padding-right: 26px;
 }
-.review-list .image {
+
+.review-list .image_co {
   width: 32px;
   height: 32px;
   border-radius: 100px;
@@ -264,7 +284,7 @@ pre {
 }
 /*좋아요 버튼*/
 .review-list .review-setting .like-button {
-  background: url(https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/heart-off.69cb1ab….png)
+  background: url()
     6px no-repeat;
   background-size: 16px;
   border: 1px solid #dfdfdf;
@@ -298,7 +318,7 @@ textarea {
 }
 
 /*닉네임 일치시 삭제버튼 */
-button.gtm-review-delect {
+button.gtm-review-delect, a .btDel {
    border: 1px solid #dfdfdf; 
     border-radius: 24px;
     height: 24px;

@@ -78,14 +78,19 @@
 					</header>
 					<div class="row">
 						<div class="col-12 col-12-narrower">
-							<section>
+							<section class="bestSeller">
+							<c:forEach var="bookVo" items="${bookList}">
 								<div class="imgBlock">
-									<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+									<a href="#" class="image featured">
+										<img src="<c:url value='/file_upload/${bookVo.coverFileName}'/>" alt="" />
+									</a>
 								</div>
 								<header>
-									<h3>책 제목</h3>
+									<h3>${bookVo.title}</h3>
 								</header>
-								<p>책 소개</p>
+								<p class="bsContent">${bookVo.content}</p>
+								<br><br>
+							</c:forEach>
 							</section>
 						</div>
 					</div>
