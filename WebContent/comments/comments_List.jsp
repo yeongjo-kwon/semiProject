@@ -20,11 +20,13 @@
 		<div id="anchorReview" class="review-container thin-line">
 			<input type="hidden" name="bookNo" id="bookNo" value="${bookNo}">
 			<input type="hidden"	name="nickname" id="nickname" value="${nickname}" /> 
+			<div class="review-bt">
 			<h3 class="book-info-title link">
 				<button type="submit" class="gtm-review-2depth" >
 					한 줄 리뷰 <span class="number">${fn:length(commList)}</span><i class="fas fa-chevron-right"></i>
 			</button>
 			</h3>
+			</div>
 			<c:if test="${empty commList}">
 				<p>등록된 리뷰가 없습니다.</p>
 			</c:if>

@@ -13,9 +13,37 @@ body {
   font-size: 14px;
   color: #242424;
 }
+/*입력폼*/
+.sub-inner.review-profile .register .textarea, textarea[name="content"] {
+    display: block;
+    width: 100%;
+    border-radius: 12px;
+    resize: none;
+    height: 56px;
+    color: #555;
+    font-size: 16px;
+    padding: 16px;
+    outline: none;
+        border-color: white;
+}
+/*입력폼*/
+.info .more-area .edit {
+	border: 1px solid #dfdfdf;
+    border-radius: 12px;
+    flex: 1;
+    align-items: center;
+    padding: 8px 8px 8px 16px;
+    min-height: 48px;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+
 /*삭제 a태그*/
-a .btDel {
-	 background: none;
+.review-list .info .more-area .btDel,
+ .review-list .info .more-area #btEdit{
+    background: none;
     border: solid 1px;
     border-radius: 0;
     color: inherit;
@@ -24,12 +52,20 @@ a .btDel {
     font-size: 0.8em;
     font-weight: 900;
     letter-spacing: 2px;
-    min-width: 15em;
+    min-width: 9em;
     padding: 0 0.75em;
     line-height: 3.75em;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
+}
+
+/*글자 수*/
+.review-container .text-number {
+  text-align: right;
+  margin-right: 8px;
+  color: #8b8b8b;
+  margin-top: 2px;
 }
 /*입력버튼*/
 input#button {
@@ -84,11 +120,8 @@ input#button {
 /*댓글 입력폼*/
 .sub-inner.review-profile .register .textarea,
  textarea[name="content"]{
- margin-bottom: 20px;
-  margin-top: 24px;
   display: block;
   width: 100%;
-  border: 1px solid #dfdfdf;
   border-radius: 12px;
   resize: none;
   height: 56px;

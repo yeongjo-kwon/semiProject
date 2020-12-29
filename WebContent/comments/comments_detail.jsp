@@ -26,6 +26,15 @@ $(function() {
 					event.preventDefault();
 				}
 			}
+			
+			$(function() {
+				$('#content').keyup(function(e) {
+					var content = $(this).val();
+					$(this).height(((content.split('\n').length + 1) * 1.5) + 'em');
+					$('#counter').html(content.length + '/50');
+				});
+				$('#content').keyup();
+			});
 </script>
 	<article id="banner"></article>
 	<!-- Main -->
@@ -57,12 +66,21 @@ $(function() {
 												<input type="hidden"	name="nickname" id="nickname" value="${nickname}" /> 
 										<textarea placeholder="한 줄 리뷰를 남겨주세요" maxlength="50"
 											class="textarea" id="content" name="content"></textarea>
-										<p class="text-number">
-											<span>0</span><em>/</em>50
-										</p>
+										<!-- 글자수 체크 -->
+										<div class="text-number">
+											<p>
+												<span id="counter"></span>
+											</p>
+										</div>
 										<input type="submit" class="gtm-review-register disabled"
 											value="리뷰 등록하기" name="button" id="button">
 									</form>
+										<!-- 글자수 체크 -->
+		<div class="text-number">
+			<p>
+				<span id="counter"></span>
+			</p>
+		</div>
 									</div>
 								</div>
 							</div>
@@ -102,7 +120,7 @@ $(function() {
 												<div class="review-setting">
 													<p>이 리뷰가 마음에 드시나요?</p>
 													<button type="submit" class="like-button gtm-review-like">
-														<i class="far fa-heart"></i> <span>${95-i*7}</span>
+														<i class="far fa-heart"></i> <span>${95-i*7 }</span>
 													</button>
 												</div>
 												<!--  닉네임 일치시 삭제 버튼  -->

@@ -12,6 +12,14 @@
 <script type="text/javascript"
 	src="<c:url value='/js/jquery-3.5.1.min.js'/>"></script>
 <script type="text/javascript">
+	$(function() {
+		$('#content').keyup(function(e) {
+			var content = $(this).val();
+			$(this).height(((content.split('\n').length + 1) * 1.5) + 'em');
+			$('#counter').html(content.length + '/50');
+		});
+		$('#content').keyup();
+	});
 </script>
 	<article id="banner"></article>
 	<!-- Main -->
@@ -42,12 +50,15 @@
 												<input type="hidden"	name="nickname" id="nickname" value="${nickname}" /> 
 										<textarea placeholder="한 줄 리뷰를 남겨주세요" maxlength="50"
 											class="textarea" id="content" name="content"></textarea>
-										<p class="text-number">
-											<!-- <span>0</span><em>/</em>50 -->
-										</p>
 										<input type="submit" class="gtm-review-register disabled"
 											value="리뷰 등록하기" name="button" id="button">
 									</form>
+										<!-- 글자수 체크 -->
+									<div class="text-number">
+										<p>
+											<span id="counter"></span>
+										</p>
+									</div>
 									</div>
 								</div>
 							</div>
@@ -83,28 +94,31 @@
 												</p>
 												<span class="date"><fmt:formatDate value="${commVo.regdate}" 
 													pattern="yyyy-MM-dd hh:mm:ss "/></span>
-												 <pre class="cont">${commVo.content }</pre>
-												<div class="review-setting">
-													<p>이 리뷰가 마음에 드시나요?</p>
-													<button type="submit" class="like-button gtm-review-like">
-														<i class="far fa-heart"></i> <span><%=36%></span>
-													</button>
-												</div>
+													
+												
 												<!--  닉네임 일치시 삭제 버튼  -->
 												<c:if test="${nickname eq commVo.nickname}" />
 												<div class="more-area">
 													<!-- hidden으로 변경 -->
 													<form name="cmtFrm" method="post"
 						action="<c:url value='/comments/comments_edit_ok.do'/>">
-													<input type="text" value="${commVo.no}"
+													<input type="hidden" value="${commVo.no}"
 														name="no" id="no"> 
-														<input type="text" value="${commVo.bookNo}"
+														<input type="hidden" value="${commVo.bookNo}"
 														name="bookNo" id="bookNo"> 
+														<div class="edit">
 														<textarea  maxlength="50"
 											class="textarea" id="content" name="content">${commVo.content }</textarea>
 											<input type="submit" id="btEdit" value="수정하기">
+											</div>
 												</form>
 												</div> 
+												<div class="review-setting">
+													<p>이 리뷰가 마음에 드시나요?</p>
+													<button type="submit" class="like-button gtm-review-like">
+														<i class="far fa-heart"></i> <span>${95-i*7 }</span>
+													</button>
+												</div>
 											</div>
 										</li>
 									</ul>
