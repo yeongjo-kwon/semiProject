@@ -15,19 +15,11 @@
 <script type="text/javascript"></script>
 </head>
 <body>
-	<%
-	//테스트 세션 - 삭제
-	session.setAttribute("no", "1");
-	session.setAttribute("bookNo", "1");
-	session.setAttribute("nickname", "세미");
-	session.setAttribute("img", "AvataImg");
-	// bookNo, nickname 필요
-	%>
 	<form method="post" name="cmtFrm"
 		action="<c:url value='/comments/comments_detail.do?no=${bookNo}'/>">
 		<div id="anchorReview" class="review-container thin-line">
-			<input type="text" name="bookNo" id="bookNo" value="${bookNo}">
-			<input type="text"	name="nickname" id="nickname" value="${nickname}" /> 
+			<input type="hidden" name="bookNo" id="bookNo" value="${bookNo}">
+			<input type="hidden"	name="nickname" id="nickname" value="${nickname}" /> 
 			<h3 class="book-info-title link">
 				<button type="submit" class="gtm-review-2depth" >
 					한 줄 리뷰 <span class="number">${fn:length(commList)}</span><i class="fas fa-chevron-right"></i>

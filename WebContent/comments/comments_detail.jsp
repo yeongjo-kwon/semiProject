@@ -125,7 +125,6 @@ $(function() {
 						</section>
 						</div>
 					</div>
-			<jsp:include page="../comments/comments_List.jsp"></jsp:include>	
 				<div class="col-2 col-12-narrower">
 					<!-- Sidebar -->
 					<div class="sidebar">

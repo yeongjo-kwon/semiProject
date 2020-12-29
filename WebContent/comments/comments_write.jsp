@@ -26,19 +26,13 @@
 </script>
 </head>
 <body>
-	<%
-	// 데이터 나중에 삭제 - 테스트용
-		session.setAttribute("no", "1");
-		session.setAttribute("bookNo", "1");
-		session.setAttribute("nickname", "세미");
-		session.setAttribute("img", "AvataImg");
-	%>
+<strong>한 줄 리뷰 작성</strong>
 	<div id="anchorReview" class="review-container thin-line">
 		<form method="post" name="cmtFrm"
 			action="<c:url value='/comments/comments_write_ok.do'/>">
 			<!-- hidden으로 변경하기 -->
-			<input type="text" name="bookNo" id="bookNo" value="${bookNo}">
-			<input type="text" name="nickname" id="nickname"
+			<input type="hidden" name="bookNo" id="bookNo" value="${bookNo}">
+			<input type="hidden" name="nickname" id="nickname"
 				value="${nickname}" />
 			<!-- 댓글 입력 시작 -->
 			<div class="review-register">
