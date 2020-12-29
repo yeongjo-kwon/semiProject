@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<title>이벤트 - 책킷아웃</title>
 <%@ include file="../inc/top.jsp"%>
+<link rel="stylesheet" type="text/css" href="<c:url value='/assets/css/eventAll.css'/>" />
+
 <script type="text/javascript"
 	src="<c:url value='/ckeditor/ckeditor.js'/>"></script>
 
@@ -10,8 +13,8 @@
 	<!-- One -->
 	<section class="wrapper style4 container">
 		<div class="row gtr-150">
-			<div class="col-10 col-12-narrower">
-				<div class="divForm">
+			<div class="col-12 col-12-narrower">
+				<div class="eventAllDiv">
 					<form name="frmEventEdit" method="post"
 						action="<c:url value='/eventBoard/eventEdit_ok.do'/>"
 						enctype="multipart/form-data">
