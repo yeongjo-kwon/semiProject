@@ -1,25 +1,27 @@
-package com.semiproj.controller;
+package com.semiproj.member.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.controller.Controller;
-import com.semiproj.member.model.MemberVO;
 
-public class MainController implements Controller{
+public class CheckNicknameController implements Controller{
+
 	@Override
 	public String requestProcess(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		
-		HttpSession session = request.getSession();
-		MemberVO vo =(MemberVO) session.getAttribute("memVo");
+		String nickname = request.getParameter("nickname");
 		
-		System.out.println(vo.getNickname());
-		return "/main.jsp";
+		System.out.println("받아온 nickname="+nickname);
+		
+		request.setAttribute("nickname", nickname);
+
+		return "checkNickname.jsp";
 	}
 
 	@Override
 	public boolean isRedirect() {
+		
 		return false;
 	}
 
