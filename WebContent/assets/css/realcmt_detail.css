@@ -72,9 +72,9 @@ input#button {
 /*my Avata*/
 .sub-inner.review-profile .profile .image {
   width: 60px;
-  height: 60px;
+  height: 0px;
   border-radius: 100px;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+/*   box-shadow: 0 0 1px rgba(0, 0, 0, 0.25); */
   display: block;
   overflow: hidden;
   position: relative;
@@ -82,7 +82,9 @@ input#button {
   background-position: 50% 50%;
 }
 /*댓글 입력폼*/
-.sub-inner.review-profile .register .cmtFrm .textarea {
+.sub-inner.review-profile .register .textarea,
+ textarea[name="content"]{
+ margin-bottom: 20px;
   margin-top: 24px;
   display: block;
   width: 100%;
@@ -94,7 +96,6 @@ input#button {
   font-size: 16px;
   padding: 16px;
   outline: none;
-  -webkit-appearance: none;
 }
 
 textarea {

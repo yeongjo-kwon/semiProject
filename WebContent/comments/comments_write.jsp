@@ -31,12 +31,12 @@
 		<form method="post" name="cmtFrm"
 			action="<c:url value='/comments/comments_write_ok.do'/>">
 			<!-- hidden으로 변경하기 -->
-			<input type="hidden" name="bookNo" id="bookNo" value="${bookNo}">
-			<input type="hidden" name="nickname" id="nickname"
+			<input type="text" name="bookNo" id="bookNo" value="${bookNo}">
+			<input type="text" name="nickname" id="nickname"
 				value="${nickname}" />
 			<!-- 댓글 입력 시작 -->
 			<div class="review-register">
-				<div class="image" style="background-image: url('');">
+				<div class="image">
 				<i class="fas fa-user-circle fa-2x solid lightgray" style="color: #757575"></i></div>
 				<div class="register">
 					<textarea placeholder="한 줄 리뷰를 남겨주세요" maxlength="50"

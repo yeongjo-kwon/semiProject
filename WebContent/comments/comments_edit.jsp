@@ -12,13 +12,6 @@
 <script type="text/javascript"
 	src="<c:url value='/js/jquery-3.5.1.min.js'/>"></script>
 <script type="text/javascript">
-	function button_delete(cmt_no) {
-		if (confirm("한 줄 평을 삭제하시겠습니까?") == true) { //확인
-			location.href = "<c:url value='/comments/comments_delete.do?no='/>"+cmt_no;
-		} else { //취소
-			return;
-		}
-	}
 </script>
 	<article id="banner"></article>
 	<!-- Main -->
@@ -44,13 +37,13 @@
 									<form method="post" name="cmtFrm"
 										action="<c:url value='/comments/comments_write_ok.do'/>">
 											<!-- hidden으로 변경하기 -->
-											<input type="text" name="bookNo" id="bookNo"
+											<input type="hidden" name="bookNo" id="bookNo"
 												value="${bookNo}"> 
-												<input type="text"	name="nickname" id="nickname" value="${nickname}" /> 
+												<input type="hidden"	name="nickname" id="nickname" value="${nickname}" /> 
 										<textarea placeholder="한 줄 리뷰를 남겨주세요" maxlength="50"
 											class="textarea" id="content" name="content"></textarea>
 										<p class="text-number">
-											<span>0</span><em>/</em>50
+											<!-- <span>0</span><em>/</em>50 -->
 										</p>
 										<input type="submit" class="gtm-review-register disabled"
 											value="리뷰 등록하기" name="button" id="button">
@@ -101,15 +94,14 @@
 												<c:if test="${nickname eq commVo.nickname}" />
 												<div class="more-area">
 													<!-- hidden으로 변경 -->
-													<form name="frmcmtEdit" method="post"
+													<form name="cmtFrm" method="post"
 						action="<c:url value='/comments/comments_edit_ok.do'/>">
 													<input type="text" value="${commVo.no}"
 														name="no" id="no"> 
 														<input type="text" value="${commVo.bookNo}"
 														name="bookNo" id="bookNo"> 
 														<textarea  maxlength="50"
-											class="textarea" id="content" name="content">
-											${commVo.content }</textarea>
+											class="textarea" id="content" name="content">${commVo.content }</textarea>
 											<input type="submit" id="btEdit" value="수정하기">
 												</form>
 												</div> 

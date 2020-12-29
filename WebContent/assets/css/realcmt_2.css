@@ -54,7 +54,7 @@ a {
 /*리스트 아바타*/
 .review-list .image {
   width: 32px;
-  height: 32px;
+  height: 0px;
   border-radius: 100px;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
   display: block;
