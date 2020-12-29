@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<title>이벤트 - 책킷아웃</title>
 <%@ include file="../inc/top.jsp"%>
 
 <script type="text/javascript"
@@ -52,7 +53,7 @@
 							</div>
 							<div>
 								<label for="content">내용</label>
-								<textarea name="content" class="ckeditor"></textarea>
+								<textarea name="content" class="ckeditor" id="content"></textarea>
 							</div>
 							<div class="center">
 								<input type="submit" value="등록" /> <input type="Button"

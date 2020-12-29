@@ -29,23 +29,12 @@
 						<li class="submenu">
 							<a href="#">Menu</a>
 							<ul>
-								<li><a href="left-sidebar.html">Ebook</a></li>
-								<li><a href="right-sidebar.html">Writer</a></li>
-								<li><a href="no-sidebar.jsp">Event</a></li>
-								<li><a href="no-sidebar.jsp">FAQ</a></li>
+								<li><a href="<c:url value='/book/bookList.do'/>">Ebook</a></li>
+								<li><a href="<c:url value='/writer/writerList.do'/>">Writer</a></li>
+								<li><a href="<c:url value='/eventBoard/eventList.do'/>">Event</a></li>
+								<li><a href="<c:url value='/faqBoard/faqView.do'/>">FAQ</a></li>
 								<li><a href="<c:url value='/comments/Map.do'/>">Info</a></li>
-								<li><a href="no-sidebar.jsp">MyPage</a></li>
-								<li><a href="contact.html">Contact</a></li>
-								<li class="submenu">
-									<a href="#">Submenu</a>
-									<ul>
-										<li><a href="#">Dolore Sed</a></li>
-										<li><a href="#">Consequat</a></li>
-										<li><a href="#">Lorem Magna</a></li>
-										<li><a href="#">Sed Magna</a></li>
-										<li><a href="#">Ipsum Nisl</a></li>
-									</ul>
-								</li>
+								<li><a href="<c:url value=''/>">MyPage</a></li>
 							</ul>
 						</li>
 						<li><a href="<c:url value='/login/login.do'/>" class="button primary">Log-in</a></li>

@@ -50,15 +50,19 @@
 						</ol>
 						<div class="carousel-inner">
 							<div class="carousel-item active">
-								<img src="<c:url value='/images/bookstore_size50.jpg'/>" class="d-block w-100" alt="...">
+								<a href="<c:url value='/eventBoard/eventDetail.do?no=239'/>">
+								<img src="<c:url value='/images/internationalday.jpg'/>" class="d-block w-100" alt="세계 문해의 날 이미지">
+								</a>
 							</div>
 							<div class="carousel-item">
-								<a href="<c:url value='/eventBoard/eventDetail.do?no=1'/>">
+								<a href="<c:url value='/eventBoard/eventDetail.do?no=228'/>">
 									<img src="<c:url value='/images/merry_christmas.jpg'/>" class="d-block w-100" 
-								alt="..."></a>
+								alt="크리스마스 이미지"></a>
 							</div>
 							<div class="carousel-item">
-								<img src="<c:url value='/images/woman_reading.jpg'/>" class="d-block w-100" alt="...">
+							<a href="<c:url value='/eventBoard/eventDetail.do?no=224'/>">
+								<img src="<c:url value='/images/newyear.jpg'/>" class="d-block w-100" alt="새해 이미지">
+							</a>
 							</div>
 						</div>
 						<a class="carousel-control-prev" href="#carouselExampleIndicators"
@@ -109,7 +113,7 @@
 					</header>
 					<footer>
 						<ul class="buttons">
-							<li><a href="#" class="button primary">ok</a></li>
+							<li><a href="<c:url value='/comments/Map.jsp'/>" class="button primary">찾아오시는 길</a></li>
 							<li><a href="#" class="button">cancel</a></li>
 						</ul>
 					</footer>
