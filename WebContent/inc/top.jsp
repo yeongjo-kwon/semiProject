@@ -31,7 +31,7 @@
 			</h1>
 			<nav id="nav">
 				<ul>
-					<li class="current"><a href="main.jsp">님 환영합니다!</a></li>
+					<li class="current"><a href="main.jsp">${memVo.nickname}님 환영합니다!</a></li>
 					<li class="submenu"><a href="#">Menu</a>
 						<ul>
 							<li><a href="<c:url value='/book/bookList.do'/>">Ebook</a></li>

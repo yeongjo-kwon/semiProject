@@ -67,7 +67,7 @@ public class BookDetailController implements Controller{
 		}
 		
     //3.
-		
+		request.setAttribute("bookNo", no);
 		request.setAttribute("bookVo", vo);
 		request.setAttribute("writerVo", wVo);
 		request.setAttribute("commList", list);

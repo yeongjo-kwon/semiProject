@@ -176,9 +176,9 @@ public class MemberDAO {
 				Timestamp regdate=rs.getTimestamp("regdate");
 				Timestamp outdate=rs.getTimestamp("outdate");
 				
-				
 				vo.setNo(no);
 				vo.setPwd(pwd);
+				vo.setEmail(email);
 				vo.setNickname(nickname);
 				vo.setName(name);
 				vo.setHp(hp);
@@ -187,8 +187,6 @@ public class MemberDAO {
 				vo.setOutdate(outdate);
 				vo.setRegdate(regdate);
 				vo.setZipcode(zipcode);
-				
-				
 			}
 			System.out.println("회원조회 결과 vo="+vo+", 매개변수 email="+email);
 			return vo;
