@@ -83,7 +83,7 @@ function pageFunc(curPage){
 																	alt='파일 이미지'>
 															</c:if> <!-- 제목이 30자 이상인 경우, 30자리만 보여주고 나머지 생략하기 --> <c:if
 																test="${fn:length(vo.title)>=30}">
-																${fn:substring(vo.title,0,30) }...
+																${fn:substring(vo.title,0,30) }....
 															</c:if> <c:if test="${fn:length(vo.title)<30}">
 																${vo.title }
 															</c:if>
