@@ -18,7 +18,7 @@ public class WriterInsertOkController implements Controller {
 	public String requestProcess(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		//1.
 		//파일 업로드
-		String saveDir="D:\\semiProject\\WebContent\\file_upload\\writer";
+		String saveDir="C:\\lecture\\workspace_list\\proj_ws\\semiproj\\WebContent\\file_upload";
 		//=> 프로젝트 때 통합을 위해 Utility에서 경로 설정해주기
 
 		int maxSize=50*1024*1024;

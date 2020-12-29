@@ -122,10 +122,9 @@
 						<hr>
 						<div class="adminButton">
 							<a class="button small" style="float: right"
-								<c:set var="nickname" value="세션닉네임"/>
-								<%--<c:if test="${nickname!='admin'}">
+								<c:if test="${nickname!='admin'}">
 									hidden="hidden"
-								</c:if>--%>
+								</c:if>
 								href="<c:url value='/book/bookWrite.do'/>">책 등록</a>
 						</div>				
 					</section>

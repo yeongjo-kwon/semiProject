@@ -187,7 +187,13 @@ input, select, textarea {
 	section.bestSeller p.bsContent{
 		font-size: 0.9em;
 		border-top: 2px solid #c18282;
+		width: 300px;
+		text-align: center;
+		display: inline-block;
+		margin-bottom: 50px;
+		padding-top: 10px;
 	}
+	
 	
 	
 /* Basic */

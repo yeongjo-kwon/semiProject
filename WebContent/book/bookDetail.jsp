@@ -32,7 +32,7 @@
 						</div><br><br>
 						<p><b>책 제목</b> : ${bookVo.title}</p>
 						<p><b>작가</b> :
-							<a href="<c:url value='/writerPage.do?no=${bookVo.wrNo}'/>">
+							<a href="<c:url value='/writer/writerPage.do?no=${bookVo.wrNo}'/>">
 								${writerVo.name}</a>
 						<p><b>가격</b> : <fmt:formatNumber value="${bookVo.price}"
 									pattern="#,###"/>원</p>
@@ -49,16 +49,15 @@
 							 href="<c:url value='/book/bookList.do'/>">책 목록</a>
 						<div class="adminButton">
 							<a class="button small"
-								<c:set var="nickname" value="세션닉네임"/>
-								<%--<c:if test="${nickname!='admin'}">
+								<c:if test="${nickname!='admin'}">
 									hidden="hidden"
-								</c:if>--%>
+								</c:if>
 								href="<c:url value='/book/bookEdit.do?no=${param.no}'/>">정보 수정</a>
 							<a class="button small"
 								<c:set var="nickname" value="세션닉네임"/>
-								<%--<c:if test="${nickname!='admin'}">
+								<c:if test="${nickname!='admin'}">
 									hidden="hidden"
-								</c:if>--%>
+								</c:if>
 								href="#" id="cfDel">삭제</a>
 							<a class="button small" href="#" id="viewTxt"
 								onclick="getText()">읽기</a>

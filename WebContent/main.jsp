@@ -80,6 +80,7 @@
 						<div class="col-12 col-12-narrower">
 							<section class="bestSeller">
 							<c:forEach var="bookVo" items="${bookList}">
+								<div></div>
 								<div class="imgBlock">
 									<a href="#" class="image featured">
 										<img src="<c:url value='/file_upload/${bookVo.coverFileName}'/>" alt="" />
@@ -89,7 +90,6 @@
 									<h3>${bookVo.title}</h3>
 								</header>
 								<p class="bsContent">${bookVo.content}</p>
-								<br><br>
 							</c:forEach>
 							</section>
 						</div>

@@ -6,12 +6,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.controller.Controller;
 import com.semiproj.bookinfo.model.BookInfoService;
 import com.semiproj.bookinfo.model.BookInfoVO;
 import com.semiproj.comments.model.CommentsService;
 import com.semiproj.comments.model.CommentsVO;
+import com.semiproj.member.model.MemberVO;
 import com.semiproj.writer.model.WriterService;
 import com.semiproj.writer.model.WriterVO;
 
@@ -28,6 +30,14 @@ public class BookDetailController implements Controller{
 			//4.
 			return "/common/message.jsp";
 		}
+		
+		//세션에 담긴 닉네임 빼오기
+		HttpSession session = request.getSession();
+		MemberVO memVo =(MemberVO) session.getAttribute("memVo");
+		
+		String nickname="";
+		if(memVo!=null) nickname=memVo.getNickname();
+		
 		//2.
 		//책 정보
 		BookInfoService service=new BookInfoService();
@@ -57,9 +67,11 @@ public class BookDetailController implements Controller{
 		}
 		
     //3.
+		
 		request.setAttribute("bookVo", vo);
 		request.setAttribute("writerVo", wVo);
 		request.setAttribute("commList", list);
+		request.setAttribute("nickname", nickname);
 		
 		//4.
 		return "/book/bookDetail.jsp";

@@ -19,7 +19,6 @@ public class MainController implements Controller{
 		HttpSession session = request.getSession();
 		MemberVO vo =(MemberVO) session.getAttribute("memVo");
 		
-		
 		System.out.println(vo);
 		
 		//베스트셀러
