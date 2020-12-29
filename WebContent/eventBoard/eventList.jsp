@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<title>이벤트 - 책킷아웃</title>
 <%@ include file="../inc/top.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/assets/css/eventList.css'/>">
-
 <script type="text/javascript">
 $(function(){
 	$('#btWrite').click(function(){
@@ -81,7 +81,12 @@ function pageFunc(curPage){
 															<c:if test="${!empty vo.imgFileName }">
 																<img src="<c:url value='/images/file.gif'/>"
 																	alt='파일 이미지'>
-															</c:if> <!-- 제목이 30자 이상인 경우, 15자리만 보여주고 나머지 생략하기 --> ${vo.title }
+															</c:if> <!-- 제목이 30자 이상인 경우, 30자리만 보여주고 나머지 생략하기 --> <c:if
+																test="${fn:length(vo.title)>=30}">
+																${fn:substring(vo.title,0,30) }...
+															</c:if> <c:if test="${fn:length(vo.title)<30}">
+																${vo.title }
+															</c:if>
 													</a></td>
 													<td><fmt:formatDate value="${vo.regdate }"
 															pattern="yyyy-MM-dd" /></td>
