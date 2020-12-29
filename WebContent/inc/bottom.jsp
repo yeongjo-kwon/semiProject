@@ -25,7 +25,6 @@
 		<script src="<c:url value='/assets/js/util.js'/>"></script>
 		<script src="<c:url value='/assets/js/main.js'/>"></script>
 		<script src="<c:url value='/assets/js/bootstrap.min.js'/>"></script>
-		<script type="text/javascript"
-			src="<c:url value='/assets/js/member.js'/>"></script>
+		
 	</body>
 </html>

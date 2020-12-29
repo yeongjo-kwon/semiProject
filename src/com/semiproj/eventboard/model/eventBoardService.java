@@ -38,4 +38,8 @@ public class eventBoardService {
 		return dao.updatedownCount(no);
 	}
 	
+	public List<eventBoardVO> listSideMenu() throws SQLException{
+		return dao.listSideMenu();
+	}
+	
 }

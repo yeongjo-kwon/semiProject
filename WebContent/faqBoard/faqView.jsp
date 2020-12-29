@@ -8,11 +8,16 @@
 <article id="banner"></article>
 <!-- Main -->
 <article id="main">
+	<header class="special container">
+		<span class="icon solid"></span>
+		<h2>
+			<strong>FAQ</strong> 자주 하는 질문
+		</h2>
+	</header>
 	<!-- One -->
 	<section class="wrapper style4 container">
-		<h1>FAQ</h1>
 		<div class="row gtr-150">
-			<div class="col-10 col-12-narrower">
+			<div class="col-12 col-12-narrower">
 				<div class="accordion">
 					<input type="checkbox" id="answer01"> <label for="answer01">
 						[서비스 이용]도서를 검색하였으나 나오지 않아요. <em></em>

@@ -82,6 +82,39 @@ public class MemberDAO {
 		}
 	}
 	
+	public int checkNickname(String nickname) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		int result = 0;
+		try {
+			//1,2
+			con=pool.getConnection();
+			//3
+			String sql="select count(nickname) from member where nickname=?";
+			ps=con.prepareStatement(sql);
+			ps.setString(1, nickname);
+			
+			//4
+			rs=ps.executeQuery();
+			if(rs.next()){
+				int count=rs.getInt(1);
+				if(count>0){	//이미 존재=>사용불가
+					result=MemberService.EXIST_NICKNAME;
+				}else{	//사용가능
+					result=MemberService.NON_EXIST_NICKNAME;
+				}
+			}//if
+			
+			System.out.println("별명 중복 확인 결과 , result="+result+", 매개변수 nickname="+nickname);
+			
+			return result;
+		} finally {
+			pool.dbClose(rs, ps, con);
+		}
+	}
+	
 	public int loginCheck(String email, String pwd) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;

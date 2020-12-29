@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
+<jsp:useBean id="memService" class="com.semiproj.member.model.MemberService" scope="session"></jsp:useBean>
+
 <script type="text/javascript">
 	$(function() {
 		$('#wr_submit').click(function() {
@@ -16,6 +18,10 @@
 				alert('비밀번호를 입력하세요');
 				$('#pwd').focus();
 				event.preventDefault();
+			} else if ($('#nickname').val().length < 1) {
+				alert('별명를 입력하세요');
+				$('#nickname').focus();
+				event.preventDefault();
 			} else if ($('#pwd').val() != $('#pwd2').val()) {
 				alert('비밀번호가 일치하지 않습니다.');
 				$('#pwd2').focus();
@@ -25,12 +31,29 @@
 				alert('전화번호는 숫자만 가능합니다.');
 				$('#hp2').focus();
 				event.preventDefault();
-			}/* else if ($('#chkEmail').val() !="Y") {
+			} else if ($('#chkEmail').val() !="Y") {
 				alert('이메일 중복확인 하세요');
 				$('#btnChkEmail').focus();
 				event.preventDefault();
-			} */
+			} else if ($('#chkNick').val() !="Y") {
+				alert('별명 중복확인 하세요');
+				$('#btnChkNick').focus();
+				event.preventDefault();
+			}
 		});
+		
+		$('#btnChkEmail').click(function(){
+			
+			open("checkEmail.do?email1="+$('#email1').val()+"&email2="+$('#email2').val()+"&email3="+$('#email3').val(),"chk",
+					"width=600,height=400,left=0,top=0,location=yes,resizable=yes");
+		});
+
+			
+		$('#btnChkNick').click(function(){
+			open("checkNickname.do?nickname="+$('#nickname').val(),"chk",
+					"width=600,height=400,left=0,top=0,location=yes,resizable=yes");
+		});
+		
 	});
 	
 	
@@ -63,17 +86,17 @@
 					<option value="etc">직접입력</option>
 				</select> 
 			<input type="text" name="email3" id="email3" title="직접입력인 경우 이메일주소 뒷자리" style="visibility: hidden">
-			<input type="button" value="중복확인" id="btnChkemail" title="새창열림">
+			<input type="button" name= "email" value="중복확인" id="btnChkEmail" title="새창열림">
 		</div><br><br>
 		<div>
 			<label for="name">성명</label> 
 			<input type="text" name="name" id="name" style="ime-mode: active">
 		</div><br><br>
 		<div>
-			<label for="nickname">닉네임</label> 
+			<label for="nickname">별명</label> 
 			<input type="text" name="nickname"
 				id="nickname" style="ime-mode: inactive">&nbsp; 
-			<input type="button" value="중복확인" id="btnChknick" title="새창열림">
+			<input type="button" value="중복확인" id="btnChkNick" title="새창열림">
 		</div><br><br>
 		
 		<div>
@@ -113,21 +136,10 @@
 			<input type="submit" id="wr_submit" value="회원가입">
 		</div>
 	</fieldset>
-<script language="Javascript">
-	String email="";
-	if(email1!=null && !email1.isEmpty()){
-		if(email2.equals("etc")){
-			if(email3!=null && !email3.isEmpty()){
-				email=email1+"@"+email3;
-			}
-		}else{
-			email=email1+"@"+email2;
-		}
-	}
-</script>
-	<input type="hidden" name="chkEmail" id="chkEmail">
-	<input type="hidden" name="chkNick" id="chkNick">
-	<input type="text" name="email" id="email">
+
+	<input type="text" name="chkEmail" id="chkEmail">
+	<input type="text" name="chkNick" id="chkNick">
+	
 </form>
 	
 </div>

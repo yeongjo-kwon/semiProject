@@ -19,6 +19,9 @@ public class MainController implements Controller{
 		HttpSession session = request.getSession();
 		MemberVO vo =(MemberVO) session.getAttribute("memVo");
 		
+
+		System.out.println(vo.getNickname());
+
 		
 		System.out.println(vo);
 		
@@ -31,6 +34,7 @@ public class MainController implements Controller{
 			e.printStackTrace();
 		}
 		request.setAttribute("bookList", bookList);
+		
 		
 		return "/main.jsp";
 	}

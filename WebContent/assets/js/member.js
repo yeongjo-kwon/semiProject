@@ -13,16 +13,7 @@ $(function(){
 		}
 	});
 	
-	$('#btnChkemail').click(function(){
-		open("checkEmail.jsp?email="+$('#email1').val(),"chk",
-				"width=400,height=300,left=0,top=0,location=yes,resizable=yes");
-	});
-		
-	$('#btnChknick').click(function(){
-		open("checkNick.jsp?nick="+$('#nick').val(),"chk",
-				"width=400,height=300,left=0,top=0,location=yes,resizable=yes");
-	});
-	
+
 	
 	$('#btnZipcode').click(function(){
 		open("../zipcode/zipcode.jsp", "zipcode",

@@ -7,20 +7,16 @@
 
 <script type="text/javascript">
 	$(function() {
-		$('#btEdit')
-				.click(
-						function() {
-							location.href = "<c:url value='/eventBoard/eventEdit.do?no=${param.no}'/>";
-						});
-		$('#btDel')
-				.click(
-						function() {
-							if (confirm('삭제하시겠습니까?')) {
-								location.href = "<c:url value='/eventBoard/eventDelete_ok.do?no=${param.no}'/>";
-							} else {
-								event.preventDefault();
-							}
-						});
+		$('#btEdit').click(function() {
+			location.href = "<c:url value='/eventBoard/eventEdit.do?no=${param.no}'/>";
+		});
+		$('#btDel').click(function() {
+			if (confirm('삭제하시겠습니까?')) {
+				location.href = "<c:url value='/eventBoard/eventDelete_ok.do?no=${param.no}'/>";
+			} else {
+				event.preventDefault();
+			}
+		});
 		$('#btList').click(function() {
 			location.href = "<c:url value='/eventBoard/eventList.do'/>";
 		});
@@ -57,14 +53,8 @@
 									${eventVo.imgOriginFileName }</a> 다운: ${eventVo.downCount}</span>
 						</c:if>
 					</div>
-					<%
-						pageContext.setAttribute("newLine", "\r\n");
-					%>
-					<c:set var="content"
-						value="${fn:replace(eventVo.content,newLine,'<br>') }" />
-
 					<div class="eventDiv">
-						<p class="content">${content }</p>
+						<p class="content">${eventVo.content }</p>
 					</div>
 					<div class="center">
 						<form>
