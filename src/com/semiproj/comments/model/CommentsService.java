@@ -30,6 +30,10 @@ public class CommentsService {
 	public int deleteCmt(int no) throws SQLException {
 		return cDao.deleteCmt(no);
 	}
+	
+	public int updateCmt(CommentsVO vo) throws SQLException {
+		return cDao.updateCmt(vo);
+	}
 }
 
 

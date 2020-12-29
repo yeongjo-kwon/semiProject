@@ -15,6 +15,7 @@ public class EventDeleteOkController implements Controller{
 
 	@Override
 	public String requestProcess(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+		
 		/*
 			8. 글 삭제하기
 		

@@ -12,20 +12,13 @@
 <script type="text/javascript"
 	src="<c:url value='/js/jquery-3.5.1.min.js'/>"></script>
 <script type="text/javascript">
-$(function() {
-	$('#btEdit')
-			.click(
-					function() {
-						location.href = "<c:url value='/comments/comments_edit.do?no=${param.no}'/>";
-					});
-			});
-			function  del_cmt(num)  {
-				if (confirm('작성하신 한 줄 리뷰를 삭제하시겠습니까?')) {
-					location.href = "<c:url value='/comments/comments_delete.do?no='/>"+num+"&bookNo="+${param.no};
-				} else {
-					event.preventDefault();
-				}
-			}
+	function button_delete(cmt_no) {
+		if (confirm("한 줄 평을 삭제하시겠습니까?") == true) { //확인
+			location.href = "<c:url value='/comments/comments_delete.do?no='/>"+cmt_no;
+		} else { //취소
+			return;
+		}
+	}
 </script>
 	<article id="banner"></article>
 	<!-- Main -->
@@ -50,11 +43,10 @@ $(function() {
 									<div class="register">
 									<form method="post" name="cmtFrm"
 										action="<c:url value='/comments/comments_write_ok.do'/>">
-											<!-- post로 전송할 것들 -->
 											<!-- hidden으로 변경하기 -->
-											<input type="hidden" name="bookNo" id="bookNo"
+											<input type="text" name="bookNo" id="bookNo"
 												value="${bookNo}"> 
-												<input type="hidden"	name="nickname" id="nickname" value="${nickname}" /> 
+												<input type="text"	name="nickname" id="nickname" value="${nickname}" /> 
 										<textarea placeholder="한 줄 리뷰를 남겨주세요" maxlength="50"
 											class="textarea" id="content" name="content"></textarea>
 										<p class="text-number">
@@ -102,21 +94,25 @@ $(function() {
 												<div class="review-setting">
 													<p>이 리뷰가 마음에 드시나요?</p>
 													<button type="submit" class="like-button gtm-review-like">
-														<i class="far fa-heart"></i> <span>${95-i*7}</span>
+														<i class="far fa-heart"></i> <span><%=36%></span>
 													</button>
 												</div>
 												<!--  닉네임 일치시 삭제 버튼  -->
-												<c:if test="${nickname eq commVo.nickname}" >
+												<c:if test="${nickname eq commVo.nickname}" />
 												<div class="more-area">
 													<!-- hidden으로 변경 -->
-													<c:set var="num" value="${commVo.no}"/>
-													<!-- 댓글 번호 확인용 -->
-													<input type="hidden" value="${commVo.no}"
+													<form name="frmcmtEdit" method="post"
+						action="<c:url value='/comments/comments_edit_ok.do'/>">
+													<input type="text" value="${commVo.no}"
 														name="no" id="no"> 
-															<a href="#" class="btDel" onclick="del_cmt(${commVo.no})" >삭제하기</a>
-														<input type="button" id="btEdit" value="수정하기">
+														<input type="text" value="${commVo.bookNo}"
+														name="bookNo" id="bookNo"> 
+														<textarea  maxlength="50"
+											class="textarea" id="content" name="content">
+											${commVo.content }</textarea>
+											<input type="submit" id="btEdit" value="수정하기">
+												</form>
 												</div> 
-												</c:if>
 											</div>
 										</li>
 									</ul>
@@ -125,6 +121,7 @@ $(function() {
 						</section>
 						</div>
 					</div>
+		
 				<div class="col-2 col-12-narrower">
 					<!-- Sidebar -->
 					<div class="sidebar">
