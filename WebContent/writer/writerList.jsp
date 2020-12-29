@@ -20,10 +20,9 @@
 						<div class="divList">
 							<table class="default" border="1">
 								<colgroup>
-									<col style="width:5%;" />
 									<col style="width:10%;" />
-									<col style="width:30%;" />
-									<col style="width:10%;" />		
+									<col style="width:40%;" />
+									<col style="width:30%;" />		
 								</colgroup>
 								<thead>
 									<tr>
@@ -50,7 +49,7 @@
 												<tr>
 													<td>
 														<img alt="작가 이미지"
-															src="<c:url value='/file_upload/writer/${wrVo.photoFileName}'/>"
+															src="<c:url value='/file_upload/${wrVo.photoFileName}'/>"
 																width="100px" height="100px">
 													</td>
 													<td><a href="<c:url value='/writer/writerPage.do?no=${wrVo.no}'/>">
@@ -91,7 +90,7 @@
 							</c:if>
 						</div>
 						<div class="divSearch">
-							<form name="frmSearch" action="<c:url value='/book/bookList.do'/>" method="post">
+							<form name="frmSearch" action="<c:url value='/writer/writerList.do'/>" method="post">
 								<select name="srchCondition">
 									<option value="title" 
 										<c:if test="${'title'==param.srchCondition}">

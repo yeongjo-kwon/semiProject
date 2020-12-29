@@ -30,7 +30,8 @@
 			</c:if>
 			<!-- 리스트 진짜 -->
 		 	<c:if test="${!empty commList}">
-				<c:forEach var="i" begin="1" end="3">
+				<c:forEach var="i" begin="1" end="${fn:length(commList)}">
+					<c:if test="${i<=3}">
 					<c:set var="commVo" value="${commList[i] }" />
 					<ul class="review-list">
 					<li>
@@ -47,7 +48,7 @@
 							<a
 								href="<c:url value='/comments/comments_detail.do?no=${session.bookNo}'/>"
 								class="gtm-review-textclick" id="textclick"> 
-								<pre	class="cont">${commVo.content }</pre>
+								<pre class="cont">${commVo.content}</pre>
 							</a> 
 							<div class="review-setting">
 								<p>이 리뷰가 마음에 드시나요?</p>
@@ -58,6 +59,7 @@
 						</div>
 					</li>
 				</ul>
+				</c:if>
 				</c:forEach>
 			</c:if>
 		</div>

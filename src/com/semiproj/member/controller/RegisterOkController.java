@@ -64,7 +64,7 @@ public class RegisterOkController implements Controller{
 		
 		return "/main.do";
 	}
-
+	
 	@Override
 	public boolean isRedirect() {
 		return false;

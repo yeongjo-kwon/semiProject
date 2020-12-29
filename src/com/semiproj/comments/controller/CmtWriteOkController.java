@@ -22,7 +22,6 @@ public class CmtWriteOkController implements Controller{
 		String bookNo=request.getParameter("bookNo");
 		String nickname=request.getParameter("nickname");
 		String content=request.getParameter("content");
-		
 		//2.
 		CommentsService service=new CommentsService();
 		String msg="등록에 실패했습니다.", url="/comments/comments_write.do?no="+bookNo;

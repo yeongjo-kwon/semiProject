@@ -23,7 +23,9 @@
 									<col style="width:5%;" />
 									<col style="width:40%;" />
 									<col style="width:20%;" />
-									<col style="width:10%;" />		
+									<col style="width:10%;" />
+									<col style="width:5%;" />
+									
 								</colgroup>
 								<thead>
 									<tr>
@@ -31,6 +33,8 @@
 										<th>책 제목</th>
 										<th>출판사</th>
 										<th>등록일</th>
+										<th>조회</th>
+										
 									</tr>
 								</thead>
 								<tbody>
@@ -54,11 +58,12 @@
 															src="<c:url value='/file_upload/${bookVo.coverFileName}'/>"
 																width="100px">
 													</td>
-													<td><a href="<c:url value='/book/bookDetail.do?no=${bookVo.no}'/>">
+													<td><a href="<c:url value='/book/readCount.do?no=${bookVo.no}'/>">
 														${bookVo.title}</a></td>
 													<td>${bookVo.publisher}</td>
 													<td><fmt:formatDate value="${bookVo.regdate}"
 														pattern="yyyy-MM-dd"/></td>
+													<td>${bookVo.readCount}</td>
 												</tr>
 											</c:if>
 										</c:forEach>
@@ -117,10 +122,9 @@
 						<hr>
 						<div class="adminButton">
 							<a class="button small" style="float: right"
-								<c:set var="nickname" value="세션닉네임"/>
-								<%--<c:if test="${nickname!='admin'}">
+								<c:if test="${nickname!='admin'}">
 									hidden="hidden"
-								</c:if>--%>
+								</c:if>
 								href="<c:url value='/book/bookWrite.do'/>">책 등록</a>
 						</div>				
 					</section>

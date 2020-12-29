@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
@@ -8,8 +7,13 @@
 			if(confirm("삭제하시겠습니까?")){
 				location.href="<c:url value='/book/bookDel.do?no=${param.no}&txtFileName=${bookVo.txtFileName}&coverFileName=${bookVo.coverFileName}'/>";
 			}
-		});			
+		});
 	});
+	
+	function getText() {
+		open("<c:url value='/book/readBook.do?no=${param.no}'/>", "readBook",
+		"width=810, height=520, top=120, left=400, location=no, resizable=no");
+	}
 </script>
 <article id="banner"></article>
 <!-- Main -->
@@ -45,21 +49,24 @@
 							 href="<c:url value='/book/bookList.do'/>">책 목록</a>
 						<div class="adminButton">
 							<a class="button small"
-								<c:set var="nickname" value="세션닉네임"/>
-								<%--<c:if test="${nickname!='admin'}">
+								<c:if test="${nickname!='admin'}">
 									hidden="hidden"
-								</c:if>--%>
+								</c:if>
 								href="<c:url value='/book/bookEdit.do?no=${param.no}'/>">정보 수정</a>
 							<a class="button small"
 								<c:set var="nickname" value="세션닉네임"/>
-								<%--<c:if test="${nickname!='admin'}">
+								<c:if test="${nickname!='admin'}">
 									hidden="hidden"
-								</c:if>--%>
+								</c:if>
 								href="#" id="cfDel">삭제</a>
+							<a class="button small" href="#" id="viewTxt"
+								onclick="getText()">읽기</a>
+							<div id="txtContent"></div>
 						</div><br><br>
+						
+						<jsp:include page="../comments/comments_write.jsp"></jsp:include>			
+						<jsp:include page="../comments/comments_List.jsp"></jsp:include>			
 		
-			<%--  	<jsp:include page="../comments/comments_write.jsp"></jsp:include>			
-					<jsp:include page="../comments/comments_List.jsp"></jsp:include>	 --%>
 					</section>
 				</div>
 			</div>
@@ -139,5 +146,4 @@
 		</div>
 	</section>
 </article>
-
 <%@ include file="../inc/bottom.jsp" %>

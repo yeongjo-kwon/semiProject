@@ -58,9 +58,9 @@
 							<div class="content">
 								<section>
 									<a href="#" class="image featured"> <img
-										src="images/pic03.jpg" alt="" /></a> 
+										src="<c:url value='images/pic03.jpg'/>" alt="" /></a> 
 										
-									<img src="<c:url value='/file_upload/writer/${vo.photoFileName}' /> "  width="400" height="400"><br>
+									<img src="<c:url value='/file_upload/${vo.photoFileName}' /> "  width="400" height="400"><br>
 									<span>${vo.name}</span><br> <span>${vo.intro}</span><br>
 									<br> 
 									<a href="<c:url value='/writer/writerInsert.do' /> ">
