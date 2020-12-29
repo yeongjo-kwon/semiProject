@@ -58,7 +58,7 @@ public class WriterDAO {
 			
 			rs=ps.executeQuery();
 			if(rs.next()) {
-				vo.setWrno(no);
+				vo.setNo(no);
 				vo.setName(rs.getString("name"));
 				vo.setIntro(rs.getString("intro"));
 				vo.setPhotoFileName(rs.getString("photofilename"));
