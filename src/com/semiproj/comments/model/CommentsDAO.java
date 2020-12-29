@@ -51,6 +51,40 @@ public class CommentsDAO {
 			pool.dbClose(rs, ps, con);
 		}
 	}
+	public List<CommentsVO> selectCmt(int bookNo) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<CommentsVO> list = new ArrayList<CommentsVO>();
+		try {
+			//1,2 con
+			con=pool.getConnection();
+			
+			//3. ps
+			String sql="select * from comments" + 
+					" where bookno=? order by no asc";
+			ps=con.prepareStatement(sql);
+			ps.setInt(1, bookNo);
+			
+			//4. exec
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				int no=rs.getInt("no");
+				String nickname=rs.getString("nickname");
+				Timestamp regdate=rs.getTimestamp("regdate");
+				String content=rs.getString("content");
+				
+				CommentsVO vo = new CommentsVO(no, nickname,regdate, content, bookNo);
+				
+				list.add(vo);
+			}
+			System.out.println("글목록 결과 list.size="+list.size()+" , 매개변수 bookNo="+bookNo);
+			return list;
+		}finally {
+			pool.dbClose(rs, ps, con);
+		}
+	}
 	
 	public int insertCmt(CommentsVO vo) throws SQLException {
 		Connection con=null;

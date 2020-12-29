@@ -38,14 +38,14 @@
 			</c:if>
 			<!-- 리스트 진짜 -->
 		 	<c:if test="${!empty commList}">
-				<ul class="review-list">
+				<c:forEach var="i" begin="1" end="3">
+					<c:set var="commVo" value="${commList[i] }" />
+					<ul class="review-list">
 					<li>
-						<div class="image" style="background-image: url('');">
+						<div class="" >
 							<i class="fas fa-user-circle fa-2x" style="color: #757575"></i> <a
 								href="#" class="gtm-review-lib"></a>
 						</div>
-							<c:forEach var="i" begin="1" end="3">
-										<c:set var="commVo" value="${commList[i] }" />
 						<div class="info">
 							<p class="nickname">
 								<a href="#" class="gtm-review-lib">${commVo.nickname}</a>
@@ -60,13 +60,13 @@
 							<div class="review-setting">
 								<p>이 리뷰가 마음에 드시나요?</p>
 								<button type="submit" class="like-button gtm-review-like">
-									<i class="far fa-heart"></i> <span>4</span>
+									<i class="far fa-heart"></i> <span>${95-i*7}</span>
 								</button>
 							</div>
 						</div>
-				</c:forEach>
 					</li>
 				</ul>
+				</c:forEach>
 			</c:if>
 		</div>
 	</form>
