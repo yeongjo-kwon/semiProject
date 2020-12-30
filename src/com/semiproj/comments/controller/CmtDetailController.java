@@ -20,16 +20,15 @@ public class CmtDetailController implements Controller{
 		 	 => /comments/comments_detail.jsp포워딩
 		 */
 		String no=request.getParameter("no");
-		String bookNo=request.getParameter("bookNo");
+		//String bookNo=request.getParameter("bookNo");
 		String nickname=request.getParameter("nickname");
 		System.out.println("DetailController : no="+no+" , nickname="+nickname);
 		if(no==null || no.isEmpty()) {
 			request.setAttribute("msg", "잘못된 url입니다.");
-			
 			request.setAttribute("url","/book/bookDetail.jsp");
 			return "/common/message.jsp";
 		}
-		CommentsVO commVo=new CommentsVO();
+		//CommentsVO commVo=new CommentsVO();
 		CommentsService cmtservice=new CommentsService();
 		List<CommentsVO> list=null;
 		try {

@@ -61,11 +61,11 @@ $(function() {
 										action="<c:url value='/comments/comments_write_ok.do'/>">
 											<!-- post로 전송할 것들 -->
 											<!-- hidden으로 변경하기 -->
-											<input type="hidden" name="bookNo" id="bookNo"
+											<input type="text" name="bookNo" id="bookNo"
 												value="${bookNo}"> 
-												<input type="hidden"	name="nickname" id="nickname" value="${nickname}" /> 
+												<input type="text"	name="nickname" id="nickname" value="${nickname}" /> 
 										<textarea placeholder="한 줄 리뷰를 남겨주세요" maxlength="50"
-											class="textarea" id="content" name="content"></textarea>
+											class="textarea" id="content" name="content" style="height: 82px; border-color:gray"></textarea>
 										<!-- 글자수 체크 -->
 										<div class="text-number">
 											<p>
