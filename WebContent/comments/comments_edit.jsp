@@ -97,7 +97,7 @@
 													
 												
 												<!--  닉네임 일치시 삭제 버튼  -->
-												<c:if test="${nickname eq commVo.nickname}" />
+												<c:if test="${nickname eq commVo.nickname || nickname eq 'admin'}" />
 												<div class="more-area">
 													<!-- hidden으로 변경 -->
 													<form name="cmtFrm" method="post"

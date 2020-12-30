@@ -61,9 +61,9 @@ $(function() {
 										action="<c:url value='/comments/comments_write_ok.do'/>">
 											<!-- post로 전송할 것들 -->
 											<!-- hidden으로 변경하기 -->
-											<input type="text" name="bookNo" id="bookNo"
+											<input type="hidden" name="bookNo" id="bookNo"
 												value="${bookNo}"> 
-												<input type="text"	name="nickname" id="nickname" value="${nickname}" /> 
+												<input type="hidden"	name="nickname" id="nickname" value="${nickname}" /> 
 										<textarea placeholder="한 줄 리뷰를 남겨주세요" maxlength="50"
 											class="textarea" id="content" name="content" style="height: 82px; border-color:gray"></textarea>
 										<!-- 글자수 체크 -->
@@ -123,8 +123,8 @@ $(function() {
 														<i class="far fa-heart"></i> <span>${95-i*7 }</span>
 													</button>
 												</div>
-												<!--  닉네임 일치시 삭제 버튼  -->
-												<c:if test="${nickname eq commVo.nickname}" >
+												<!--  닉네임 일치시, admin 삭제 버튼  -->
+												<c:if test="${nickname eq commVo.nickname || nickname eq 'admin'}" >
 												<div class="more-area">
 													<!-- hidden으로 변경 -->
 													<c:set var="num" value="${commVo.no}"/>
