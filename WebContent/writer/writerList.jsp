@@ -28,7 +28,7 @@
 									<tr>
 										<th>작가 이미지</th>
 										<th>이름</th>
-										<th>소개글</th>
+										
 									</tr>
 								</thead>
 								<tbody>
@@ -54,7 +54,7 @@
 													</td>
 													<td><a href="<c:url value='/writer/writerPage.do?no=${wrVo.no}'/>">
 														${wrVo.name}</a></td>
-													<td>${wrVo.intro}</td>
+													
 												</tr>
 											</c:if>
 										</c:forEach>
