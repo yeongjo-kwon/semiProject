@@ -5,18 +5,36 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/assets/css/eventAll.css'/>" />
 
+<style>
+#btWrite {
+	visibility: hidden;
+}
+
+#btEdit {
+	visibility: hidden;
+}
+
+#btDel {
+	visibility: hidden;
+}
+</style>
+
 <script type="text/javascript">
 	$(function() {
-		$('#btEdit').click(function() {
-			location.href = "<c:url value='/eventBoard/eventEdit.do?no=${param.no}'/>";
-		});
-		$('#btDel').click(function() {
-			if (confirm('삭제하시겠습니까?')) {
-				location.href = "<c:url value='/eventBoard/eventDelete_ok.do?no=${param.no}'/>";
-			} else {
-				event.preventDefault();
-			}
-		});
+		$('#btEdit')
+				.click(
+						function() {
+							location.href = "<c:url value='/eventBoard/eventEdit.do?no=${param.no}'/>";
+						});
+		$('#btDel')
+				.click(
+						function() {
+							if (confirm('삭제하시겠습니까?')) {
+								location.href = "<c:url value='/eventBoard/eventDelete_ok.do?no=${param.no}'/>";
+							} else {
+								event.preventDefault();
+							}
+						});
 		$('#btList').click(function() {
 			location.href = "<c:url value='/eventBoard/eventList.do'/>";
 		});
@@ -58,9 +76,14 @@
 					</div>
 					<div class="center">
 						<form>
-							<input type="button" id="btEdit" value="수정"> <input
-								type="button" id="btDel" value="삭제"> <input
-								type="button" id="btList" value="목록">
+							<c:if test="${nickname eq 'admin' }">
+								<input type="button" id="btEdit" style="visibility: visible;"
+									value="수정">
+								<input type="button" id="btDel" style="visibility: visible;"
+									value="삭제">
+								<input type="button" id="btList" style="visibility: visible;"
+									value="목록">
+							</c:if>
 						</form>
 					</div>
 				</div>
