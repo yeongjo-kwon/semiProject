@@ -1,10 +1,16 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <title>이벤트 - 책킷아웃</title>
 <%@ include file="../inc/top.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/assets/css/eventList.css'/>">
+<style type="text/css">
+#btWrite {
+	visibility: hidden;
+}
+
+</style>
+
 <script type="text/javascript">
 $(function(){
 	$('#btWrite').click(function(){
@@ -17,12 +23,14 @@ function pageFunc(curPage){
 	$('form[name=frmPage]').submit();
 }
 </script>
+
 <form name="frmPage" action="<c:url value='/eventBoard/eventList.do'/>"
 	method="post">
 	<input type="hidden" name="currentPage"> <input type="hidden"
 		name="searchKeyword" value="${param.keyword }"> <input
 		type="hidden" name="searchCondition" value="${param.condition }">
 </form>
+
 <article id="banner"></article>
 <!-- Main -->
 <article id="main">
@@ -140,7 +148,10 @@ function pageFunc(curPage){
 							</form>
 						</div>
 						<div class="divBtn">
-							<input type="button" id="btWrite" value="글쓰기">
+							<c:if test="${nickname eq 'admin' }">
+								<input type="button" id="btWrite" value="글쓰기"
+									style="visibility: visible;">
+							</c:if>
 						</div>
 					</section>
 				</div>
